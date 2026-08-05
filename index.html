@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA Fragrances | Luxury Perfumery</title>
+    <meta name="description" content="AURA — artisanal luxury fragrances crafted from rare botanicals. Shop Signature & Collector's Editions for him and her.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js" defer></script>
+    <script src="https://js.stripe.com/v3/" defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+
+    <!-- ═══ LUXURY FULL-SCREEN VIDEO LOADING OVERLAY ═════════════════════════ -->
+    <div class="video-loader-overlay" id="video-loader-overlay">
+        <!-- 100% Fullscreen Background Video -->
+        <video id="loader-video-element" class="video-loader-bg-video" autoplay muted playsinline preload="auto">
+            <source src="media/Video Project 1.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+        <!-- Ambient Luxury Dark Gradient Overlay -->
+        <div class="video-loader-backdrop-gradient"></div>
+
+        <!-- Floating Controls & Content -->
+        <div class="video-loader-content">
+            <div class="loader-top-bar">
+                <span class="loader-brand">AURA</span>
+            </div>
+            <div class="loader-middle-content">
+                <p class="loader-subtitle">Sculpted in Light &nbsp;·&nbsp; Captured in Scent</p>
+            </div>
+            <div class="loader-bottom-bar">
+                <div class="loader-progress-box">
+                    <div class="loader-progress-bar"><div class="loader-progress-fill" id="loader-progress-fill"></div></div>
+                    <span class="loader-caption">Distilling Luxury…</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Promo Banner -->
+    <div class="promo-banner" id="promo-banner">
+        Complimentary signature sample with every order &nbsp;·&nbsp; Free shipping nationwide
+        <button class="promo-close" onclick="this.parentElement.style.display='none'">×</button>
+    </div>
+
+    <!-- ═══ NAVIGATION HEADER ═══════════════════════════════════════════════ -->
+    <header class="main-header" id="main-header">
+        <div class="header-container">
+
+            <nav class="nav-links nav-left">
+                <a href="#catalog" class="nav-link">Shop</a>
+                <a href="#quiz-section" class="nav-link">Scent Finder</a>
+                <a href="#ingredients-section" class="nav-link">Ingredients</a>
+            </nav>
+
+            <a href="#" class="brand-logo">AURA</a>
+
+            <div class="nav-links nav-right">
+                <a href="#manifesto" class="nav-link">Our Story</a>
+
+                <!-- Guest: Show Sign In button -->
+                <button class="nav-link auth-btn" id="sign-in-nav-btn" onclick="openAuthModal('login')">
+                    <i class="fa-regular fa-user"></i> Sign In
+                </button>
+
+                <!-- Logged-in: Direct My Orders Button -->
+                <button class="nav-link auth-btn" id="nav-my-orders-btn" onclick="openMyOrders()" style="display:none;">
+                    <i class="fa-solid fa-box"></i> My Orders
+                </button>
+
+                <!-- Logged-in: Show Account Dropdown (hidden by default) -->
+                <div class="account-dropdown" id="account-dropdown" style="display:none;">
+                    <button class="account-trigger" id="account-trigger-btn">
+                        <span class="account-avatar" id="account-avatar">A</span>
+                        <span id="account-display-name">Account</span>
+                        <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
+                    </button>
+                    <div class="account-menu" id="account-menu">
+                        <div class="account-menu-header">
+                            <span id="menu-login-id">user@aura.com</span>
+                        </div>
+                        <a href="#" onclick="openMyOrders(); return false;" class="account-menu-item">
+                            <i class="fa-solid fa-box"></i> My Orders
+                        </a>
+                        <a href="#" onclick="openEditProfile('address'); return false;" class="account-menu-item">
+                            <i class="fa-solid fa-user-gear"></i> Profile & Address
+                        </a>
+                        <a href="admin.html" class="account-menu-item">
+                            <i class="fa-solid fa-lock"></i> Admin Desk
+                        </a>
+                        <button class="account-menu-item logout-btn" onclick="handleLogout()">
+                            <i class="fa-solid fa-right-from-bracket"></i> Logout
+                        </button>
+                    </div>
+                </div>
+
+                <button id="cart-toggle-btn" class="cart-btn" aria-label="Open cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    Cart <span class="cart-count-badge" id="cart-count">0</span>
+                </button>
+            </div>
+
+            <button class="mobile-nav-toggle" aria-label="Toggle navigation" id="mobile-nav-toggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Drawer -->
+    <div class="mobile-nav-drawer" id="mobile-nav">
+        <button class="mobile-nav-close" id="mobile-nav-close"><i class="fa-solid fa-xmark"></i></button>
+        <div class="mobile-links">
+            <a href="#catalog" class="mobile-link">Shop</a>
+            <a href="#quiz-section" class="mobile-link">Scent Finder</a>
+            <a href="#ingredients-section" class="mobile-link">Ingredients</a>
+            <a href="#manifesto" class="mobile-link">Our Story</a>
+            <a href="#" onclick="openAuthModal('login')" class="mobile-link" id="mobile-auth-link">Sign In</a>
+        </div>
+    </div>
+
+    <!-- ═══ HERO SECTION ══════════════════════════════════════════════════════ -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="hero-subtitle">Meticulously Crafted</span>
+                <h1 class="hero-title">Sculpted in Light,<br>Captured in Scent.</h1>
+                <p class="hero-description">
+                    A collection of artisanal fragrances designed to linger elegantly on the skin. Distilled in micro-batches with natural, rare botanicals.
+                </p>
+                <div class="hero-actions">
+                    <a href="#catalog" class="btn btn-primary" onclick="setFilters('all','signature')">Signature Edition</a>
+                    <a href="#catalog" class="btn btn-outline" onclick="setFilters('all','collector')">Collector's Edition</a>
+                </div>
+            </div>
+            <div class="hero-media">
+                <div class="hero-image-wrapper">
+                    <img src="assets/hero.png" alt="AURA luxury perfume bottle on travertine stone pedestal" class="hero-image">
+                    <div class="hero-image-accent"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ MANIFESTO ═════════════════════════════════════════════════════════ -->
+    <section class="manifesto-section" id="manifesto">
+        <div class="manifesto-container">
+            <h2 class="manifesto-heading">The Philosophy of AURA</h2>
+            <p class="manifesto-text">
+                We believe perfume is not an accessory, but a silent language — the invisible architecture of memory. Each AURA fragrance is hand-poured with traditional heritage and modern olfactive innovation.
+            </p>
+            <div class="manifesto-details">
+                <div class="manifesto-pillar">
+                    <span class="pillar-num">01</span>
+                    <h3 class="pillar-title">Rare Botanicals</h3>
+                    <p class="pillar-desc">Sourced globally from sustainable cooperatives — the finest jasmines, ouds, and citrus oils.</p>
+                </div>
+                <div class="manifesto-pillar">
+                    <span class="pillar-num">02</span>
+                    <h3 class="pillar-title">Subtle Complexity</h3>
+                    <p class="pillar-desc">Designed to evolve on the skin, creating a unique aroma profile for every wearer.</p>
+                </div>
+                <div class="manifesto-pillar">
+                    <span class="pillar-num">03</span>
+                    <h3 class="pillar-title">Luminous Minimalism</h3>
+                    <p class="pillar-desc">From our architectural glass vessels to our design philosophy — clean lines, deep substance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CATALOG ═══════════════════════════════════════════════════════════ -->
+    <section class="catalog-section" id="catalog">
+        <div class="catalog-container">
+            <div class="catalog-header">
+                <span class="section-label">Browse the Catalog</span>
+                <h2 class="section-title">The Fragrance Directory</h2>
+                <p class="section-subtitle">Signature and Collector's Editions, tailored for both gentlemen and ladies.</p>
+            </div>
+
+            <div class="catalog-filters">
+                <div class="filter-group">
+                    <span class="filter-label">Segment:</span>
+                    <button class="filter-tab active" data-filter-edition="all">All Editions</button>
+                    <button class="filter-tab" data-filter-edition="signature">Signature (₹1,699)</button>
+                    <button class="filter-tab" data-filter-edition="collector">Collector's (₹3,999)</button>
+                </div>
+                <div class="filter-group">
+                    <span class="filter-label">Profile:</span>
+                    <button class="filter-tab active" data-filter-gender="all">Universal</button>
+                    <button class="filter-tab" data-filter-gender="male">For Him</button>
+                    <button class="filter-tab" data-filter-gender="female">For Her</button>
+                </div>
+                <div class="filter-sort">
+                    <select id="sort-select" aria-label="Sort products">
+                        <option value="default">Default Sort</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name-asc">Name: A to Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="active-filters-bar" id="active-filters-info" style="display:none;">
+                <span id="active-filters-text"></span>
+                <button id="clear-filters-btn" class="clear-filters-btn">Clear All</button>
+            </div>
+
+            <div class="products-grid" id="product-grid"></div>
+        </div>
+    </section>
+
+    <!-- ═══ SCENT FINDER QUIZ ═════════════════════════════════════════════════ -->
+    <section class="quiz-section" id="quiz-section">
+        <div class="quiz-container">
+            <div class="quiz-card">
+                <span class="section-label">Scent Profiling</span>
+                <h2 class="section-title">Find Your Signature</h2>
+                <p class="section-subtitle">Answer three sensory questions to discover your ideal AURA scent.</p>
+                <div class="quiz-steps" id="quiz-steps-container">
+                    <div class="quiz-step active" data-step="1">
+                        <h3 class="quiz-question">Which scent family draws you in?</h3>
+                        <div class="quiz-options">
+                            <button class="quiz-option" data-value="citrus"><span class="option-title">Fresh & Citrusy</span><span class="option-desc">Bergamot, lemon zest, crisp sea breezes.</span></button>
+                            <button class="quiz-option" data-value="woody"><span class="option-title">Earthy & Woody</span><span class="option-desc">Cedar, creamy sandalwood, forest moss.</span></button>
+                            <button class="quiz-option" data-value="floral"><span class="option-title">Floral & Delicate</span><span class="option-desc">Jasmine, soft roses, botanical petals.</span></button>
+                            <button class="quiz-option" data-value="amber"><span class="option-title">Warm & Oriental</span><span class="option-desc">Rich amber, sweet vanilla, exotic spices.</span></button>
+                        </div>
+                    </div>
+                    <div class="quiz-step" data-step="2">
+                        <h3 class="quiz-question">Your ideal atmosphere?</h3>
+                        <div class="quiz-options">
+                            <button class="quiz-option" data-value="day"><span class="option-title">Sunlight & Open Air</span><span class="option-desc">Coastlines, green pine forests, midday warmth.</span></button>
+                            <button class="quiz-option" data-value="night"><span class="option-title">Cozy Rooms & Velvet</span><span class="option-desc">Evening cocktails, low lights, soft jazz.</span></button>
+                        </div>
+                        <button class="quiz-back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    </div>
+                    <div class="quiz-step" data-step="3">
+                        <h3 class="quiz-question">Who is this fragrance for?</h3>
+                        <div class="quiz-options">
+                            <button class="quiz-option" data-value="male"><span class="option-title">Gentleman</span><span class="option-desc">Tailored, crisp, woody masculine or gender-neutral.</span></button>
+                            <button class="quiz-option" data-value="female"><span class="option-title">Lady</span><span class="option-desc">Graceful, radiant, floral feminine or gender-neutral.</span></button>
+                        </div>
+                        <button class="quiz-back-btn"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                    </div>
+                    <div class="quiz-step" data-step="result" id="quiz-result-step">
+                        <h3 class="quiz-question">Your Olfactive Aura Awaits</h3>
+                        <div class="quiz-result-content"></div>
+                        <button class="btn btn-outline" id="restart-quiz-btn">Retake Quiz</button>
+                    </div>
+                </div>
+                <div class="quiz-progress-wrapper" id="quiz-progress-bar">
+                    <div class="quiz-progress-track"><div class="quiz-progress-fill" style="width:33%;"></div></div>
+                    <div class="quiz-progress-text">Step 1 of 3</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ INGREDIENT SPOTLIGHT ══════════════════════════════════════════════ -->
+    <section class="ingredients-section" id="ingredients-section">
+        <div class="ingredients-container">
+            <div class="ingredients-header">
+                <span class="section-label">Raw Material Spotlight</span>
+                <h2 class="section-title">The Natural Palette</h2>
+                <p class="section-subtitle">Hover to explore the character of each ingredient and see matching blends.</p>
+            </div>
+            <div class="ingredients-grid">
+                <div class="ingredient-card" data-note="Bergamot">
+                    <div class="ingredient-img-wrapper">
+                        <img src="assets/citrus.png" alt="Calabrian Bergamot" class="ingredient-img">
+                        <div class="ingredient-overlay">
+                            <h3>Bergamot</h3>
+                            <p class="ingredient-origin">Calabria, Italy</p>
+                            <p class="ingredient-desc">Bright, sparkling citrus with complex green and tea-like floral undertones. Adds clean luminescence to top notes.</p>
+                            <span class="ingredient-action">View Matching Scents</span>
+                        </div>
+                    </div>
+                    <h3 class="ingredient-card-title">Calabrian Bergamot</h3>
+                </div>
+                <div class="ingredient-card" data-note="Sandalwood">
+                    <div class="ingredient-img-wrapper">
+                        <img src="assets/woody.png" alt="Mysore Sandalwood" class="ingredient-img">
+                        <div class="ingredient-overlay">
+                            <h3>Sandalwood</h3>
+                            <p class="ingredient-origin">Mysore, India</p>
+                            <p class="ingredient-desc">Creamy, warm, woody, and milky. A grounding force in the base notes of our best-selling blends.</p>
+                            <span class="ingredient-action">View Matching Scents</span>
+                        </div>
+                    </div>
+                    <h3 class="ingredient-card-title">Mysore Sandalwood</h3>
+                </div>
+                <div class="ingredient-card" data-note="Jasmine">
+                    <div class="ingredient-img-wrapper">
+                        <img src="assets/floral.png" alt="Grasse Jasmine" class="ingredient-img">
+                        <div class="ingredient-overlay">
+                            <h3>Jasmine</h3>
+                            <p class="ingredient-origin">Grasse, France</p>
+                            <p class="ingredient-desc">Indolic, narcotic, intensely sweet floral. Hand-picked Jasmine Sambac yields a deep, opulent heart.</p>
+                            <span class="ingredient-action">View Matching Scents</span>
+                        </div>
+                    </div>
+                    <h3 class="ingredient-card-title">Grasse Jasmine</h3>
+                </div>
+                <div class="ingredient-card" data-note="Oud">
+                    <div class="ingredient-img-wrapper">
+                        <img src="assets/amber.png" alt="Rare Agarwood Oud" class="ingredient-img">
+                        <div class="ingredient-overlay">
+                            <h3>Rare Oud</h3>
+                            <p class="ingredient-origin">Assam, India</p>
+                            <p class="ingredient-desc">Resinous, woody, balsamic, and dark. Aged agarwood harvested to create the ultimate smoky luxury.</p>
+                            <span class="ingredient-action">View Matching Scents</span>
+                        </div>
+                    </div>
+                    <h3 class="ingredient-card-title">Rare Agarwood (Oud)</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CART DRAWER ═══════════════════════════════════════════════════════ -->
+    <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3>Shopping Bag</h3>
+            <button class="cart-close-btn" id="cart-close-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-drawer-items" id="cart-items-container"></div>
+        <div class="cart-drawer-footer">
+            <div class="cart-summary-row">
+                <span>Shipping</span>
+                <span class="accent-text">Complimentary</span>
+            </div>
+            <div class="cart-summary-row total-row">
+                <span>Subtotal</span>
+                <span id="cart-subtotal">₹0</span>
+            </div>
+            <button class="btn btn-primary btn-block" id="proceed-checkout-btn" style="display:none;">
+                <i class="fa-solid fa-lock" style="margin-right:8px;"></i>Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         LOGIN / REGISTER MODAL
+    ═══════════════════════════════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="auth-modal">
+        <div class="auth-modal-card">
+            <button class="modal-close" id="auth-modal-close"><i class="fa-solid fa-xmark"></i></button>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Sign In</button>
+                <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">Create Account</button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form id="login-form" class="auth-form">
+                <div class="auth-brand">
+                    <span class="brand-logo-sm">AURA</span>
+                    <p>Welcome back. Sign in to your account.</p>
+                </div>
+
+                <!-- Google Sign In Button -->
+                <button type="button" class="btn-google-auth" onclick="handleGoogleLoginClick()">
+                    <svg class="google-icon" viewBox="0 0 24 24" width="18" height="18">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                    </svg>
+                    <span>Sign in with Google</span>
+                </button>
+
+                <div class="auth-divider">
+                    <span>or sign in with email</span>
+                </div>
+
+                <div class="form-field">
+                    <label for="login-email">Login ID (Email)</label>
+                    <div class="form-input-icon">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="login-email" placeholder="your@email.com" required autocomplete="email">
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="login-password">Password</label>
+                    <div class="form-input-icon">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="login-password" placeholder="Enter password" required autocomplete="current-password">
+                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility('login-password', this)">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="auth-error" id="login-error" style="display:none;"></div>
+                <button type="submit" class="btn btn-primary btn-block" id="login-submit-btn">
+                    Sign In to AURA
+                </button>
+                <p class="auth-switch-text">Don't have an account? <a href="#" onclick="switchAuthTab('register'); return false;">Create one free</a></p>
+
+                <div class="demo-credentials">
+                    <strong>Demo Account:</strong> eleanor@example.com / Aura@2026
+                </div>
+            </form>
+
+            <!-- REGISTER FORM -->
+            <form id="register-form" class="auth-form" style="display:none;">
+                <div class="auth-brand">
+                    <span class="brand-logo-sm">AURA</span>
+                    <p>Create your AURA account — free, forever.</p>
+                </div>
+
+                <!-- Google Sign In Button -->
+                <button type="button" class="btn-google-auth" onclick="handleGoogleLoginClick()">
+                    <svg class="google-icon" viewBox="0 0 24 24" width="18" height="18">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                    </svg>
+                    <span>Sign up with Google</span>
+                </button>
+
+                <div class="auth-divider">
+                    <span>or register with email</span>
+                </div>
+
+                <div class="form-row-2">
+                    <div class="form-field">
+                        <label for="reg-name">Full Name *</label>
+                        <input type="text" id="reg-name" placeholder="Your full name" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="reg-phone">Phone Number *</label>
+                        <div class="form-input-icon">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="tel" id="reg-phone" placeholder="+91 98765 43210" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="reg-email">Login ID (Email) *</label>
+                    <div class="form-input-icon">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="reg-email" placeholder="your@email.com" required autocomplete="email">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="reg-password">Password *</label>
+                    <div class="form-input-icon">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="reg-password" placeholder="Minimum 6 characters" required autocomplete="new-password">
+                        <button type="button" class="toggle-password" onclick="togglePasswordVisibility('reg-password', this)">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-section-label"><i class="fa-solid fa-location-dot"></i> Default Delivery Address</div>
+
+                <div class="form-field">
+                    <label for="reg-address">Street Address</label>
+                    <input type="text" id="reg-address" placeholder="Flat / House No. / Street">
+                </div>
+                <div class="form-row-3">
+                    <div class="form-field">
+                        <label for="reg-city">City</label>
+                        <input type="text" id="reg-city" placeholder="City">
+                    </div>
+                    <div class="form-field">
+                        <label for="reg-state">State</label>
+                        <input type="text" id="reg-state" placeholder="State">
+                    </div>
+                    <div class="form-field">
+                        <label for="reg-pincode">Pincode</label>
+                        <input type="text" id="reg-pincode" placeholder="400001">
+                    </div>
+                </div>
+
+                <div class="auth-error" id="register-error" style="display:none;"></div>
+                <button type="submit" class="btn btn-primary btn-block" id="register-submit-btn">
+                    Create My AURA Account
+                </button>
+                <p class="auth-switch-text">Already have an account? <a href="#" onclick="switchAuthTab('login'); return false;">Sign in here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         DEDICATED ORDER PLACEMENT SECTION (3-Step)
+    ═══════════════════════════════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="checkout-drawer-modal">
+        <div class="checkout-full-card">
+            <button class="modal-close" id="checkout-modal-close"><i class="fa-solid fa-xmark"></i></button>
+
+            <!-- Step Progress Bar -->
+            <div class="checkout-progress">
+                <div class="checkout-step-indicator active" data-step="1">
+                    <span class="step-num">1</span>
+                    <span class="step-label">Your Identity</span>
+                </div>
+                <div class="checkout-step-connector"></div>
+                <div class="checkout-step-indicator" data-step="2">
+                    <span class="step-num">2</span>
+                    <span class="step-label">Delivery Address</span>
+                </div>
+                <div class="checkout-step-connector"></div>
+                <div class="checkout-step-indicator" data-step="3">
+                    <span class="step-num">3</span>
+                    <span class="step-label">Payment & Place</span>
+                </div>
+            </div>
+
+            <div class="checkout-body">
+
+                <!-- Left Column: Form Steps -->
+                <div class="checkout-form-col">
+
+                    <!-- ── STEP 1: Identity ── -->
+                    <div class="checkout-step-panel active" id="checkout-panel-1">
+                        <h3 class="checkout-step-title"><i class="fa-regular fa-user"></i> Your Identity</h3>
+
+                        <!-- Logged-in User Card -->
+                        <div class="identity-card logged-in-identity" id="logged-in-identity-card" style="display:none;">
+                            <div class="identity-avatar" id="checkout-avatar">A</div>
+                            <div class="identity-details">
+                                <div class="identity-name" id="checkout-identity-name">—</div>
+                                <div class="identity-login-id">Login ID: <strong id="checkout-identity-loginid">—</strong></div>
+                                <div class="identity-phone"><i class="fa-solid fa-phone"></i> <span id="checkout-identity-phone">—</span></div>
+                            </div>
+                            <div class="identity-verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</div>
+                        </div>
+
+                        <!-- Guest User: Prompt Sign In -->
+                        <div class="identity-guest-card" id="guest-identity-card">
+                            <i class="fa-regular fa-user" style="font-size: 2rem; color: var(--color-border);"></i>
+                            <p>Sign in to pre-fill your name, phone, and delivery address automatically.</p>
+                            <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+                                <button class="btn btn-primary" onclick="openAuthModal('login')">Sign In</button>
+                                <button class="btn btn-outline" onclick="openAuthModal('register')">Create Account</button>
+                            </div>
+                            <p style="margin-top:12px; font-size:0.75rem; color: var(--color-text-muted);">Or continue as guest — you'll enter details manually.</p>
+                            <button class="btn btn-outline" style="margin-top:8px;" id="continue-as-guest-btn">Continue as Guest</button>
+                        </div>
+
+                        <div class="checkout-step-nav" style="margin-top:24px;">
+                            <button class="btn btn-primary" id="go-step-2-btn" style="display:none;" onclick="goToCheckoutStep(2)">
+                                Continue to Address <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ── STEP 2: Delivery Address ── -->
+                    <div class="checkout-step-panel" id="checkout-panel-2">
+                        <h3 class="checkout-step-title"><i class="fa-solid fa-location-dot"></i> Delivery Address</h3>
+
+                        <div class="saved-address-card" id="saved-address-display" style="display:none;">
+                            <div class="saved-address-header">
+                                <span><i class="fa-solid fa-house"></i> Saved Address</span>
+                                <button class="edit-address-btn" onclick="enableAddressEdit()">Edit <i class="fa-solid fa-pen"></i></button>
+                            </div>
+                            <div class="saved-address-body" id="saved-address-body">
+                                <!-- Filled by JS -->
+                            </div>
+                        </div>
+
+                        <div id="address-form-fields">
+                            <div class="form-row-2">
+                                <div class="form-field">
+                                    <label for="co-name">Full Name *</label>
+                                    <input type="text" id="co-name" placeholder="Full name" required>
+                                </div>
+                                <div class="form-field">
+                                    <label for="co-phone">Phone Number *</label>
+                                    <div class="form-input-icon">
+                                        <i class="fa-solid fa-phone"></i>
+                                        <input type="tel" id="co-phone" placeholder="+91 98765 43210" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label for="co-email">Email Address *</label>
+                                <div class="form-input-icon">
+                                    <i class="fa-regular fa-envelope"></i>
+                                    <input type="email" id="co-email" placeholder="For order confirmation" required>
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label for="co-address">Street Address *</label>
+                                <input type="text" id="co-address" placeholder="Flat / House No. / Street" required>
+                            </div>
+                            <div class="form-row-3">
+                                <div class="form-field">
+                                    <label for="co-city">City *</label>
+                                    <input type="text" id="co-city" placeholder="City" required>
+                                </div>
+                                <div class="form-field">
+                                    <label for="co-state">State *</label>
+                                    <input type="text" id="co-state" placeholder="State" required>
+                                </div>
+                                <div class="form-field">
+                                    <label for="co-pincode">Pincode *</label>
+                                    <input type="text" id="co-pincode" placeholder="400001" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="checkout-step-nav">
+                            <button class="btn btn-outline" onclick="goToCheckoutStep(1)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                            <button class="btn btn-primary" onclick="goToCheckoutStep(3)">Continue to Payment <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- ── STEP 3: Payment & Place Order ── -->
+                    <div class="checkout-step-panel" id="checkout-panel-3">
+                        <h3 class="checkout-step-title"><i class="fa-solid fa-credit-card"></i> Payment Method</h3>
+
+                        <div class="payment-grid">
+                            <label class="payment-option-tab active" data-method="razorpay">
+                                <input type="radio" name="paymentMethod" value="razorpay" checked style="display:none;">
+                                <i class="fa-solid fa-qrcode payment-icon"></i>
+                                <span class="payment-label">UPI / Cards</span>
+                                <span class="payment-sub">Razorpay</span>
+                            </label>
+                            <label class="payment-option-tab" data-method="stripe">
+                                <input type="radio" name="paymentMethod" value="stripe" style="display:none;">
+                                <i class="fa-brands fa-stripe payment-icon" style="color:#6772E5;"></i>
+                                <span class="payment-label">Credit Card</span>
+                                <span class="payment-sub">Stripe</span>
+                            </label>
+                            <label class="payment-option-tab" data-method="paypal">
+                                <input type="radio" name="paymentMethod" value="paypal" style="display:none;">
+                                <i class="fa-brands fa-paypal payment-icon" style="color:#003087;"></i>
+                                <span class="payment-label">PayPal</span>
+                                <span class="payment-sub">Express Wallet</span>
+                            </label>
+                            <label class="payment-option-tab" data-method="cod">
+                                <input type="radio" name="paymentMethod" value="cod" style="display:none;">
+                                <i class="fa-solid fa-truck-ramp-box payment-icon"></i>
+                                <span class="payment-label">Pay on Delivery</span>
+                                <span class="payment-sub">COD</span>
+                            </label>
+                        </div>
+
+                        <div class="payment-info-box" id="payment-info-box">
+                            <i class="fa-solid fa-bolt" style="color:var(--color-accent);"></i>
+                            Instant UPI (GPay, PhonePe, Paytm), Cards & NetBanking via Razorpay.
+                        </div>
+
+                        <div class="checkout-step-nav">
+                            <button class="btn btn-outline" onclick="goToCheckoutStep(2)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                            <button class="btn btn-primary" id="place-order-submit-btn" onclick="handleOrderSubmission()">
+                                <i class="fa-solid fa-lock"></i> Place Order & Pay
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Order Summary -->
+                <div class="checkout-summary-col">
+                    <div class="order-summary-card">
+                        <h4 class="order-summary-title">Order Summary</h4>
+                        <div class="order-summary-items" id="checkout-summary-items">
+                            <!-- Filled by JS -->
+                        </div>
+                        <div class="order-summary-totals">
+                            <div class="summary-row"><span>Subtotal</span><span id="checkout-summary-subtotal">₹0</span></div>
+                            <div class="summary-row"><span>Shipping</span><span style="color:var(--color-success);">Complimentary</span></div>
+                            <div class="summary-row total-summary-row"><span>Total</span><span id="checkout-summary-total">₹0</span></div>
+                        </div>
+                        <div class="secure-badge">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            256-bit SSL Encrypted & Secure
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         MY ORDERS HISTORY DRAWER
+    ═══════════════════════════════════════════════════════════════════════════ -->
+    <div class="cart-drawer-overlay" id="my-orders-overlay"></div>
+    <div class="cart-drawer" id="my-orders-drawer" style="max-width:560px;">
+        <div class="cart-drawer-header">
+            <h3>My Orders</h3>
+            <button class="cart-close-btn" id="my-orders-close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-drawer-items" id="my-orders-content" style="padding:20px;">
+            <!-- Filled by JS -->
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         USER PROFILE & MY ORDERS PORTAL MODAL
+    ═══════════════════════════════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="edit-profile-modal">
+        <div class="auth-modal-card profile-modal-card">
+            <button class="modal-close" onclick="document.getElementById('edit-profile-modal').classList.remove('active')"><i class="fa-solid fa-xmark"></i></button>
+
+            <!-- Profile Header -->
+            <div class="profile-header-banner">
+                <div class="profile-avatar-large" id="profile-avatar-large">A</div>
+                <div class="profile-header-info">
+                    <h3 id="profile-header-name">My Account</h3>
+                    <p id="profile-header-email">user@aura.com</p>
+                </div>
+            </div>
+
+            <!-- Profile Navigation Tabs -->
+            <div class="auth-tabs profile-tabs">
+                <button class="auth-tab active" id="tab-profile-orders" onclick="switchProfileTab('orders')">
+                    <i class="fa-solid fa-box-archive"></i> My Orders
+                </button>
+                <button class="auth-tab" id="tab-profile-address" onclick="switchProfileTab('address')">
+                    <i class="fa-solid fa-location-dot"></i> Delivery Details
+                </button>
+            </div>
+
+            <!-- TAB 1: MY ORDERS IN PROFILE -->
+            <div class="profile-tab-panel active" id="profile-panel-orders">
+                <div class="profile-orders-list" id="profile-orders-list" style="padding: 24px; max-height: 480px; overflow-y: auto;">
+                    <!-- Loaded dynamically via JS -->
+                </div>
+            </div>
+
+            <!-- TAB 2: EDIT PROFILE ADDRESS -->
+            <div class="profile-tab-panel" id="profile-panel-address" style="display:none;">
+                <form id="edit-profile-form" class="auth-form" style="padding: 24px 32px;">
+                    <div class="form-row-2">
+                        <div class="form-field">
+                            <label for="ep-name">Full Name</label>
+                            <input type="text" id="ep-name" placeholder="Full Name">
+                        </div>
+                        <div class="form-field">
+                            <label for="ep-phone">Phone Number</label>
+                            <div class="form-input-icon">
+                                <i class="fa-solid fa-phone"></i>
+                                <input type="tel" id="ep-phone" placeholder="+91 98765 43210">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-field">
+                        <label for="ep-address">Street Address</label>
+                        <input type="text" id="ep-address" placeholder="Flat / House No. / Street">
+                    </div>
+                    <div class="form-row-3">
+                        <div class="form-field">
+                            <label for="ep-city">City</label>
+                            <input type="text" id="ep-city" placeholder="City">
+                        </div>
+                        <div class="form-field">
+                            <label for="ep-state">State</label>
+                            <input type="text" id="ep-state" placeholder="State">
+                        </div>
+                        <div class="form-field">
+                            <label for="ep-pincode">Pincode</label>
+                            <input type="text" id="ep-pincode" placeholder="400001">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Save Profile Details</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Quick View Product Modal -->
+    <div class="modal-overlay" id="product-modal">
+        <div class="modal-card">
+            <button class="modal-close" id="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-grid" id="modal-content-container"></div>
+        </div>
+    </div>
+
+    <!-- Order Success Modal -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="checkout-success-card">
+            <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+            <h2>Order Placed!</h2>
+            <p>Your luxury package is being prepared with utmost care. A confirmation has been dispatched to your email.</p>
+            <p class="order-id">Order ID: <span id="simulated-order-id">AURA-ORD-00000</span></p>
+            <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+                <button class="btn btn-outline" id="checkout-success-close">Continue Shopping</button>
+                <button class="btn btn-primary" onclick="openMyOrders(); document.getElementById('checkout-modal').classList.remove('active');">View My Orders</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ FOOTER ═══════════════════════════════════════════════════════════ -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="#" class="footer-logo">AURA</a>
+                <p class="footer-tagline">Crafting modern, quiet luxury for the senses.</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Pinterest"><i class="fa-brands fa-pinterest"></i></a>
+                    <a href="#" aria-label="Twitter X"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-links-group">
+                <h4>Collections</h4>
+                <a href="#catalog" onclick="setFilters('all','signature')">Signature Edition</a>
+                <a href="#catalog" onclick="setFilters('all','collector')">Collector's Edition</a>
+                <a href="#catalog" onclick="setFilters('male','all')">Men's Fragrances</a>
+                <a href="#catalog" onclick="setFilters('female','all')">Women's Fragrances</a>
+            </div>
+            <div class="footer-links-group">
+                <h4>House of Aura</h4>
+                <a href="#manifesto">Our Story</a>
+                <a href="#ingredients-section">Ingredients</a>
+                <a href="admin.html">Admin Portal</a>
+                <a href="#">Scent Care Guide</a>
+            </div>
+            <div class="footer-newsletter">
+                <h4>The Gazette</h4>
+                <p>Subscribe for olfactory essays, new release previews, and private collection access.</p>
+                <form id="newsletter-form" class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required aria-label="Newsletter email">
+                    <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-arrow-right"></i></button>
+                </form>
+                <div id="newsletter-success" style="display:none; font-size:0.75rem; color:var(--color-success);">
+                    Thank you — you're on the list.
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AURA Fragrances. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="admin.html">Admin Portal</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
