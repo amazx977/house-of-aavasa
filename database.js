@@ -8,7 +8,7 @@ let DATA_DIR = path.join(__dirname, 'data');
 try {
     if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 } catch (err) {
-    DATA_DIR = path.join(os.tmpdir(), 'aura_data');
+    DATA_DIR = path.join(os.tmpdir(), 'aavasa_data');
     if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 }
 
@@ -24,7 +24,7 @@ function initDatabase() {
     if (!fs.existsSync(ORDERS_FILE)) {
         const seedOrders = [
             {
-                id: "AURA-ORD-10001",
+                id: "AAVASA-ORD-10001",
                 loginId: "eleanor@example.com",
                 customer: {
                     fullName: "Eleanor Vance",
@@ -45,7 +45,7 @@ function initDatabase() {
                 createdAt: new Date(Date.now() - 86400000).toISOString()
             },
             {
-                id: "AURA-ORD-10002",
+                id: "AAVASA-ORD-10002",
                 loginId: "julian@example.com",
                 customer: {
                     fullName: "Julian Thorne",
@@ -72,7 +72,7 @@ function initDatabase() {
         const seedUsers = [
             {
                 loginId: "eleanor@example.com",
-                passwordHash: hashPassword("Aura@2026"),
+                passwordHash: hashPassword("Aavasa@2026"),
                 profile: {
                     fullName: "Eleanor Vance",
                     phone: "+91 98765 43210",
@@ -90,7 +90,7 @@ function initDatabase() {
 
 // ─── Helper: Hash Passwords ───────────────────────────────────────────────────
 function hashPassword(plain) {
-    return crypto.createHash('sha256').update(plain + 'aura_salt_2026').digest('hex');
+    return crypto.createHash('sha256').update(plain + 'aavasa_salt_2026').digest('hex');
 }
 
 // ─── Read / Write Helpers ─────────────────────────────────────────────────────
@@ -173,7 +173,7 @@ function loginOrRegisterGoogleUser({ email, name, picture, googleId }) {
             picture: picture || "",
             passwordHash: null,
             profile: {
-                fullName: name || "AURA Member",
+                fullName: name || "Aavasa Member",
                 phone: "",
                 address: "",
                 city: "",
@@ -185,7 +185,7 @@ function loginOrRegisterGoogleUser({ email, name, picture, googleId }) {
         users.push(user);
         writeJSON(USERS_FILE, users);
     } else {
-        if (name && (!user.profile.fullName || user.profile.fullName === "AURA Member")) {
+        if (name && (!user.profile.fullName || user.profile.fullName === "Aavasa Member")) {
             user.profile.fullName = name;
         }
         if (picture) user.picture = picture;
@@ -226,7 +226,7 @@ function getOrdersByLoginId(loginId) {
 function createOrder(orderData) {
     const orders = getAllOrders();
     const randomNum = Math.floor(10000 + Math.random() * 90000);
-    const orderId = `AURA-ORD-${randomNum}`;
+    const orderId = `AAVASA-ORD-${randomNum}`;
 
     const newOrder = {
         id: orderId,

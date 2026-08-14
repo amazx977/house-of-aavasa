@@ -1,5 +1,5 @@
 /* ==========================================================================
-   AURA FRAGRANCES — APP ENGINE (Auth + Cart + Catalog + Checkout + Orders)
+   HOUSE OF AAVASA — APP ENGINE (Auth + Cart + Catalog + Checkout + Orders)
    ========================================================================== */
 
 // ─── PRODUCT DATABASE ─────────────────────────────────────────────────────────
@@ -27,8 +27,8 @@ const products = [
 ];
 
 // ─── APP STATE ─────────────────────────────────────────────────────────────────
-let cart = JSON.parse(localStorage.getItem("aura_cart") || "[]");
-let currentUser = JSON.parse(localStorage.getItem("aura_user") || "null");
+let cart = JSON.parse(localStorage.getItem("aavasa_cart") || "[]");
+let currentUser = JSON.parse(localStorage.getItem("aavasa_user") || "null");
 let currentGenderFilter = "all";
 let currentEditionFilter = "all";
 let currentSort = "default";
@@ -258,7 +258,7 @@ function syncAuthState() {
                 profAvatar.textContent = initial;
             }
         }
-        if (profName)   profName.textContent   = currentUser.profile?.fullName || "AURA Member";
+        if (profName)   profName.textContent   = currentUser.profile?.fullName || "Aavasa Member";
         if (profEmail)  profEmail.textContent  = currentUser.loginId;
 
         if (mobileAuthLink) mobileAuthLink.textContent = "My Account & Orders";
@@ -274,7 +274,7 @@ function syncAuthState() {
 window.handleGoogleLoginClick = function() {
     if (window.google && google.accounts && google.accounts.id) {
         google.accounts.id.initialize({
-            client_id: "987654321098-aura-demo-client-id.apps.googleusercontent.com",
+            client_id: "987654321098-aavasa-demo-client-id.apps.googleusercontent.com",
             callback: handleGoogleCredentialResponse,
             auto_select: false
         });
@@ -318,7 +318,7 @@ async function processGoogleAuthPayload(payload) {
         const data = await res.json();
         if (data.success) {
             currentUser = data.user;
-            localStorage.setItem("aura_user", JSON.stringify(currentUser));
+            localStorage.setItem("aavasa_user", JSON.stringify(currentUser));
             authModal.classList.remove("active");
             syncAuthState();
             alert(`Welcome, ${currentUser.profile.fullName || currentUser.loginId}! Signed in with Google.`);
@@ -377,7 +377,7 @@ async function handleLogin(e) {
         const data = await res.json();
         if (data.success) {
             currentUser = data.user;
-            localStorage.setItem("aura_user", JSON.stringify(currentUser));
+            localStorage.setItem("aavasa_user", JSON.stringify(currentUser));
             authModal.classList.remove("active");
             syncAuthState();
         } else {
@@ -390,7 +390,7 @@ async function handleLogin(e) {
     }
 
     btn.disabled = false;
-    btn.textContent = "Sign In to AURA";
+    btn.textContent = "Sign In to AAVASA";
 }
 
 // Handle Register
@@ -423,7 +423,7 @@ async function handleRegister(e) {
         const data = await res.json();
         if (data.success) {
             currentUser = data.user;
-            localStorage.setItem("aura_user", JSON.stringify(currentUser));
+            localStorage.setItem("aavasa_user", JSON.stringify(currentUser));
             authModal.classList.remove("active");
             syncAuthState();
         } else {
@@ -436,12 +436,12 @@ async function handleRegister(e) {
     }
 
     btn.disabled = false;
-    btn.textContent = "Create My AURA Account";
+    btn.textContent = "Create My AAVASA Account";
 }
 
 window.handleLogout = function() {
     currentUser = null;
-    localStorage.removeItem("aura_user");
+    localStorage.removeItem("aavasa_user");
     syncAuthState();
     document.getElementById("account-menu")?.classList.remove("open");
 };
@@ -508,7 +508,7 @@ async function handleEditProfile(e) {
         const data = await res.json();
         if (data.success) {
             currentUser = data.user;
-            localStorage.setItem("aura_user", JSON.stringify(currentUser));
+            localStorage.setItem("aavasa_user", JSON.stringify(currentUser));
             syncAuthState();
             editProfileModal.classList.remove("active");
         }
@@ -961,7 +961,7 @@ function updateCartUI() {
     const count = cart.reduce((s, i) => s + i.quantity, 0);
     cartCountEl.textContent = count;
 }
-function saveCart() { localStorage.setItem("aura_cart", JSON.stringify(cart)); }
+function saveCart() { localStorage.setItem("aavasa_cart", JSON.stringify(cart)); }
 
 // ─── PRODUCT QUICK VIEW MODAL ──────────────────────────────────────────────────
 window.openProductModal = function(id) {

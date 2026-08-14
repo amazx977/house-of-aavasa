@@ -32,7 +32,7 @@ app.post('/api/auth/register', (req, res) => {
             return res.status(409).json(result);
         }
 
-        console.log(`[AURA AUTH] New user registered: ${loginId}`);
+        console.log(`[AAVASA AUTH] New user registered: ${loginId}`);
         res.status(201).json(result);
     } catch (error) {
         console.error("Register error:", error);
@@ -53,7 +53,7 @@ app.post('/api/auth/login', (req, res) => {
             return res.status(401).json(result);
         }
 
-        console.log(`[AURA AUTH] User logged in: ${loginId}`);
+        console.log(`[AAVASA AUTH] User logged in: ${loginId}`);
         res.json(result);
     } catch (error) {
         console.error("Login error:", error);
@@ -100,7 +100,7 @@ app.post('/api/auth/google', (req, res) => {
             googleId: userSub
         });
 
-        console.log(`[AURA AUTH] Google sign-in successful: ${userEmail} (${result.created ? 'New User' : 'Existing User'})`);
+        console.log(`[AAVASA AUTH] Google sign-in successful: ${userEmail} (${result.created ? 'New User' : 'Existing User'})`);
         res.json(result);
     } catch (error) {
         console.error("Google Auth error:", error);
@@ -173,7 +173,7 @@ app.post('/api/orders', (req, res) => {
         }
 
         const newOrder = db.createOrder({ customer, items, subtotal, totalAmount, paymentMethod, loginId: loginId || "guest" });
-        console.log(`[AURA ORDER] New order: ${newOrder.id} | User: ${newOrder.loginId} | ₹${newOrder.totalAmount}`);
+        console.log(`[AAVASA ORDER] New order: ${newOrder.id} | User: ${newOrder.loginId} | ₹${newOrder.totalAmount}`);
 
         res.status(201).json({ success: true, message: "Order placed successfully!", order: newOrder });
     } catch (error) {
@@ -193,7 +193,7 @@ app.patch('/api/orders/:id/status', (req, res) => {
         const updated = db.updateOrderStatus(req.params.id, status);
         if (!updated) return res.status(404).json({ success: false, message: "Order not found" });
 
-        console.log(`[AURA ORDER] Status updated: ${updated.id} → ${status}`);
+        console.log(`[AAVASA ORDER] Status updated: ${updated.id} → ${status}`);
         res.json({ success: true, message: `Status updated to ${status}`, order: updated });
     } catch (error) {
         res.status(500).json({ success: false, message: "Status update failed" });
@@ -219,7 +219,7 @@ app.get('*', (req, res) => {
 if (require.main === module) {
     app.listen(PORT, () => {
         console.log(`====================================================`);
-        console.log(` AURA Luxury Perfumes — Backend Server Running`);
+        console.log(` House of Aavasa — Backend Server Running`);
         console.log(` Store:       http://localhost:${PORT}`);
         console.log(` Admin:       http://localhost:${PORT}/admin.html`);
         console.log(` Orders API:  http://localhost:${PORT}/api/orders`);

@@ -1,7 +1,7 @@
 {
-  "name": "aura-perfumes",
+  "name": "house-of-aavasa",
   "version": "1.0.0",
-  "description": "Luxury perfume e-commerce landing page & backend order engine",
+  "description": "House of Aavasa — Luxury perfume e-commerce landing page & backend order engine",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
