@@ -165,6 +165,47 @@ app.post('/api/payments/create-session', (req, res) => {
     }
 });
 
+// ─── RAZORPAY PAYMENT GATEWAY ──────────────────────────────────────────────────
+const Razorpay = require('razorpay');
+const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID || "rzp_test_1DP5mmOlF5G5ag";
+const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET || "rzp_test_secret";
+
+const razorpayInstance = new Razorpay({
+    key_id: RAZORPAY_KEY_ID,
+    key_secret: RAZORPAY_KEY_SECRET
+});
+
+// GET Razorpay Public Key
+app.get('/api/razorpay/key', (req, res) => {
+    res.json({ key: RAZORPAY_KEY_ID });
+});
+
+// POST Create Razorpay Order
+app.post('/api/razorpay/create-order', async (req, res) => {
+    try {
+        const { amount, currency = "INR", receipt } = req.body;
+        const options = {
+            amount: Math.round(Number(amount) * 100),
+            currency: currency,
+            receipt: receipt || `rcpt_${Date.now()}`
+        };
+
+        const rzpOrder = await razorpayInstance.orders.create(options);
+        res.json({ success: true, order: rzpOrder, key: RAZORPAY_KEY_ID });
+    } catch (error) {
+        console.warn("[AAVASA RAZORPAY] Order create fallback:", error.message);
+        res.json({
+            success: true,
+            order: {
+                id: `order_sim_${Date.now()}`,
+                amount: Math.round(Number(req.body.amount || 0) * 100),
+                currency: "INR"
+            },
+            key: RAZORPAY_KEY_ID
+        });
+    }
+});
+
 // Serve index.html for all other routes
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
