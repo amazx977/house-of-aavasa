@@ -335,6 +335,15 @@ window.selectGoogleAccount = function(name, email, picture) {
     });
 };
 
+window.handleGlobalGoogleSubmit = function(e) {
+    e.preventDefault();
+    const email = document.getElementById("gg-email").value.trim();
+    const name = document.getElementById("gg-name").value.trim() || email.split("@")[0];
+    if (!email) return;
+
+    selectGoogleAccount(name, email, "https://lh3.googleusercontent.com/a/default-user=s96-c");
+};
+
 window.promptCustomGoogleAccount = function() {
     const userEmail = prompt("Enter your Google Account email:", "alex.thorne@gmail.com");
     if (!userEmail) return;
