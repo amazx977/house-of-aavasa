@@ -61,6 +61,13 @@ app.post('/api/auth/login', (req, res) => {
     }
 });
 
+// Auth Public Config (Google Client ID)
+app.get('/api/auth/config', (req, res) => {
+    res.json({
+        googleClientId: process.env.GOOGLE_CLIENT_ID || "987654321098-house-of-aavasa.apps.googleusercontent.com"
+    });
+});
+
 // Google Authentication Sign-In / Sign-Up
 app.post('/api/auth/google', (req, res) => {
     try {

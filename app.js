@@ -271,12 +271,43 @@ function syncAuthState() {
 }
 
 // ─── GOOGLE AUTHENTICATION SYSTEM ──────────────────────────────────────────────
-window.handleGoogleLoginClick = function() {
-    const customClientId = window.GOOGLE_CLIENT_ID || null;
-    if (customClientId && window.google && google.accounts && google.accounts.id) {
+let googleOAuthClientId = "987654321098-house-of-aavasa.apps.googleusercontent.com";
+
+async function fetchAuthConfig() {
+    try {
+        const res = await fetch("/api/auth/config");
+        const data = await res.json();
+        if (data.googleClientId) {
+            googleOAuthClientId = data.googleClientId;
+            initGoogleGSI();
+        }
+    } catch {
+        initGoogleGSI();
+    }
+}
+
+function initGoogleGSI() {
+    if (window.google && google.accounts && google.accounts.id) {
         try {
             google.accounts.id.initialize({
-                client_id: customClientId,
+                client_id: googleOAuthClientId,
+                callback: handleGoogleCredentialResponse,
+                auto_select: false
+            });
+        } catch (e) {
+            console.warn("Google GSI Init:", e);
+        }
+    }
+}
+
+// Call config fetch on script load
+fetchAuthConfig();
+
+window.handleGoogleLoginClick = function() {
+    if (window.google && google.accounts && google.accounts.id) {
+        try {
+            google.accounts.id.initialize({
+                client_id: googleOAuthClientId,
                 callback: handleGoogleCredentialResponse,
                 auto_select: false
             });
@@ -287,7 +318,7 @@ window.handleGoogleLoginClick = function() {
             });
             return;
         } catch (e) {
-            console.warn("GSI Client fallback to Account Chooser:", e);
+            console.warn("GSI Prompt fallback to Account Chooser:", e);
         }
     }
     openGoogleAccountModal();
