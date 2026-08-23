@@ -5,87 +5,87 @@ const crypto = require('crypto');
 const os = require('os');
 
 let DATA_DIR = path.join(__dirname, 'data');
+let TMP_DATA_DIR = path.join(os.tmpdir(), 'aavasa_data');
+
 try {
     if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-} catch (err) {
-    DATA_DIR = path.join(os.tmpdir(), 'aavasa_data');
-    if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+} catch (e) {
+    DATA_DIR = TMP_DATA_DIR;
 }
 
 const ORDERS_FILE = path.join(DATA_DIR, 'orders.json');
 const USERS_FILE = path.join(DATA_DIR, 'users.json');
 
+// In-memory cache for ultra-fast and fail-proof access in serverless environments
+let memoryOrders = null;
+let memoryUsers = null;
+
 // ─── Init Database Files ──────────────────────────────────────────────────────
 function initDatabase() {
-    try {
-        if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-    } catch (e) {}
+    if (memoryOrders && memoryUsers) return;
 
-    if (!fs.existsSync(ORDERS_FILE)) {
-        const seedOrders = [
-            {
-                id: "AAVASA-ORD-10001",
-                loginId: "eleanor@example.com",
-                customer: {
-                    fullName: "Eleanor Vance",
-                    email: "eleanor@example.com",
-                    phone: "+91 98765 43210",
-                    address: "42 Park Avenue, Penthouse B",
-                    city: "Mumbai",
-                    state: "Maharashtra",
-                    pincode: "400001"
-                },
-                items: [
-                    { id: 6, name: "Oud Imperial", edition: "collector", price: 3999, quantity: 1, size: "80ml" },
-                    { id: 11, name: "Jasmine Dew", edition: "signature", price: 1699, quantity: 1, size: "80ml" }
-                ],
-                subtotal: 5698, shippingFee: 0, totalAmount: 5698,
-                paymentMethod: "stripe", paymentStatus: "Paid",
-                orderStatus: "Shipped",
-                createdAt: new Date(Date.now() - 86400000).toISOString()
+    const seedOrders = [
+        {
+            id: "AAVASA-ORD-10001",
+            loginId: "eleanor@example.com",
+            customer: {
+                fullName: "Eleanor Vance",
+                email: "eleanor@example.com",
+                phone: "+91 98765 43210",
+                address: "42 Park Avenue, Penthouse B",
+                city: "Mumbai",
+                state: "Maharashtra",
+                pincode: "400001"
             },
-            {
-                id: "AAVASA-ORD-10002",
-                loginId: "julian@example.com",
-                customer: {
-                    fullName: "Julian Thorne",
-                    email: "julian@example.com",
-                    phone: "+91 91234 56789",
-                    address: "18 Rosewood Estate, Road No. 12",
-                    city: "Bengaluru",
-                    state: "Karnataka",
-                    pincode: "560001"
-                },
-                items: [
-                    { id: 10, name: "Cuir Royale", edition: "collector", price: 3999, quantity: 1, size: "80ml" }
-                ],
-                subtotal: 3999, shippingFee: 0, totalAmount: 3999,
-                paymentMethod: "razorpay", paymentStatus: "Paid",
-                orderStatus: "Processing",
-                createdAt: new Date(Date.now() - 36000000).toISOString()
-            }
-        ];
-        fs.writeFileSync(ORDERS_FILE, JSON.stringify(seedOrders, null, 2), 'utf8');
-    }
+            items: [
+                { id: 6, name: "Oud Imperial", edition: "collector", price: 3999, quantity: 1, size: "80ml" },
+                { id: 11, name: "Jasmine Dew", edition: "signature", price: 1699, quantity: 1, size: "80ml" }
+            ],
+            subtotal: 5698, shippingFee: 0, totalAmount: 5698,
+            paymentMethod: "stripe", paymentStatus: "Paid",
+            orderStatus: "Shipped",
+            createdAt: new Date(Date.now() - 86400000).toISOString()
+        },
+        {
+            id: "AAVASA-ORD-10002",
+            loginId: "julian@example.com",
+            customer: {
+                fullName: "Julian Thorne",
+                email: "julian@example.com",
+                phone: "+91 91234 56789",
+                address: "18 Rosewood Estate, Road No. 12",
+                city: "Bengaluru",
+                state: "Karnataka",
+                pincode: "560001"
+            },
+            items: [
+                { id: 10, name: "Cuir Royale", edition: "collector", price: 3999, quantity: 1, size: "80ml" }
+            ],
+            subtotal: 3999, shippingFee: 0, totalAmount: 3999,
+            paymentMethod: "razorpay", paymentStatus: "Paid",
+            orderStatus: "Processing",
+            createdAt: new Date(Date.now() - 36000000).toISOString()
+        }
+    ];
 
-    if (!fs.existsSync(USERS_FILE)) {
-        const seedUsers = [
-            {
-                loginId: "eleanor@example.com",
-                passwordHash: hashPassword("Aavasa@2026"),
-                profile: {
-                    fullName: "Eleanor Vance",
-                    phone: "+91 98765 43210",
-                    address: "42 Park Avenue, Penthouse B",
-                    city: "Mumbai",
-                    state: "Maharashtra",
-                    pincode: "400001"
-                },
-                createdAt: new Date(Date.now() - 90000000).toISOString()
-            }
-        ];
-        fs.writeFileSync(USERS_FILE, JSON.stringify(seedUsers, null, 2), 'utf8');
-    }
+    const seedUsers = [
+        {
+            loginId: "eleanor@example.com",
+            passwordHash: hashPassword("Aavasa@2026"),
+            profile: {
+                fullName: "Eleanor Vance",
+                phone: "+91 98765 43210",
+                address: "42 Park Avenue, Penthouse B",
+                city: "Mumbai",
+                state: "Maharashtra",
+                pincode: "400001"
+            },
+            createdAt: new Date(Date.now() - 90000000).toISOString()
+        }
+    ];
+
+    memoryOrders = readJSON(ORDERS_FILE, seedOrders);
+    memoryUsers = readJSON(USERS_FILE, seedUsers);
 }
 
 // ─── Helper: Hash Passwords ───────────────────────────────────────────────────
@@ -94,21 +94,46 @@ function hashPassword(plain) {
 }
 
 // ─── Read / Write Helpers ─────────────────────────────────────────────────────
-function readJSON(filePath) {
+function readJSON(filePath, defaultData = []) {
     try {
-        return JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    } catch { return []; }
+        if (fs.existsSync(filePath)) {
+            return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+        }
+    } catch {}
+
+    // Check temp folder fallback
+    try {
+        const tmpFile = path.join(TMP_DATA_DIR, path.basename(filePath));
+        if (fs.existsSync(tmpFile)) {
+            return JSON.parse(fs.readFileSync(tmpFile, 'utf8'));
+        }
+    } catch {}
+
+    return defaultData;
 }
 
 function writeJSON(filePath, data) {
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
+    if (filePath.includes('orders')) memoryOrders = data;
+    if (filePath.includes('users')) memoryUsers = data;
+
+    try {
+        fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
+    } catch {
+        try {
+            if (!fs.existsSync(TMP_DATA_DIR)) fs.mkdirSync(TMP_DATA_DIR, { recursive: true });
+            const tmpFile = path.join(TMP_DATA_DIR, path.basename(filePath));
+            fs.writeFileSync(tmpFile, JSON.stringify(data, null, 2), 'utf8');
+        } catch (e) {
+            console.warn("Storage in memory-only mode:", e.message);
+        }
+    }
 }
 
 // ─── USER AUTH OPERATIONS ─────────────────────────────────────────────────────
 
 function getAllUsers() {
     initDatabase();
-    return readJSON(USERS_FILE);
+    return memoryUsers || [];
 }
 
 function registerUser({ loginId, password, fullName, phone, address, city, state, pincode }) {
@@ -211,8 +236,7 @@ function safeUser(user) {
 
 function getAllOrders() {
     initDatabase();
-    const orders = readJSON(ORDERS_FILE);
-    return orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    return (memoryOrders || []).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 }
 
 function getOrderById(id) {
