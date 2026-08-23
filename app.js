@@ -272,35 +272,50 @@ function syncAuthState() {
 
 // ─── GOOGLE AUTHENTICATION SYSTEM ──────────────────────────────────────────────
 window.handleGoogleLoginClick = function() {
-    if (window.google && google.accounts && google.accounts.id) {
-        google.accounts.id.initialize({
-            client_id: "987654321098-aavasa-demo-client-id.apps.googleusercontent.com",
-            callback: handleGoogleCredentialResponse,
-            auto_select: false
-        });
-        google.accounts.id.prompt((notification) => {
-            if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-                triggerGoogleAuthFallback();
-            }
-        });
-    } else {
-        triggerGoogleAuthFallback();
+    const customClientId = window.GOOGLE_CLIENT_ID || null;
+    if (customClientId && window.google && google.accounts && google.accounts.id) {
+        try {
+            google.accounts.id.initialize({
+                client_id: customClientId,
+                callback: handleGoogleCredentialResponse,
+                auto_select: false
+            });
+            google.accounts.id.prompt((notification) => {
+                if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+                    openGoogleAccountModal();
+                }
+            });
+            return;
+        } catch (e) {
+            console.warn("GSI Client fallback to Account Chooser:", e);
+        }
     }
+    openGoogleAccountModal();
 };
 
-function triggerGoogleAuthFallback() {
+window.openGoogleAccountModal = function() {
+    const gModal = document.getElementById("google-account-modal");
+    if (gModal) gModal.classList.add("active");
+};
+
+window.selectGoogleAccount = function(name, email, picture) {
+    document.getElementById("google-account-modal")?.classList.remove("active");
+    processGoogleAuthPayload({
+        email: email,
+        name: name,
+        picture: picture || "https://lh3.googleusercontent.com/a/default-user=s96-c",
+        googleId: `google_sub_${Date.now()}`
+    });
+};
+
+window.promptCustomGoogleAccount = function() {
     const userEmail = prompt("Enter your Google Account email:", "alex.thorne@gmail.com");
     if (!userEmail) return;
 
     const userName = prompt("Enter your Google profile name:", "Alex Thorne") || "Alex Thorne";
 
-    processGoogleAuthPayload({
-        email: userEmail,
-        name: userName,
-        picture: "https://lh3.googleusercontent.com/a/default-user=s96-c",
-        googleId: `google_sub_${Date.now()}`
-    });
-}
+    selectGoogleAccount(userName, userEmail, "https://lh3.googleusercontent.com/a/default-user=s96-c");
+};
 
 window.handleGoogleCredentialResponse = function(response) {
     if (response && response.credential) {
