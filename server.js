@@ -2,13 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const { OAuth2Client } = require('google-auth-library');
 const db = require('./database');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || "987654321098-house-of-aavasa.apps.googleusercontent.com";
-const googleOAuthClient = new OAuth2Client(GOOGLE_CLIENT_ID);
 
 app.use(cors());
 app.use(express.json());
@@ -62,72 +59,6 @@ app.post('/api/auth/login', (req, res) => {
     } catch (error) {
         console.error("Login error:", error);
         res.status(500).json({ success: false, message: "Login failed. Please try again." });
-    }
-});
-
-// Auth Public Config (Google Client ID)
-app.get('/api/auth/config', (req, res) => {
-    res.json({
-        googleClientId: process.env.GOOGLE_CLIENT_ID || "987654321098-house-of-aavasa.apps.googleusercontent.com"
-    });
-});
-
-// Google Authentication Sign-In / Sign-Up
-app.post('/api/auth/google', async (req, res) => {
-    try {
-        const { email, name, picture, googleId, credential } = req.body;
-
-        let userEmail = email;
-        let userName = name;
-        let userPicture = picture;
-        let userSub = googleId;
-
-        // Verify ID token with google-auth-library if credential string is provided
-        if (credential) {
-            try {
-                if (process.env.GOOGLE_CLIENT_ID) {
-                    const ticket = await googleOAuthClient.verifyIdToken({
-                        idToken: credential,
-                        audience: process.env.GOOGLE_CLIENT_ID
-                    });
-                    const payload = ticket.getPayload();
-                    userEmail = payload.email;
-                    userName = payload.name;
-                    userPicture = payload.picture;
-                    userSub = payload.sub;
-                } else {
-                    const base64Url = credential.split('.')[1];
-                    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-                    const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
-                        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-                    }).join(''));
-                    const payload = JSON.parse(jsonPayload);
-                    userEmail = payload.email;
-                    userName = payload.name;
-                    userPicture = payload.picture;
-                    userSub = payload.sub;
-                }
-            } catch (jwtErr) {
-                console.error("JWT parse/verification:", jwtErr.message);
-            }
-        }
-
-        if (!userEmail) {
-            return res.status(400).json({ success: false, message: "Valid Google account email is required." });
-        }
-
-        const result = db.loginOrRegisterGoogleUser({
-            email: userEmail,
-            name: userName,
-            picture: userPicture,
-            googleId: userSub
-        });
-
-        console.log(`[AAVASA AUTH] Google sign-in successful: ${userEmail} (${result.created ? 'New User' : 'Existing User'})`);
-        res.json(result);
-    } catch (error) {
-        console.error("Google Auth error:", error);
-        res.status(500).json({ success: false, message: "Google authentication failed. Please try again." });
     }
 });
 
