@@ -271,13 +271,13 @@ function syncAuthState() {
 }
 
 // ─── GOOGLE AUTHENTICATION SYSTEM ──────────────────────────────────────────────
-let googleOAuthClientId = "987654321098-house-of-aavasa.apps.googleusercontent.com";
+let googleOAuthClientId = localStorage.getItem("aavasa_google_client_id") || "987654321098-house-of-aavasa.apps.googleusercontent.com";
 
 async function fetchAuthConfig() {
     try {
         const res = await fetch("/api/auth/config");
         const data = await res.json();
-        if (data.googleClientId) {
+        if (data.googleClientId && !localStorage.getItem("aavasa_google_client_id")) {
             googleOAuthClientId = data.googleClientId;
             initGoogleGSI();
         }
@@ -304,24 +304,20 @@ function initGoogleGSI() {
 fetchAuthConfig();
 
 window.handleGoogleLoginClick = function() {
-    if (window.google && google.accounts && google.accounts.id) {
-        try {
-            google.accounts.id.initialize({
-                client_id: googleOAuthClientId,
-                callback: handleGoogleCredentialResponse,
-                auto_select: false
-            });
-            google.accounts.id.prompt((notification) => {
-                if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-                    openGoogleAccountModal();
-                }
-            });
-            return;
-        } catch (e) {
-            console.warn("GSI Prompt fallback to Account Chooser:", e);
-        }
-    }
     openGoogleAccountModal();
+};
+
+window.promptSetGoogleClientId = function() {
+    const inputId = prompt(
+        "Enter your Google Cloud Console OAuth Client ID:\n(e.g. 123456789-abc.apps.googleusercontent.com)",
+        googleOAuthClientId
+    );
+    if (inputId && inputId.trim()) {
+        googleOAuthClientId = inputId.trim();
+        localStorage.setItem("aavasa_google_client_id", googleOAuthClientId);
+        initGoogleGSI();
+        alert("Google OAuth Client ID updated! Try Google Sign-In now.");
+    }
 };
 
 window.openGoogleAccountModal = function() {
