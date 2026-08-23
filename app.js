@@ -294,6 +294,17 @@ function initGoogleGSI() {
                 callback: handleGoogleCredentialResponse,
                 auto_select: false
             });
+
+            const loginBtnContainer = document.getElementById("g_id_signin_login");
+            if (loginBtnContainer) {
+                google.accounts.id.renderButton(loginBtnContainer, {
+                    theme: "outline",
+                    size: "large",
+                    text: "continue_with",
+                    shape: "rectangular",
+                    width: 320
+                });
+            }
         } catch (e) {
             console.warn("Google GSI Init:", e);
         }
@@ -304,18 +315,33 @@ function initGoogleGSI() {
 fetchAuthConfig();
 
 window.handleGoogleLoginClick = function() {
-    // Direct 1-Click Google Sign-In
-    const defaultEmail = "sukoon.amazxanand@gmail.com";
-    const defaultName = "Sukoon Anand";
-    const defaultPic = "https://lh3.googleusercontent.com/a/default-user=s96-c";
+    // If real Client ID configured, attempt Google Native GSI Prompt first
+    if (window.google && google.accounts && google.accounts.id && localStorage.getItem("aavasa_google_client_id")) {
+        try {
+            google.accounts.id.prompt((notification) => {
+                if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+                    triggerGoogleAuth();
+                }
+            });
+            return;
+        } catch (e) {}
+    }
+    triggerGoogleAuth();
+};
+
+function triggerGoogleAuth() {
+    const userEmail = prompt("Sign in with Google Account:\nEnter Google Email", "sukoon.amazxanand@gmail.com");
+    if (!userEmail) return;
+
+    const userName = prompt("Enter Name for Google Account:", userEmail.split("@")[0]) || userEmail.split("@")[0];
 
     processGoogleAuthPayload({
-        email: defaultEmail,
-        name: defaultName,
-        picture: defaultPic,
+        email: userEmail.trim(),
+        name: userName.trim(),
+        picture: "https://lh3.googleusercontent.com/a/default-user=s96-c",
         googleId: `google_sub_${Date.now()}`
     });
-};
+}
 
 window.promptSetGoogleClientId = function() {
     const inputId = prompt(
