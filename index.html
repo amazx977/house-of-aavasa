@@ -640,8 +640,34 @@
                         <div class="order-summary-items" id="checkout-summary-items">
                             <!-- Filled by JS -->
                         </div>
+
+                        <!-- ═══ COUPON CODE SECTION ═══ -->
+                        <div class="checkout-coupon-box">
+                            <div class="coupon-input-group" id="coupon-input-group">
+                                <input type="text" id="coupon-code-input" placeholder="Coupon Code (e.g. AAVASA10)" aria-label="Coupon code">
+                                <button type="button" class="btn-apply-coupon" onclick="applyCouponCode()">Apply</button>
+                            </div>
+                            <div class="coupon-msg" id="coupon-message"></div>
+                            
+                            <div class="coupon-applied-tag" id="coupon-applied-tag">
+                                <span><i class="fa-solid fa-tag"></i> <strong id="applied-coupon-label">AAVASA10</strong> applied (<span id="applied-coupon-desc">10% OFF</span>)</span>
+                                <button type="button" class="coupon-remove-btn" onclick="removeCouponCode()" title="Remove coupon"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+
+                            <div class="coupon-hints" id="coupon-hints-container">
+                                <span>Promo:</span>
+                                <span class="coupon-chip" onclick="quickApplyCoupon('AAVASA10')">AAVASA10</span>
+                                <span class="coupon-chip" onclick="quickApplyCoupon('LUXURY20')">LUXURY20</span>
+                                <span class="coupon-chip" onclick="quickApplyCoupon('FIRST500')">FIRST500</span>
+                            </div>
+                        </div>
+
                         <div class="order-summary-totals">
                             <div class="summary-row"><span>Subtotal</span><span id="checkout-summary-subtotal">₹0</span></div>
+                            <div class="summary-row" id="checkout-discount-row" style="display:none; color:var(--color-success);">
+                                <span>Discount (<span id="discount-percent-label">10%</span>)</span>
+                                <span id="checkout-summary-discount">-₹0</span>
+                            </div>
                             <div class="summary-row"><span>Shipping</span><span style="color:var(--color-success);">Complimentary</span></div>
                             <div class="summary-row total-summary-row"><span>Total</span><span id="checkout-summary-total">₹0</span></div>
                         </div>

@@ -537,6 +537,90 @@ async function loadMyOrders() {
     }
 }
 
+// ─── COUPON CODE SYSTEM ──────────────────────────────────────────────────────
+let appliedCoupon = null; // { code: "AAVASA10", type: "percent", value: 10, label: "10% OFF" }
+
+const AVAILABLE_COUPONS = {
+    "AAVASA10":   { type: "percent", value: 10, label: "10% OFF", minOrder: 0 },
+    "LUXURY20":   { type: "percent", value: 20, label: "20% OFF", minOrder: 3000 },
+    "FIRST500":   { type: "flat",    value: 500, label: "₹500 OFF", minOrder: 1500 },
+    "FESTIVE15":  { type: "percent", value: 15, label: "15% OFF", minOrder: 2000 }
+};
+
+window.applyCouponCode = function(codeOverride) {
+    const input = document.getElementById("coupon-code-input");
+    const code = (codeOverride || input?.value || "").trim().toUpperCase();
+
+    if (!code) {
+        showCouponMsg("Please enter a coupon code.", "error");
+        return;
+    }
+
+    const subtotal = cart.reduce((s, i) => s + i.priceDiscounted * i.quantity, 0);
+    const coupon = AVAILABLE_COUPONS[code];
+
+    if (!coupon) {
+        showCouponMsg(`Coupon code "${code}" is invalid or expired.`, "error");
+        return;
+    }
+
+    if (coupon.minOrder && subtotal < coupon.minOrder) {
+        showCouponMsg(`Coupon "${code}" requires a min. order of ₹${coupon.minOrder.toLocaleString("en-IN")}.`, "error");
+        return;
+    }
+
+    appliedCoupon = { code, ...coupon };
+    if (input) input.value = code;
+
+    showCouponMsg(`Coupon "${code}" applied successfully!`, "success");
+    updateCouponUI();
+    populateCheckoutSummary();
+};
+
+window.quickApplyCoupon = function(code) {
+    applyCouponCode(code);
+};
+
+window.removeCouponCode = function() {
+    appliedCoupon = null;
+    const input = document.getElementById("coupon-code-input");
+    if (input) input.value = "";
+    const msgEl = document.getElementById("coupon-message");
+    if (msgEl) {
+        msgEl.className = "coupon-msg";
+        msgEl.textContent = "";
+    }
+    updateCouponUI();
+    populateCheckoutSummary();
+};
+
+function showCouponMsg(text, type) {
+    const msgEl = document.getElementById("coupon-message");
+    if (!msgEl) return;
+    msgEl.textContent = text;
+    msgEl.className = `coupon-msg ${type}`;
+}
+
+function updateCouponUI() {
+    const tag = document.getElementById("coupon-applied-tag");
+    const label = document.getElementById("applied-coupon-label");
+    const desc = document.getElementById("applied-coupon-desc");
+    const inputGroup = document.getElementById("coupon-input-group");
+    const hints = document.getElementById("coupon-hints-container");
+
+    if (appliedCoupon) {
+        if (tag) tag.classList.add("active");
+        if (label) label.textContent = appliedCoupon.code;
+        if (desc) desc.textContent = appliedCoupon.label;
+        if (inputGroup) inputGroup.style.display = "none";
+        if (hints) hints.style.display = "none";
+    } else {
+        if (tag) tag.classList.remove("active");
+        if (inputGroup) inputGroup.style.display = "flex";
+        if (hints) hints.style.display = "flex";
+    }
+}
+
 // ─── CHECKOUT SYSTEM (3-Step) ──────────────────────────────────────────────────
 function openCheckoutModal() {
     if (cart.length === 0) return;
@@ -550,18 +634,47 @@ function populateCheckoutSummary() {
     const itemsEl = document.getElementById("checkout-summary-items");
     const subtotal = cart.reduce((s, i) => s + i.priceDiscounted * i.quantity, 0);
 
-    itemsEl.innerHTML = cart.map(item => `
-        <div class="summary-item">
-            <div class="summary-item-img"><img src="${item.image}" alt="${item.name}"></div>
-            <div class="summary-item-details">
-                <div class="summary-item-name">${item.name}</div>
-                <div class="summary-item-sub">${item.edition === "collector" ? "Collector's" : "Signature"} · ${item.size} · Qty ${item.quantity}</div>
-            </div>
-            <div class="summary-item-price">₹${(item.priceDiscounted * item.quantity).toLocaleString("en-IN")}</div>
-        </div>`).join("");
+    let discountAmount = 0;
+    if (appliedCoupon) {
+        if (appliedCoupon.type === "percent") {
+            discountAmount = Math.round((subtotal * appliedCoupon.value) / 100);
+        } else if (appliedCoupon.type === "flat") {
+            discountAmount = Math.min(appliedCoupon.value, subtotal);
+        }
+    }
 
-    document.getElementById("checkout-summary-subtotal").textContent = `₹${subtotal.toLocaleString("en-IN")}`;
-    document.getElementById("checkout-summary-total").textContent = `₹${subtotal.toLocaleString("en-IN")}`;
+    const total = Math.max(0, subtotal - discountAmount);
+
+    if (itemsEl) {
+        itemsEl.innerHTML = cart.map(item => `
+            <div class="summary-item">
+                <div class="summary-item-img"><img src="${item.image}" alt="${item.name}"></div>
+                <div class="summary-item-details">
+                    <div class="summary-item-name">${item.name}</div>
+                    <div class="summary-item-sub">${item.edition === "collector" ? "Collector's" : "Signature"} · ${item.size} · Qty ${item.quantity}</div>
+                </div>
+                <div class="summary-item-price">₹${(item.priceDiscounted * item.quantity).toLocaleString("en-IN")}</div>
+            </div>`).join("");
+    }
+
+    const subtotalEl = document.getElementById("checkout-summary-subtotal");
+    const discountRow = document.getElementById("checkout-discount-row");
+    const discountEl = document.getElementById("checkout-summary-discount");
+    const percentLabel = document.getElementById("discount-percent-label");
+    const totalEl = document.getElementById("checkout-summary-total");
+
+    if (subtotalEl) subtotalEl.textContent = `₹${subtotal.toLocaleString("en-IN")}`;
+
+    if (appliedCoupon && discountAmount > 0) {
+        if (discountRow) discountRow.style.display = "flex";
+        if (percentLabel) percentLabel.textContent = appliedCoupon.label;
+        if (discountEl) discountEl.textContent = `-₹${discountAmount.toLocaleString("en-IN")}`;
+    } else {
+        if (discountRow) discountRow.style.display = "none";
+    }
+
+    if (totalEl) totalEl.textContent = `₹${total.toLocaleString("en-IN")}`;
+    updateCouponUI();
 }
 
 function setupIdentityStep() {
@@ -701,12 +814,24 @@ window.handleOrderSubmission = async function() {
 
     const subtotal = cart.reduce((s, i) => s + i.priceDiscounted * i.quantity, 0);
 
+    let discountAmount = 0;
+    if (appliedCoupon) {
+        if (appliedCoupon.type === "percent") {
+            discountAmount = Math.round((subtotal * appliedCoupon.value) / 100);
+        } else if (appliedCoupon.type === "flat") {
+            discountAmount = Math.min(appliedCoupon.value, subtotal);
+        }
+    }
+    const totalAmount = Math.max(0, subtotal - discountAmount);
+
     const payload = {
         loginId: currentUser?.loginId || "guest",
         customer: { fullName: name, email, phone, address, city, state, pincode },
         items: cart.map(i => ({ id: i.id, name: i.name, edition: i.edition, price: i.priceDiscounted, quantity: i.quantity, size: i.size })),
         subtotal,
-        totalAmount: subtotal,
+        discountAmount,
+        couponCode: appliedCoupon?.code || null,
+        totalAmount,
         paymentMethod: selectedPaymentMethod,
         paymentStatus: selectedPaymentMethod === "cod" ? "Pending (Cash on Delivery)" : "Paid"
     };
@@ -723,7 +848,7 @@ window.handleOrderSubmission = async function() {
 
             const options = {
                 key: razorpayKey,
-                amount: subtotal * 100,
+                amount: totalAmount * 100,
                 currency: "INR",
                 name: "House of Aavasa",
                 description: `Luxury Fragrance Order (${cart.length} item${cart.length > 1 ? 's' : ''})`,

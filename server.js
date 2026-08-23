@@ -118,7 +118,7 @@ app.get('/api/orders/:id', (req, res) => {
 // POST create new order (checkout submission)
 app.post('/api/orders', (req, res) => {
     try {
-        const { customer, items, subtotal, totalAmount, paymentMethod, loginId } = req.body || {};
+        const { customer, items, subtotal, discountAmount, couponCode, totalAmount, paymentMethod, loginId } = req.body || {};
         if (!items || items.length === 0) {
             return res.status(400).json({ success: false, message: "Cart cannot be empty" });
         }
@@ -138,12 +138,14 @@ app.post('/api/orders', (req, res) => {
             customer: safeCustomer,
             items: items || [],
             subtotal: subtotal || totalAmount || 0,
+            discountAmount: discountAmount || 0,
+            couponCode: couponCode || null,
             totalAmount: totalAmount || subtotal || 0,
             paymentMethod: paymentMethod || "cod",
             loginId: loginId || "guest"
         });
 
-        console.log(`[AAVASA ORDER] New order: ${newOrder.id} | User: ${newOrder.loginId} | ₹${newOrder.totalAmount} | Method: ${newOrder.paymentMethod}`);
+        console.log(`[AAVASA ORDER] New order: ${newOrder.id} | User: ${newOrder.loginId} | ₹${newOrder.totalAmount} | Coupon: ${couponCode || 'None'}`);
         res.status(201).json({ success: true, message: "Order placed successfully!", order: newOrder });
     } catch (error) {
         console.error("Order error fallback:", error);
@@ -153,6 +155,8 @@ app.post('/api/orders', (req, res) => {
             customer: req.body?.customer || {},
             items: req.body?.items || [],
             subtotal: req.body?.subtotal || 0,
+            discountAmount: req.body?.discountAmount || 0,
+            couponCode: req.body?.couponCode || null,
             totalAmount: req.body?.totalAmount || 0,
             paymentMethod: req.body?.paymentMethod || "cod",
             paymentStatus: req.body?.paymentMethod === "cod" ? "Pending (COD)" : "Paid",

@@ -266,6 +266,8 @@ function createOrder(orderData) {
         },
         items: orderData.items || [],
         subtotal: orderData.subtotal || 0,
+        discountAmount: orderData.discountAmount || 0,
+        couponCode: orderData.couponCode || null,
         shippingFee: 0,
         totalAmount: orderData.totalAmount || orderData.subtotal || 0,
         paymentMethod: orderData.paymentMethod || "cod",
