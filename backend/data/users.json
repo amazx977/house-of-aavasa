@@ -1,0 +1,105 @@
+[
+  {
+    "loginId": "eleanor@example.com",
+    "passwordHash": "1f9a91c1f189fcd049cd1c5529e37f7c33d5adfd2c3cd3ce9cad7fe24665b657",
+    "profile": {
+      "fullName": "Eleanor Vance",
+      "phone": "+91 98765 43210",
+      "address": "42 Park Avenue, Penthouse B",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pincode": "400001"
+    },
+    "createdAt": "2026-08-03T15:28:53.015Z"
+  },
+  {
+    "loginId": "alex.thorne@gmail.com",
+    "googleId": "google_sub_1785925743944",
+    "authProvider": "google",
+    "picture": "https://lh3.googleusercontent.com/a/default-user=s96-c",
+    "passwordHash": null,
+    "profile": {
+      "fullName": "Alex Thorne",
+      "phone": "",
+      "address": "",
+      "city": "",
+      "state": "",
+      "pincode": ""
+    },
+    "createdAt": "2026-08-05T10:26:23.909Z"
+  },
+  {
+    "loginId": "user.test@example.com",
+    "passwordHash": "7e3c3f58b5d2255ed5e02e8e934d8928c4de80fb6f2d021604c37889cc19b6d1",
+    "profile": {
+      "fullName": "Test User",
+      "phone": "+91 99999 88888",
+      "address": "",
+      "city": "",
+      "state": "",
+      "pincode": ""
+    },
+    "createdAt": "2026-08-23T14:49:51.716Z"
+  },
+  {
+    "loginId": "google.user@example.com",
+    "googleId": "google_1029384756",
+    "authProvider": "google",
+    "picture": "https://lh3.googleusercontent.com/a/default-user=s96-c",
+    "passwordHash": null,
+    "profile": {
+      "fullName": "Google User",
+      "phone": "",
+      "address": "",
+      "city": "",
+      "state": "",
+      "pincode": ""
+    },
+    "createdAt": "2026-08-23T14:49:57.782Z"
+  },
+  {
+    "loginId": "user.one@gmail.com",
+    "googleId": "google_sub_1001",
+    "authProvider": "google",
+    "picture": "https://lh3.googleusercontent.com/a/default-user=s96-c",
+    "passwordHash": null,
+    "profile": {
+      "fullName": "User One",
+      "phone": "",
+      "address": "",
+      "city": "",
+      "state": "",
+      "pincode": ""
+    },
+    "createdAt": "2026-08-23T15:11:43.624Z"
+  },
+  {
+    "loginId": "john.doe@company.org",
+    "googleId": "google_sub_1002",
+    "authProvider": "google",
+    "picture": "https://lh3.googleusercontent.com/a/default-user=s96-c",
+    "passwordHash": null,
+    "profile": {
+      "fullName": "John Doe",
+      "phone": "",
+      "address": "",
+      "city": "",
+      "state": "",
+      "pincode": ""
+    },
+    "createdAt": "2026-08-23T15:11:46.210Z"
+  },
+  {
+    "loginId": "amazx.anand@gmail.com",
+    "passwordHash": "97b3f3fd3c856357eeaec8d35766d29011537ba4f99a1968569a71cc96176d0f",
+    "profile": {
+      "fullName": "Anand raj",
+      "phone": "+917645890402",
+      "address": "218 Darpan Greens, lane 4",
+      "city": "Chandigarh",
+      "state": "Chandigarh (UT)",
+      "pincode": "140301"
+    },
+    "createdAt": "2026-08-23T15:45:34.376Z"
+  }
+]

@@ -1,0 +1,252 @@
+[
+  {
+    "id": "AAVASA-ORD-61134",
+    "loginId": "guest",
+    "customer": {
+      "fullName": "Architecture Test",
+      "email": "arch@example.com",
+      "phone": "+91 99999 11111",
+      "address": "77 Design Blvd",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pincode": "400001"
+    },
+    "items": [
+      {
+        "id": 1,
+        "name": "Verve Royale",
+        "edition": "signature",
+        "price": 1699,
+        "quantity": 1,
+        "size": "80ml"
+      }
+    ],
+    "subtotal": 1699,
+    "discountAmount": 0,
+    "couponCode": null,
+    "shippingFee": 0,
+    "totalAmount": 1699,
+    "paymentMethod": "cod",
+    "paymentStatus": "Pending (COD)",
+    "orderStatus": "Processing",
+    "createdAt": "2026-09-12T15:49:37.986Z"
+  },
+  {
+    "id": "AAVASA-ORD-34179",
+    "loginId": "amazx.anand@gmail.com",
+    "customer": {
+      "fullName": "Anand raj",
+      "email": "amazx.anand@gmail.com",
+      "phone": "+917645890402",
+      "address": "218 Darpan Greens, lane 4",
+      "city": "Chandigarh",
+      "state": "Chandigarh (UT)",
+      "pincode": "140301"
+    },
+    "items": [
+      {
+        "id": 1,
+        "name": "Verve Royale",
+        "edition": "signature",
+        "price": 1699,
+        "quantity": 1,
+        "size": "80ml"
+      }
+    ],
+    "subtotal": 1699,
+    "shippingFee": 0,
+    "totalAmount": 1699,
+    "paymentMethod": "cod",
+    "paymentStatus": "Pending (COD)",
+    "orderStatus": "Processing",
+    "createdAt": "2026-08-23T15:45:49.922Z"
+  },
+  {
+    "id": "AAVASA-ORD-30899",
+    "loginId": "guest",
+    "customer": {
+      "fullName": "Aditi Rao",
+      "email": "aditi@example.com",
+      "phone": "+91 98888 77777",
+      "address": "Villa 9, Green Glades",
+      "city": "Delhi",
+      "state": "Delhi",
+      "pincode": "110001"
+    },
+    "items": [
+      {
+        "id": 3,
+        "name": "Royal Sandalwood",
+        "edition": "signature",
+        "price": 1699,
+        "quantity": 1,
+        "size": "50ml"
+      }
+    ],
+    "subtotal": 1699,
+    "shippingFee": 0,
+    "totalAmount": 1699,
+    "paymentMethod": "cod",
+    "paymentStatus": "Pending (COD)",
+    "orderStatus": "Processing",
+    "createdAt": "2026-08-23T15:34:19.673Z"
+  },
+  {
+    "id": "AAVASA-ORD-39146",
+    "loginId": "guest",
+    "customer": {
+      "fullName": "Ananya Roy",
+      "email": "ananya@example.com",
+      "phone": "+91 91234 56789",
+      "address": "Tower B, 12th Floor, MG Road",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "pincode": "560001"
+    },
+    "items": [
+      {
+        "id": 2,
+        "name": "Saffron & Suede",
+        "edition": "signature",
+        "price": 1699,
+        "quantity": 1,
+        "size": "50ml"
+      }
+    ],
+    "subtotal": 1699,
+    "shippingFee": 0,
+    "totalAmount": 1699,
+    "paymentMethod": "cod",
+    "paymentStatus": "Pending (COD)",
+    "orderStatus": "Processing",
+    "createdAt": "2026-08-23T15:30:19.417Z"
+  },
+  {
+    "id": "AAVASA-ORD-68663",
+    "loginId": "guest",
+    "customer": {
+      "fullName": "Rahul Sharma",
+      "email": "rahul.sharma@example.com",
+      "phone": "+91 98765 12345",
+      "address": "Flat 402, Royal Palms, Bandra West",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pincode": "400050"
+    },
+    "items": [
+      {
+        "id": 1,
+        "name": "Velvet Oud",
+        "edition": "collector",
+        "price": 3999,
+        "quantity": 1,
+        "size": "100ml"
+      }
+    ],
+    "subtotal": 3999,
+    "shippingFee": 0,
+    "totalAmount": 3999,
+    "paymentMethod": "cod",
+    "paymentStatus": "Pending (COD)",
+    "orderStatus": "Processing",
+    "createdAt": "2026-08-23T15:21:46.547Z"
+  },
+  {
+    "id": "AAVASA-ORD-95407",
+    "loginId": "guest",
+    "customer": {
+      "fullName": "Anand Raj",
+      "email": "amazx.anand@gmail.com",
+      "phone": "+917549967617",
+      "address": "c/o- Roshani fertilizers mathahi",
+      "city": "Madhepura",
+      "state": "Bihar",
+      "pincode": "852121"
+    },
+    "items": [
+      {
+        "id": 3,
+        "name": "Nautical Drift",
+        "edition": "signature",
+        "price": 1699,
+        "quantity": 1,
+        "size": "80ml"
+      }
+    ],
+    "subtotal": 1699,
+    "shippingFee": 0,
+    "totalAmount": 1699,
+    "paymentMethod": "razorpay",
+    "paymentStatus": "Paid",
+    "orderStatus": "Processing",
+    "createdAt": "2026-08-04T16:31:02.691Z"
+  },
+  {
+    "id": "AAVASA-ORD-10002",
+    "loginId": "julian@example.com",
+    "customer": {
+      "fullName": "Julian Thorne",
+      "email": "julian@example.com",
+      "phone": "+91 91234 56789",
+      "address": "18 Rosewood Estate, Road No. 12",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "pincode": "560001"
+    },
+    "items": [
+      {
+        "id": 10,
+        "name": "Cuir Royale",
+        "edition": "collector",
+        "price": 3999,
+        "quantity": 1,
+        "size": "80ml"
+      }
+    ],
+    "subtotal": 3999,
+    "shippingFee": 0,
+    "totalAmount": 3999,
+    "paymentMethod": "razorpay",
+    "paymentStatus": "Paid",
+    "orderStatus": "Processing",
+    "createdAt": "2026-08-04T06:28:53.008Z"
+  },
+  {
+    "id": "AAVASA-ORD-10001",
+    "loginId": "eleanor@example.com",
+    "customer": {
+      "fullName": "Eleanor Vance",
+      "email": "eleanor@example.com",
+      "phone": "+91 98765 43210",
+      "address": "42 Park Avenue, Penthouse B",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pincode": "400001"
+    },
+    "items": [
+      {
+        "id": 6,
+        "name": "Oud Imperial",
+        "edition": "collector",
+        "price": 3999,
+        "quantity": 1,
+        "size": "80ml"
+      },
+      {
+        "id": 11,
+        "name": "Jasmine Dew",
+        "edition": "signature",
+        "price": 1699,
+        "quantity": 1,
+        "size": "80ml"
+      }
+    ],
+    "subtotal": 5698,
+    "shippingFee": 0,
+    "totalAmount": 5698,
+    "paymentMethod": "stripe",
+    "paymentStatus": "Paid",
+    "orderStatus": "Shipped",
+    "createdAt": "2026-08-03T16:28:53.007Z"
+  }
+]

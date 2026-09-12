@@ -2,10 +2,10 @@
   "name": "house-of-aavasa",
   "version": "1.0.0",
   "description": "House of Aavasa — Luxury perfume e-commerce landing page & backend order engine",
-  "main": "server.js",
+  "main": "backend/server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

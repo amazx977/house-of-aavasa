@@ -7,10 +7,13 @@ const db = require('./database');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const FRONTEND_PATH = path.join(__dirname, '..', 'frontend');
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(FRONTEND_PATH));
+app.use('/media', express.static(path.join(FRONTEND_PATH, 'media')));
 
 /* ==========================================================================
    USER AUTHENTICATION ROUTES
@@ -239,7 +242,7 @@ app.post('/api/razorpay/create-order', async (req, res) => {
 
 // Serve index.html for all other routes
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(FRONTEND_PATH, 'index.html'));
 });
 
 if (require.main === module) {
