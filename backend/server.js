@@ -10,8 +10,8 @@ const PORT = process.env.PORT || 3000;
 const FRONTEND_PATH = path.join(__dirname, '..', 'frontend');
 
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(express.static(FRONTEND_PATH));
 app.use('/media', express.static(path.join(FRONTEND_PATH, 'media')));
 
@@ -238,6 +238,71 @@ app.post('/api/razorpay/create-order', async (req, res) => {
             key: RAZORPAY_KEY_ID
         });
     }
+});
+
+// ─── REVIEWS API (STREET & MALL FEEDBACK) ──────────────────────────────────────
+// GET all reviews (optional query: ?perfume=Timeless)
+app.get('/api/reviews', (req, res) => {
+    try {
+        let reviews = db.getAllReviews();
+        const { perfume, rating } = req.query;
+
+        if (perfume && perfume !== 'all') {
+            reviews = reviews.filter(r => r.perfume && r.perfume.toLowerCase() === perfume.toLowerCase());
+        }
+        if (rating) {
+            reviews = reviews.filter(r => Number(r.rating) === Number(rating));
+        }
+
+        res.json({
+            success: true,
+            count: reviews.length,
+            data: reviews
+        });
+    } catch (error) {
+        console.error("Reviews fetch error:", error);
+        res.status(500).json({ success: false, message: "Could not fetch reviews." });
+    }
+});
+
+// POST submit new street/mall review
+app.post('/api/reviews', (req, res) => {
+    try {
+        const { perfume, userName, identity, rating, repurchase, generalPreference, suggestions, photoUrl, location } = req.body || {};
+
+        if (!perfume) {
+            return res.status(400).json({ success: false, message: "Perfume selection is required." });
+        }
+        if (!userName || !userName.trim()) {
+            return res.status(400).json({ success: false, message: "User name is required." });
+        }
+
+        const validPerfumes = ["Timeless", "Petal Kiss", "Night King", "Adora", "A Date with Rose", "Morning Shower"];
+        const matchedPerfume = validPerfumes.find(p => p.toLowerCase() === perfume.toLowerCase()) || perfume;
+
+        const newReview = db.createReview({
+            perfume: matchedPerfume,
+            userName,
+            identity: identity || "others",
+            rating: rating || 5,
+            repurchase: repurchase || "Yes, definitely",
+            generalPreference: generalPreference || "All fragrances",
+            suggestions: suggestions || "",
+            photoUrl: photoUrl || null,
+            location: location || "Street & Mall Campaign"
+        });
+
+        console.log(`[AAVASA REVIEW] New review: ${newReview.id} | ${newReview.perfume} | By: ${newReview.userName} (${newReview.identity}) | Rating: ${newReview.rating}★`);
+        res.status(201).json({ success: true, message: "Review submitted successfully!", data: newReview });
+    } catch (error) {
+        console.error("Review submission error:", error);
+        res.status(500).json({ success: false, message: "Failed to submit review." });
+    }
+});
+
+// Serve reviews.html
+app.get('/reviews', (req, res) => {
+    res.sendFile(path.join(FRONTEND_PATH, 'reviews.html'));
 });
 
 // Serve index.html for all other routes

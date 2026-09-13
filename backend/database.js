@@ -15,14 +15,16 @@ try {
 
 const ORDERS_FILE = path.join(DATA_DIR, 'orders.json');
 const USERS_FILE = path.join(DATA_DIR, 'users.json');
+const REVIEWS_FILE = path.join(DATA_DIR, 'reviews.json');
 
 // In-memory cache for ultra-fast and fail-proof access in serverless environments
 let memoryOrders = null;
 let memoryUsers = null;
+let memoryReviews = null;
 
 // ─── Init Database Files ──────────────────────────────────────────────────────
 function initDatabase() {
-    if (memoryOrders && memoryUsers) return;
+    if (memoryOrders && memoryUsers && memoryReviews) return;
 
     const seedOrders = [
         {
@@ -86,6 +88,7 @@ function initDatabase() {
 
     memoryOrders = readJSON(ORDERS_FILE, seedOrders);
     memoryUsers = readJSON(USERS_FILE, seedUsers);
+    memoryReviews = readJSON(REVIEWS_FILE, []);
 }
 
 // ─── Helper: Hash Passwords ───────────────────────────────────────────────────
@@ -115,6 +118,7 @@ function readJSON(filePath, defaultData = []) {
 function writeJSON(filePath, data) {
     if (filePath.includes('orders')) memoryOrders = data;
     if (filePath.includes('users')) memoryUsers = data;
+    if (filePath.includes('reviews')) memoryReviews = data;
 
     try {
         fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
@@ -294,6 +298,37 @@ function updateOrderStatus(id, newStatus) {
     return orders[idx];
 }
 
+// ─── REVIEWS OPERATIONS ───────────────────────────────────────────────────────
+
+function getAllReviews() {
+    initDatabase();
+    return (memoryReviews || []).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+}
+
+function createReview(reviewData) {
+    const reviews = getAllReviews();
+    const randomNum = Math.floor(1000 + Math.random() * 9000);
+    const reviewId = `AAVASA-REV-${randomNum}`;
+
+    const newReview = {
+        id: reviewId,
+        perfume: reviewData.perfume || "Timeless",
+        userName: reviewData.userName?.trim() || "Anonymous",
+        identity: reviewData.identity || "others",
+        rating: Math.min(5, Math.max(1, Number(reviewData.rating) || 5)),
+        repurchase: reviewData.repurchase || "Yes, definitely",
+        generalPreference: reviewData.generalPreference?.trim() || "All fragrances",
+        suggestions: reviewData.suggestions?.trim() || "",
+        photoUrl: reviewData.photoUrl || null,
+        location: reviewData.location || "Street & Mall Campaign",
+        createdAt: new Date().toISOString()
+    };
+
+    reviews.unshift(newReview);
+    writeJSON(REVIEWS_FILE, reviews);
+    return newReview;
+}
+
 initDatabase();
 
 module.exports = {
@@ -305,5 +340,7 @@ module.exports = {
     registerUser,
     loginUser,
     updateUserProfile,
-    loginOrRegisterGoogleUser
+    loginOrRegisterGoogleUser,
+    getAllReviews,
+    createReview
 };

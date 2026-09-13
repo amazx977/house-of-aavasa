@@ -1,0 +1,93 @@
+[
+  {
+    "id": "AAVASA-REV-4303",
+    "perfume": "Timeless",
+    "userName": "Siddharth Sharma",
+    "identity": "male",
+    "rating": 5,
+    "repurchase": "Yes, definitely",
+    "generalPreference": "Fresh Bergamot & Sandalwood",
+    "suggestions": "Loved the longevity during hot weather outside!",
+    "photoUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+    "location": "Connaught Place Street Poll",
+    "createdAt": "2026-09-13T17:27:41.683Z"
+  },
+  {
+    "id": "AAVASA-REV-1006",
+    "perfume": "Morning Shower",
+    "userName": "Samir D'Souza",
+    "identity": "others",
+    "rating": 5,
+    "repurchase": "Yes, definitely",
+    "generalPreference": "Fresh Citrus & Aquatic greens",
+    "suggestions": "Instant post-gym rejuvenation. So crisp and clean without being synthetic.",
+    "photoUrl": null,
+    "location": "Connaught Place, Delhi",
+    "createdAt": "2026-09-13T15:00:00.000Z"
+  },
+  {
+    "id": "AAVASA-REV-1005",
+    "perfume": "A Date with Rose",
+    "userName": "Rhea & Maya",
+    "identity": "lesbian",
+    "rating": 5,
+    "repurchase": "Yes, definitely",
+    "generalPreference": "Romantic Florals with spicy undertones",
+    "suggestions": "Sensual, romantic, and deeply intoxicating. The saffron-rose combination is divine.",
+    "photoUrl": null,
+    "location": "Elante Mall, Chandigarh",
+    "createdAt": "2026-09-13T12:20:00.000Z"
+  },
+  {
+    "id": "AAVASA-REV-1004",
+    "perfume": "Adora",
+    "userName": "Zoya Merchant",
+    "identity": "female",
+    "rating": 4,
+    "repurchase": "Yes, definitely",
+    "generalPreference": "Gourmand & Sweet Vanilla",
+    "suggestions": "Very sophisticated sweetness. Would love a 30ml travel rollerball version.",
+    "photoUrl": null,
+    "location": "Bandra Street Campaign, Mumbai",
+    "createdAt": "2026-09-12T20:10:00.000Z"
+  },
+  {
+    "id": "AAVASA-REV-1003",
+    "perfume": "Night King",
+    "userName": "Vikramaditya Rao",
+    "identity": "gay",
+    "rating": 5,
+    "repurchase": "Yes, definitely",
+    "generalPreference": "Warm Amber & Leather",
+    "suggestions": "Bold, dark, and regal. Perfect projection for night outs and club wear.",
+    "photoUrl": null,
+    "location": "UB City Mall, Bengaluru",
+    "createdAt": "2026-09-12T19:45:00.000Z"
+  },
+  {
+    "id": "AAVASA-REV-1002",
+    "perfume": "Petal Kiss",
+    "userName": "Ananya Sen",
+    "identity": "female",
+    "rating": 5,
+    "repurchase": "Yes, definitely",
+    "generalPreference": "Soft Floral & Powdery musks",
+    "suggestions": "Smells like fresh dew on spring roses. Received three compliments within an hour at the mall!",
+    "photoUrl": null,
+    "location": "Select Citywalk, Delhi",
+    "createdAt": "2026-09-11T16:15:00.000Z"
+  },
+  {
+    "id": "AAVASA-REV-1001",
+    "perfume": "Timeless",
+    "userName": "Kabir Mehta",
+    "identity": "male",
+    "rating": 5,
+    "repurchase": "Yes, definitely",
+    "generalPreference": "Woody & Earthy notes",
+    "suggestions": "The dry down is magnificent. Lasted through a whole day of meetings and evening dinner.",
+    "photoUrl": null,
+    "location": "Phoenix Marketcity, Mumbai",
+    "createdAt": "2026-09-11T14:30:00.000Z"
+  }
+]

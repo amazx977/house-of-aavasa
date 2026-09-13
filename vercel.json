@@ -13,6 +13,14 @@
       "destination": "/frontend/admin.html"
     },
     {
+      "source": "/reviews",
+      "destination": "/frontend/reviews.html"
+    },
+    {
+      "source": "/reviews.html",
+      "destination": "/frontend/reviews.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/frontend/$1"
     }
