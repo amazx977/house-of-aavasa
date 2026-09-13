@@ -316,6 +316,7 @@ function createReview(reviewData) {
         userName: reviewData.userName?.trim() || "Anonymous",
         identity: reviewData.identity || "others",
         rating: Math.min(5, Math.max(1, Number(reviewData.rating) || 5)),
+        fragranceDefinition: reviewData.fragranceDefinition?.trim() || "Elegant & Luxurious",
         repurchase: reviewData.repurchase || "Yes, definitely",
         generalPreference: reviewData.generalPreference?.trim() || "All fragrances",
         suggestions: reviewData.suggestions?.trim() || "",

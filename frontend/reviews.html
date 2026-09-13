@@ -14,20 +14,23 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* ═══ LUXURY REVIEWS SPECIFIC STYLING ══════════════════════════════════ */
+        /* ═══ HOUSE OF AAVASA — LUMINOUS CREAM THEME ═══════════════════════════ */
         :root {
-            --rev-gold: #c5a880;
-            --rev-gold-light: #e6d5be;
-            --rev-bg: #0d0c0a;
-            --rev-card: #181613;
-            --rev-border: rgba(197, 168, 128, 0.22);
-            --rev-text: #f5f2eb;
-            --rev-muted: #9e978b;
+            --color-bg: #FAF8F5;          /* Luminous Off-white / Cream */
+            --color-bg-alt: #F3EFE9;      /* Muted Sand / Soft Linen */
+            --color-text: #1C1A17;        /* Rich Graphite / Charcoal */
+            --color-text-muted: #79756E;  /* Soft Warm Gray */
+            --color-border: #E5DFD5;      /* Subtle Linen Border */
+            --color-accent: #C5A059;      /* Muted Luxury Gold */
+            --color-accent-dark: #A4813D; /* Darker Gold */
+            --color-white: #FFFFFF;
+            --color-success: #2e7d32;
+            --color-tag-bg: #F0EAE1;
         }
 
         body.reviews-page-body {
-            background-color: var(--rev-bg);
-            color: var(--rev-text);
+            background-color: var(--color-bg);
+            color: var(--color-text);
             font-family: var(--font-sans);
             margin: 0;
             padding: 0;
@@ -39,10 +42,10 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(13, 12, 10, 0.92);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--rev-border);
-            padding: 16px 24px;
+            background: rgba(250, 248, 245, 0.94);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--color-border);
+            padding: 16px 32px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -50,118 +53,125 @@
         .rev-brand {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             text-decoration: none;
-            color: var(--rev-text);
+            color: var(--color-text);
         }
         .rev-brand-title {
             font-family: var(--font-serif);
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             letter-spacing: 0.18em;
-            color: var(--rev-gold);
+            color: var(--color-accent);
             font-weight: 500;
         }
         .rev-badge {
             font-size: 0.68rem;
             text-transform: uppercase;
-            letter-spacing: 0.12em;
-            background: rgba(197, 168, 128, 0.12);
-            border: 1px solid var(--rev-border);
-            color: var(--rev-gold-light);
+            letter-spacing: 0.14em;
+            background: var(--color-bg-alt);
+            border: 1px solid var(--color-border);
+            color: var(--color-accent-dark);
             padding: 4px 10px;
             border-radius: 20px;
             font-weight: 600;
         }
         .rev-back-btn {
             font-size: 0.85rem;
-            color: var(--rev-gold-light);
+            color: var(--color-text);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 16px;
-            border: 1px solid var(--rev-border);
+            padding: 9px 18px;
+            border: 1px solid var(--color-border);
+            background: var(--color-white);
             border-radius: var(--border-radius);
             transition: all var(--transition-fast);
+            font-weight: 500;
         }
         .rev-back-btn:hover {
-            background: var(--rev-gold);
-            color: #000;
+            background: var(--color-accent);
+            color: var(--color-white);
+            border-color: var(--color-accent);
         }
 
         /* Hero Banner */
         .rev-hero {
-            padding: 60px 20px 40px;
+            padding: 55px 20px 30px;
             text-align: center;
-            max-width: 800px;
+            max-width: 820px;
             margin: 0 auto;
         }
         .rev-hero-tagline {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             text-transform: uppercase;
-            letter-spacing: 0.25em;
-            color: var(--rev-gold);
+            letter-spacing: 0.28em;
+            color: var(--color-accent-dark);
             margin-bottom: 12px;
             display: block;
+            font-weight: 600;
         }
         .rev-hero-title {
             font-family: var(--font-serif);
-            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
             line-height: 1.15;
             font-weight: 400;
-            color: var(--rev-text);
+            color: var(--color-text);
             margin: 0 0 16px;
         }
         .rev-hero-desc {
-            font-size: 0.95rem;
-            color: var(--rev-muted);
-            line-height: 1.6;
-            margin: 0 auto 30px;
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            line-height: 1.65;
+            margin: 0 auto 28px;
         }
 
         /* Live Metrics Bar */
         .rev-metrics {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            max-width: 800px;
-            margin: 0 auto 50px;
+            gap: 20px;
+            max-width: 840px;
+            margin: 0 auto 45px;
             padding: 0 20px;
         }
         .rev-metric-card {
-            background: var(--rev-card);
-            border: 1px solid var(--rev-border);
-            border-radius: var(--border-radius);
-            padding: 18px;
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 20px 16px;
             text-align: center;
+            box-shadow: var(--shadow-subtle);
         }
         .rev-metric-val {
             font-family: var(--font-serif);
-            font-size: 2rem;
-            color: var(--rev-gold);
+            font-size: 2.2rem;
+            color: var(--color-accent-dark);
             font-weight: 600;
             display: block;
+            line-height: 1.1;
         }
         .rev-metric-label {
             font-size: 0.72rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--rev-muted);
-            margin-top: 4px;
+            letter-spacing: 0.12em;
+            color: var(--color-text-muted);
+            margin-top: 6px;
+            font-weight: 500;
         }
 
         /* Container Layout */
         .rev-layout {
-            max-width: 1200px;
+            max-width: 1240px;
             margin: 0 auto 80px;
             padding: 0 20px;
             display: grid;
             grid-template-columns: 1.1fr 1fr;
-            gap: 40px;
+            gap: 36px;
             align-items: flex-start;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 950px) {
             .rev-layout {
                 grid-template-columns: 1fr;
             }
@@ -169,47 +179,48 @@
 
         /* Form Card */
         .rev-form-card {
-            background: var(--rev-card);
-            border: 1px solid var(--rev-border);
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
             border-radius: 12px;
-            padding: 32px;
-            box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+            padding: 36px;
+            box-shadow: var(--shadow-medium);
         }
         .rev-form-header {
-            margin-bottom: 24px;
+            margin-bottom: 26px;
             padding-bottom: 16px;
-            border-bottom: 1px solid var(--rev-border);
+            border-bottom: 1px solid var(--color-border);
         }
         .rev-form-title {
             font-family: var(--font-serif);
-            font-size: 1.6rem;
-            color: var(--rev-gold);
+            font-size: 1.8rem;
+            color: var(--color-text);
             margin: 0 0 6px;
+            font-weight: 500;
         }
         .rev-form-subtitle {
-            font-size: 0.82rem;
-            color: var(--rev-muted);
+            font-size: 0.88rem;
+            color: var(--color-text-muted);
             margin: 0;
         }
 
         /* Form Fields */
         .rev-field {
-            margin-bottom: 22px;
+            margin-bottom: 24px;
         }
         .rev-label {
             display: block;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            color: var(--rev-gold-light);
-            margin-bottom: 8px;
+            color: var(--color-text);
+            margin-bottom: 9px;
         }
         .rev-label span.req {
-            color: #e57373;
+            color: var(--color-error);
         }
 
-        /* Perfume Selection Pills */
+        /* Perfume Selection Grid */
         .rev-perfume-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -231,32 +242,34 @@
         .rev-perfume-label {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             padding: 12px 14px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--rev-border);
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
             border-radius: 8px;
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: all var(--transition-fast);
             user-select: none;
         }
         .rev-perfume-option input[type="radio"]:checked + .rev-perfume-label {
-            background: rgba(197, 168, 128, 0.18);
-            border-color: var(--rev-gold);
-            color: #fff;
-            box-shadow: 0 0 12px rgba(197, 168, 128, 0.25);
+            background: #fdfbf7;
+            border-color: var(--color-accent);
+            color: var(--color-text);
+            box-shadow: 0 2px 12px rgba(197, 160, 89, 0.2);
         }
         .rev-perfume-dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            border: 1px solid var(--rev-gold);
+            border: 1.5px solid var(--color-border);
             flex-shrink: 0;
+            transition: all var(--transition-fast);
         }
         .rev-perfume-option input[type="radio"]:checked + .rev-perfume-label .rev-perfume-dot {
-            background: var(--rev-gold);
-            box-shadow: 0 0 6px var(--rev-gold);
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.2);
         }
 
         /* Identity Pills */
@@ -277,37 +290,40 @@
             align-items: center;
             gap: 6px;
             padding: 8px 16px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--rev-border);
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
             border-radius: 20px;
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: all var(--transition-fast);
+            color: var(--color-text);
         }
         .rev-identity-pill input[type="radio"]:checked + .rev-identity-btn {
-            background: var(--rev-gold);
-            color: #0d0c0a;
+            background: var(--color-accent);
+            color: var(--color-white);
             font-weight: 600;
-            border-color: var(--rev-gold);
+            border-color: var(--color-accent);
+            box-shadow: 0 2px 10px rgba(197, 160, 89, 0.25);
         }
 
-        /* Text Input */
+        /* Text Input & Textarea */
         .rev-input, .rev-textarea, .rev-select {
             width: 100%;
             box-sizing: border-box;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid var(--rev-border);
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
             border-radius: 8px;
             padding: 12px 16px;
-            color: var(--rev-text);
-            font-size: 0.9rem;
+            color: var(--color-text);
+            font-size: 0.92rem;
             font-family: var(--font-sans);
             outline: none;
-            transition: border-color var(--transition-fast);
+            transition: all var(--transition-fast);
         }
         .rev-input:focus, .rev-textarea:focus, .rev-select:focus {
-            border-color: var(--rev-gold);
-            background: rgba(255,255,255,0.06);
+            border-color: var(--color-accent);
+            background: var(--color-white);
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15);
         }
 
         /* Interactive Star Rating */
@@ -322,21 +338,50 @@
             cursor: pointer;
         }
         .rev-star-icon {
-            font-size: 1.6rem;
-            color: rgba(255,255,255,0.2);
+            font-size: 1.8rem;
+            color: #d1c7b7;
             transition: color var(--transition-fast), transform var(--transition-fast);
         }
         .rev-star-icon.active {
-            color: #f59e0b;
+            color: #d97706;
         }
         .rev-star-icon:hover {
-            transform: scale(1.15);
+            transform: scale(1.18);
         }
         .rev-rating-desc {
-            font-size: 0.82rem;
-            color: var(--rev-gold-light);
+            font-size: 0.88rem;
+            color: var(--color-accent-dark);
             margin-left: 12px;
-            font-weight: 500;
+            font-weight: 600;
+        }
+
+        /* Fragrance Definition Chips */
+        .rev-chips-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .rev-def-chip, .rev-pref-chip {
+            font-size: 0.8rem;
+            padding: 6px 12px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            user-select: none;
+        }
+        .rev-def-chip:hover, .rev-pref-chip:hover {
+            border-color: var(--color-accent);
+            color: var(--color-text);
+        }
+        .rev-def-chip.selected, .rev-pref-chip.selected {
+            background: rgba(197, 160, 89, 0.15);
+            border-color: var(--color-accent);
+            color: var(--color-accent-dark);
+            font-weight: 600;
         }
 
         /* Repurchase Pills */
@@ -352,57 +397,37 @@
         .rev-repurchase-btn {
             display: block;
             text-align: center;
-            padding: 10px 8px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--rev-border);
+            padding: 12px 8px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
             border-radius: 8px;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             cursor: pointer;
             transition: all var(--transition-fast);
+            color: var(--color-text);
         }
         .rev-repurchase-pill input[type="radio"]:checked + .rev-repurchase-btn {
-            background: rgba(197, 168, 128, 0.2);
-            border-color: var(--rev-gold);
-            color: #fff;
+            background: var(--color-white);
+            border-color: var(--color-accent);
+            color: var(--color-accent-dark);
             font-weight: 600;
-        }
-
-        /* General Preferences Chips */
-        .rev-chips-wrap {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 8px;
-        }
-        .rev-pref-chip {
-            font-size: 0.75rem;
-            padding: 5px 10px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 14px;
-            color: var(--rev-muted);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-        }
-        .rev-pref-chip.selected {
-            background: rgba(197, 168, 128, 0.2);
-            border-color: var(--rev-gold);
-            color: var(--rev-gold-light);
+            box-shadow: 0 2px 10px rgba(197, 160, 89, 0.18);
         }
 
         /* Photo Upload Dropzone */
         .rev-photo-box {
-            border: 1px dashed var(--rev-border);
+            border: 1.5px dashed var(--color-border);
             border-radius: 8px;
-            padding: 16px;
+            padding: 20px;
             text-align: center;
-            background: rgba(255,255,255,0.02);
+            background: var(--color-bg);
             cursor: pointer;
             position: relative;
             transition: border-color var(--transition-fast);
         }
         .rev-photo-box:hover {
-            border-color: var(--rev-gold);
+            border-color: var(--color-accent);
+            background: #fdfbf7;
         }
         .rev-photo-input {
             position: absolute;
@@ -414,31 +439,34 @@
             display: none;
             align-items: center;
             justify-content: space-between;
-            padding: 8px 12px;
-            background: rgba(0,0,0,0.4);
+            padding: 10px 14px;
+            background: var(--color-bg-alt);
+            border: 1px solid var(--color-border);
             border-radius: 6px;
             margin-top: 10px;
         }
         .rev-photo-preview img {
-            width: 50px;
-            height: 50px;
+            width: 52px;
+            height: 52px;
             object-fit: cover;
             border-radius: 4px;
+            border: 1px solid var(--color-border);
         }
         .rev-photo-remove {
             background: none;
             border: none;
-            color: #ef4444;
+            color: var(--color-error);
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 500;
         }
 
         /* Submit Button */
         .rev-submit-btn {
             width: 100%;
             padding: 16px;
-            background: var(--rev-gold);
-            color: #0d0c0a;
+            background: var(--color-accent);
+            color: var(--color-white);
             border: none;
             border-radius: 8px;
             font-size: 0.95rem;
@@ -450,55 +478,58 @@
             margin-top: 10px;
         }
         .rev-submit-btn:hover {
-            background: var(--rev-gold-light);
-            box-shadow: 0 4px 20px rgba(197, 168, 128, 0.4);
+            background: var(--color-accent-dark);
+            box-shadow: var(--shadow-medium);
         }
 
         /* Success Card Alert */
         .rev-success-banner {
             display: none;
-            background: rgba(34, 197, 94, 0.12);
-            border: 1px solid #22c55e;
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
             border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 20px;
+            padding: 18px;
+            margin-bottom: 22px;
             text-align: center;
-            color: #86efac;
+            color: #1b5e20;
         }
         .rev-reset-btn {
-            background: transparent;
-            border: 1px solid #86efac;
-            color: #86efac;
-            padding: 6px 14px;
+            background: var(--color-white);
+            border: 1px solid #2e7d32;
+            color: #2e7d32;
+            padding: 7px 16px;
             border-radius: 4px;
-            font-size: 0.78rem;
+            font-size: 0.82rem;
             cursor: pointer;
-            margin-top: 8px;
+            margin-top: 10px;
+            font-weight: 600;
             display: inline-block;
         }
 
         /* Right Column: Live Feed Showcase */
         .rev-feed-section {
-            background: var(--rev-card);
-            border: 1px solid var(--rev-border);
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
             border-radius: 12px;
-            padding: 24px;
+            padding: 28px;
+            box-shadow: var(--shadow-medium);
         }
         .rev-feed-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--rev-border);
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--color-border);
             flex-wrap: wrap;
             gap: 10px;
         }
         .rev-feed-title {
             font-family: var(--font-serif);
-            font-size: 1.4rem;
-            color: var(--rev-gold);
+            font-size: 1.6rem;
+            color: var(--color-text);
             margin: 0;
+            font-weight: 500;
         }
 
         /* Perfume Filter Tabs */
@@ -507,24 +538,29 @@
             gap: 6px;
             overflow-x: auto;
             padding-bottom: 12px;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             scrollbar-width: thin;
         }
         .rev-filter-btn {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid var(--rev-border);
-            color: var(--rev-muted);
-            padding: 6px 12px;
-            border-radius: 16px;
-            font-size: 0.75rem;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
             white-space: nowrap;
             cursor: pointer;
             transition: all var(--transition-fast);
+            font-weight: 500;
+        }
+        .rev-filter-btn:hover {
+            color: var(--color-text);
+            border-color: var(--color-accent);
         }
         .rev-filter-btn.active {
-            background: var(--rev-gold);
-            color: #0d0c0a;
-            border-color: var(--rev-gold);
+            background: var(--color-accent);
+            color: var(--color-white);
+            border-color: var(--color-accent);
             font-weight: 600;
         }
 
@@ -532,22 +568,23 @@
         .rev-feed-list {
             display: flex;
             flex-direction: column;
-            gap: 16px;
-            max-height: 850px;
+            gap: 18px;
+            max-height: 900px;
             overflow-y: auto;
             padding-right: 4px;
         }
         .rev-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid var(--rev-border);
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
             border-radius: 8px;
-            padding: 18px;
-            transition: transform var(--transition-fast), border-color var(--transition-fast);
+            padding: 20px;
+            transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
             animation: fadeIn 0.4s ease;
         }
         .rev-card:hover {
-            border-color: var(--rev-gold);
+            border-color: var(--color-accent);
             transform: translateY(-2px);
+            box-shadow: var(--shadow-subtle);
         }
         .rev-card-top {
             display: flex;
@@ -561,49 +598,64 @@
             gap: 10px;
         }
         .rev-card-avatar {
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            background: var(--rev-gold);
-            color: #0d0c0a;
+            background: var(--color-accent);
+            color: var(--color-white);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 0.85rem;
+            font-weight: 600;
+            font-size: 0.9rem;
             flex-shrink: 0;
         }
         .rev-card-name {
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             font-weight: 600;
-            color: var(--rev-text);
+            color: var(--color-text);
         }
         .rev-identity-tag {
-            font-size: 0.65rem;
+            font-size: 0.68rem;
             text-transform: uppercase;
-            padding: 2px 6px;
-            background: rgba(255,255,255,0.08);
-            border-radius: 10px;
-            color: var(--rev-gold-light);
+            padding: 2px 8px;
+            background: var(--color-tag-bg);
+            border-radius: 12px;
+            color: var(--color-text-muted);
             margin-left: 6px;
+            font-weight: 600;
         }
         .rev-card-stars {
-            color: #f59e0b;
-            font-size: 0.85rem;
+            color: #d97706;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
         }
         .rev-perfume-tag {
             display: inline-block;
-            font-size: 0.72rem;
+            font-size: 0.76rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            color: var(--rev-gold);
+            color: var(--color-accent-dark);
             margin-bottom: 6px;
         }
+        .rev-card-def {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            background: rgba(197, 160, 89, 0.12);
+            color: var(--color-accent-dark);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 14px;
+            padding: 3px 10px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
         .rev-card-quote {
-            font-size: 0.88rem;
-            color: var(--rev-text);
-            line-height: 1.5;
+            font-size: 0.9rem;
+            color: var(--color-text);
+            line-height: 1.55;
             margin: 6px 0 10px;
             font-style: italic;
         }
@@ -611,19 +663,19 @@
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
-            font-size: 0.72rem;
-            color: var(--rev-muted);
-            border-top: 1px solid rgba(255,255,255,0.06);
-            padding-top: 8px;
+            font-size: 0.74rem;
+            color: var(--color-text-muted);
+            border-top: 1px solid var(--color-border);
+            padding-top: 10px;
             margin-top: 8px;
         }
         .rev-card-photo {
             width: 100%;
-            max-height: 220px;
+            max-height: 240px;
             object-fit: cover;
             border-radius: 6px;
             margin-top: 10px;
-            border: 1px solid var(--rev-border);
+            border: 1px solid var(--color-border);
         }
 
         @keyframes fadeIn {
@@ -650,7 +702,7 @@
         <span class="rev-hero-tagline">Street & Mall Olfactory Impressions</span>
         <h1 class="rev-hero-title">Real People.<br>Unfiltered Fragrance Voices.</h1>
         <p class="rev-hero-desc">
-            We take House of Aavasa fragrances to the bustling streets and luxury malls across Indian cities to capture authentic, in-person reactions and honest feedback.
+            We bring House of Aavasa perfumes to life through spontaneous encounters on city avenues and luxury shopping destinations. Discover raw, honest perceptions directly from fragrance wearers.
         </p>
     </section>
 
@@ -682,9 +734,9 @@
 
             <!-- Success Alert -->
             <div class="rev-success-banner" id="rev-success-banner">
-                <i class="fa-solid fa-circle-check"></i>
+                <i class="fa-solid fa-circle-check" style="font-size:1.2rem; margin-bottom:4px; display:inline-block;"></i><br>
                 <strong>Review submitted successfully!</strong>
-                <p style="margin:4px 0 0; font-size:0.82rem;">It is now live in the Aavasa street impressions feed.</p>
+                <p style="margin:4px 0 0; font-size:0.85rem;">It is now feeding live on the Aavasa impressions wall.</p>
                 <button type="button" class="rev-reset-btn" onclick="resetReviewForm()">Collect Another Review</button>
             </div>
 
@@ -700,7 +752,7 @@
                                 <span class="rev-perfume-dot"></span>
                                 <div>
                                     <strong>a. Timeless</strong>
-                                    <div style="font-size:0.72rem; color:var(--rev-muted);">Signature Classic</div>
+                                    <div style="font-size:0.75rem; color:var(--color-text-muted);">Signature Classic</div>
                                 </div>
                             </label>
                         </div>
@@ -710,7 +762,7 @@
                                 <span class="rev-perfume-dot"></span>
                                 <div>
                                     <strong>b. Petal Kiss</strong>
-                                    <div style="font-size:0.72rem; color:var(--rev-muted);">Fresh Romantic Floral</div>
+                                    <div style="font-size:0.75rem; color:var(--color-text-muted);">Fresh Romantic Floral</div>
                                 </div>
                             </label>
                         </div>
@@ -720,7 +772,7 @@
                                 <span class="rev-perfume-dot"></span>
                                 <div>
                                     <strong>c. Night King</strong>
-                                    <div style="font-size:0.72rem; color:var(--rev-muted);">Dark Resinous Amber</div>
+                                    <div style="font-size:0.75rem; color:var(--color-text-muted);">Dark Resinous Amber</div>
                                 </div>
                             </label>
                         </div>
@@ -730,7 +782,7 @@
                                 <span class="rev-perfume-dot"></span>
                                 <div>
                                     <strong>d. Adora</strong>
-                                    <div style="font-size:0.72rem; color:var(--rev-muted);">Solar Gourmand Vanilla</div>
+                                    <div style="font-size:0.75rem; color:var(--color-text-muted);">Solar Gourmand Vanilla</div>
                                 </div>
                             </label>
                         </div>
@@ -740,7 +792,7 @@
                                 <span class="rev-perfume-dot"></span>
                                 <div>
                                     <strong>e. A Date with Rose</strong>
-                                    <div style="font-size:0.72rem; color:var(--rev-muted);">Sensual Saffron Rose</div>
+                                    <div style="font-size:0.75rem; color:var(--color-text-muted);">Sensual Saffron Rose</div>
                                 </div>
                             </label>
                         </div>
@@ -750,7 +802,7 @@
                                 <span class="rev-perfume-dot"></span>
                                 <div>
                                     <strong>f. Morning Shower</strong>
-                                    <div style="font-size:0.72rem; color:var(--rev-muted);">Crisp Aquatic Citrus</div>
+                                    <div style="font-size:0.75rem; color:var(--color-text-muted);">Crisp Aquatic Citrus</div>
                                 </div>
                             </label>
                         </div>
@@ -801,72 +853,89 @@
                             <i class="fa-solid fa-star rev-star-icon active" data-val="4"></i>
                             <i class="fa-solid fa-star rev-star-icon active" data-val="5"></i>
                         </div>
-                        <span class="rev-rating-desc" id="rev-rating-text">5 / 5 — Masterpiece</span>
+                        <span class="rev-rating-desc" id="rev-rating-text">5 / 5 — Masterpiece!</span>
                         <input type="hidden" id="rev-rating-input" value="5">
                     </div>
                 </div>
 
-                <!-- 5. WOULD YOU RE-PURCHASE IT EVER? -->
+                <!-- 5. HOW WOULD YOU DEFINE THIS FRAGRANCE? (NEW SEGMENT) -->
                 <div class="rev-field">
-                    <label class="rev-label">5. Would you re-purchase it ever? <span class="req">*</span></label>
+                    <label class="rev-label" for="rev-definition-input">
+                        5. How would you define this fragrance? <span class="req">*</span>
+                    </label>
+                    <div class="rev-chips-wrap">
+                        <span class="rev-def-chip" onclick="setDefChip(this, 'Bold & Regal')">Bold & Regal</span>
+                        <span class="rev-def-chip" onclick="setDefChip(this, 'Fresh & Uplifting')">Fresh & Uplifting</span>
+                        <span class="rev-def-chip" onclick="setDefChip(this, 'Sensual & Romantic')">Sensual & Romantic</span>
+                        <span class="rev-def-chip" onclick="setDefChip(this, 'Dark & Mysterious')">Dark & Mysterious</span>
+                        <span class="rev-def-chip" onclick="setDefChip(this, 'Warm & Cozy')">Warm & Cozy</span>
+                        <span class="rev-def-chip" onclick="setDefChip(this, 'Clean & Luxurious')">Clean & Luxurious</span>
+                        <span class="rev-def-chip" onclick="setDefChip(this, 'Earthy & Grounded')">Earthy & Grounded</span>
+                    </div>
+                    <input type="text" id="rev-definition-input" class="rev-input" placeholder="e.g. Royal evening presence, Crisp monsoon breeze, Modern elegance..." required>
+                </div>
+
+                <!-- 6. WOULD YOU RE-PURCHASE IT EVER? -->
+                <div class="rev-field">
+                    <label class="rev-label">6. Would you re-purchase it ever? <span class="req">*</span></label>
                     <div class="rev-repurchase-group">
                         <label class="rev-repurchase-pill">
                             <input type="radio" name="repurchase" value="Yes, definitely" checked>
                             <span class="rev-repurchase-btn">
-                                <i class="fa-solid fa-circle-check" style="color:#22c55e;"></i><br>
+                                <i class="fa-solid fa-circle-check" style="color:#2e7d32; font-size:1.1rem; margin-bottom:4px;"></i><br>
                                 <strong>Yes, definitely!</strong>
                             </span>
                         </label>
                         <label class="rev-repurchase-pill">
                             <input type="radio" name="repurchase" value="Maybe / Need another test">
                             <span class="rev-repurchase-btn">
-                                <i class="fa-solid fa-circle-question" style="color:#f59e0b;"></i><br>
+                                <i class="fa-solid fa-circle-question" style="color:#d97706; font-size:1.1rem; margin-bottom:4px;"></i><br>
                                 <strong>Maybe / Test more</strong>
                             </span>
                         </label>
                         <label class="rev-repurchase-pill">
                             <input type="radio" name="repurchase" value="No, not for me">
                             <span class="rev-repurchase-btn">
-                                <i class="fa-solid fa-circle-xmark" style="color:#ef4444;"></i><br>
+                                <i class="fa-solid fa-circle-xmark" style="color:#c62828; font-size:1.1rem; margin-bottom:4px;"></i><br>
                                 <strong>No, not for me</strong>
                             </span>
                         </label>
                     </div>
                 </div>
 
-                <!-- 6. GENERAL PERFUME PREFERENCE -->
+                <!-- 7. GENERAL PERFUME PREFERENCE -->
                 <div class="rev-field">
-                    <label class="rev-label" for="rev-preference-input">6. What kind of perfume you like to wear generally?</label>
+                    <label class="rev-label" for="rev-preference-input">7. What kind of perfume you like to wear generally?</label>
                     <div class="rev-chips-wrap">
                         <span class="rev-pref-chip" onclick="togglePrefChip(this, 'Fresh Citrus')">Citrus & Bergamot</span>
                         <span class="rev-pref-chip" onclick="togglePrefChip(this, 'Deep Woody & Sandalwood')">Deep Woody</span>
                         <span class="rev-pref-chip" onclick="togglePrefChip(this, 'Romantic Florals')">Romantic Floral</span>
                         <span class="rev-pref-chip" onclick="togglePrefChip(this, 'Warm Amber & Oud')">Amber & Oud</span>
-                        <span class="rev-pref-chip" onclick="togglePrefChip(this, 'Aquatic & Fresh Marine')">Aquatic Marine</span>
-                        <span class="rev-pref-chip" onclick="togglePrefChip(this, 'Sweet Vanilla / Gourmand')">Sweet Vanilla</span>
+                        <span class="rev-pref-chip" onclick="togglePrefChip(this, 'Aquatic Marine')">Aquatic Marine</span>
+                        <span class="rev-pref-chip" onclick="togglePrefChip(this, 'Sweet Vanilla')">Sweet Vanilla</span>
                     </div>
-                    <input type="text" id="rev-preference-input" class="rev-input" placeholder="e.g. Woody & fresh citrus for daily office, Amber for dates">
+                    <input type="text" id="rev-preference-input" class="rev-input" placeholder="e.g. Woody & fresh citrus for office, Amber for dates">
                 </div>
 
-                <!-- 7. ANY SUGGESTIONS FOR US -->
+                <!-- 8. ANY SUGGESTIONS FOR US -->
                 <div class="rev-field">
-                    <label class="rev-label" for="rev-suggestions">7. Any suggestion for us...</label>
+                    <label class="rev-label" for="rev-suggestions">8. Any suggestion for us...</label>
                     <textarea id="rev-suggestions" class="rev-textarea" rows="3" placeholder="Bottle design, silage, pricing, longevity, or custom scent ideas..."></textarea>
                 </div>
 
-                <!-- 8. POST PHOTOS (OPTIONAL) -->
+                <!-- 9. POST PHOTOS (OPTIONAL) -->
                 <div class="rev-field">
-                    <label class="rev-label">8. Post photo along with review <span style="font-weight:400; color:var(--rev-muted);">(Optional)</span></label>
+                    <label class="rev-label">9. Post photo along with review <span style="font-weight:400; color:var(--color-text-muted);">(Optional)</span></label>
                     <div class="rev-photo-box">
-                        <i class="fa-solid fa-camera" style="font-size:1.8rem; color:var(--rev-gold); margin-bottom:6px; display:block;"></i>
-                        <span style="font-size:0.85rem; color:var(--rev-gold-light);">Click to capture or upload photo</span>
-                        <div style="font-size:0.72rem; color:var(--rev-muted);">Street portrait, fragrance spray, or mall kiosk selfie</div>
+                        <i class="fa-solid fa-camera" style="font-size:1.8rem; color:var(--color-accent); margin-bottom:6px; display:block;"></i>
+                        <span style="font-size:0.88rem; color:var(--color-text); font-weight:500;">Click to capture or upload photo</span>
+                        <div style="font-size:0.75rem; color:var(--color-text-muted);">Street portrait, fragrance spray, or mall kiosk snapshot</div>
                         <input type="file" id="rev-photo-input" class="rev-photo-input" accept="image/*">
                     </div>
                     <div class="rev-photo-preview" id="rev-photo-preview-box">
                         <div style="display:flex; align-items:center; gap:10px;">
                             <img id="rev-photo-preview-img" src="" alt="Reviewer photo">
-                            <span style="font-size:0.78rem; color:var(--rev-gold-light);">Photo attached</span>
+                            <span style="font-size:0.82rem; color:var(--color-text); font-weight:500;">Photo attached</span>
                         </div>
                         <button type="button" class="rev-photo-remove" onclick="removeAttachedPhoto()"><i class="fa-solid fa-trash"></i> Remove</button>
                     </div>
@@ -885,7 +954,7 @@
         <div class="rev-feed-section">
             <div class="rev-feed-header">
                 <h3 class="rev-feed-title">Live Voices Feed</h3>
-                <span style="font-size:0.75rem; color:var(--rev-muted);" id="rev-feed-count">Showing all reviews</span>
+                <span style="font-size:0.8rem; color:var(--color-text-muted);" id="rev-feed-count">Showing all reviews</span>
             </div>
 
             <!-- Filter Tabs -->
@@ -901,8 +970,8 @@
 
             <!-- Review Cards Feed List -->
             <div class="rev-feed-list" id="rev-feed-container">
-                <div style="text-align:center; padding:30px; color:var(--rev-muted);">
-                    <i class="fa-solid fa-spinner fa-spin" style="font-size:1.5rem; color:var(--rev-gold);"></i>
+                <div style="text-align:center; padding:30px; color:var(--color-text-muted);">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size:1.5rem; color:var(--color-accent);"></i>
                     <p>Loading real-time impressions…</p>
                 </div>
             </div>
@@ -951,6 +1020,14 @@
                 });
             });
         }
+
+        // ─── DEFINITION CHIPS ────────────────────────────────────────────────────────
+        window.setDefChip = function(el, text) {
+            document.querySelectorAll(".rev-def-chip").forEach(c => c.classList.remove("selected"));
+            el.classList.add("selected");
+            const input = document.getElementById("rev-definition-input");
+            input.value = text;
+        };
 
         // ─── PREFERENCE CHIPS ────────────────────────────────────────────────────────
         window.togglePrefChip = function(el, text) {
@@ -1039,7 +1116,7 @@
 
             if (filtered.length === 0) {
                 container.innerHTML = `
-                    <div style="text-align:center; padding:40px; color:var(--rev-muted);">
+                    <div style="text-align:center; padding:40px; color:var(--color-text-muted);">
                         <i class="fa-regular fa-comment-dots" style="font-size:2rem; margin-bottom:8px; display:block;"></i>
                         No street reviews yet for ${currentFilter}. Be the first to add one!
                     </div>`;
@@ -1067,12 +1144,14 @@
 
                         <span class="rev-perfume-tag"><i class="fa-solid fa-spray-can-sparkles"></i> ${escapeHtml(r.perfume)}</span>
 
+                        ${r.fragranceDefinition ? `<div><span class="rev-card-def"><i class="fa-solid fa-sparkles"></i> Defined as: <strong>${escapeHtml(r.fragranceDefinition)}</strong></span></div>` : ""}
+
                         ${r.suggestions ? `<div class="rev-card-quote">“${escapeHtml(r.suggestions)}”</div>` : ""}
 
                         ${r.photoUrl ? `<img src="${r.photoUrl}" alt="Reviewer photo" class="rev-card-photo">` : ""}
 
                         <div class="rev-card-meta">
-                            <span><i class="fa-solid fa-rotate-right"></i> Repurchase: <strong style="color:${isRepurchase ? '#22c55e' : 'var(--rev-muted)'}">${escapeHtml(r.repurchase)}</strong></span>
+                            <span><i class="fa-solid fa-rotate-right"></i> Repurchase: <strong style="color:${isRepurchase ? '#2e7d32' : 'var(--color-text-muted)'}">${escapeHtml(r.repurchase)}</strong></span>
                             ${r.generalPreference ? `<span><i class="fa-solid fa-heart"></i> Prefers: ${escapeHtml(r.generalPreference)}</span>` : ""}
                             <span><i class="fa-regular fa-calendar"></i> ${date}</span>
                         </div>
@@ -1101,6 +1180,7 @@
                 userName: document.getElementById("rev-user-name").value.trim(),
                 identity: identityEl ? identityEl.value : "others",
                 rating: parseInt(document.getElementById("rev-rating-input").value) || 5,
+                fragranceDefinition: document.getElementById("rev-definition-input").value.trim() || "Elegant & Luxurious",
                 repurchase: repurchaseEl ? repurchaseEl.value : "Yes, definitely",
                 generalPreference: document.getElementById("rev-preference-input").value.trim() || "All fragrances",
                 suggestions: document.getElementById("rev-suggestions").value.trim(),
@@ -1152,6 +1232,7 @@
             document.getElementById("rev-rating-input").value = "5";
             document.getElementById("rev-rating-text").textContent = ratingLabels[5];
             document.querySelectorAll("#rev-stars-picker .rev-star-icon").forEach(s => s.classList.add("active"));
+            document.querySelectorAll(".rev-def-chip").forEach(c => c.classList.remove("selected"));
             document.querySelectorAll(".rev-pref-chip").forEach(c => c.classList.remove("selected"));
             removeAttachedPhoto();
 

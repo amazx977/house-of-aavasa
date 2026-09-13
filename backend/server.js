@@ -268,7 +268,7 @@ app.get('/api/reviews', (req, res) => {
 // POST submit new street/mall review
 app.post('/api/reviews', (req, res) => {
     try {
-        const { perfume, userName, identity, rating, repurchase, generalPreference, suggestions, photoUrl, location } = req.body || {};
+        const { perfume, userName, identity, rating, fragranceDefinition, repurchase, generalPreference, suggestions, photoUrl, location } = req.body || {};
 
         if (!perfume) {
             return res.status(400).json({ success: false, message: "Perfume selection is required." });
@@ -285,6 +285,7 @@ app.post('/api/reviews', (req, res) => {
             userName,
             identity: identity || "others",
             rating: rating || 5,
+            fragranceDefinition: fragranceDefinition || "Elegant & Luxurious",
             repurchase: repurchase || "Yes, definitely",
             generalPreference: generalPreference || "All fragrances",
             suggestions: suggestions || "",
