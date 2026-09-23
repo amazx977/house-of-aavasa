@@ -770,6 +770,108 @@ button {
     color: var(--color-accent);
 }
 
+/* Product Card Size Selector */
+.product-sizes-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.product-size-chip {
+    padding: 3px 10px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    background: var(--color-bg);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.product-size-chip:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text);
+}
+
+.product-size-chip.active {
+    background-color: var(--color-text);
+    border-color: var(--color-text);
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.product-size-chip.static {
+    cursor: default;
+    background-color: var(--color-bg-alt);
+    border-color: var(--color-border);
+    color: var(--color-text-muted);
+}
+
+/* Modal Volume Selector */
+.modal-sizes-container {
+    margin-bottom: 22px;
+}
+
+.modal-sizes-title {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+    margin-bottom: 10px;
+}
+
+.modal-sizes-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.modal-size-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 14px;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--border-radius);
+    background: var(--color-bg);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: left;
+}
+
+.modal-size-card:hover {
+    border-color: var(--color-accent);
+}
+
+.modal-size-card.active {
+    border-color: var(--color-accent);
+    background: rgba(197, 160, 89, 0.08);
+    box-shadow: 0 0 0 1px var(--color-accent);
+}
+
+.m-size-vol {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.m-size-sub {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-bottom: 4px;
+}
+
+.m-size-price {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--color-accent-dark);
+}
+
 /* Payment Option Tabs in Real Checkout Modal */
 .payment-option-tab {
     display: flex;
@@ -1982,6 +2084,36 @@ button {
         padding-top: 10px;
         font-size: 0.7rem;
         letter-spacing: 0.08em;
+    }
+
+    .product-sizes-bar {
+        gap: 4px;
+        margin-bottom: 8px;
+    }
+    
+    .product-size-chip {
+        padding: 2px 7px;
+        font-size: 0.65rem;
+    }
+    
+    .modal-sizes-options {
+        gap: 8px;
+    }
+    
+    .modal-size-card {
+        padding: 8px 10px;
+    }
+    
+    .m-size-vol {
+        font-size: 0.88rem;
+    }
+    
+    .m-size-sub {
+        font-size: 0.65rem;
+    }
+    
+    .m-size-price {
+        font-size: 0.8rem;
     }
     
     .btn-quickview {
