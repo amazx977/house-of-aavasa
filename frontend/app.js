@@ -3,11 +3,101 @@
    ========================================================================== */
 
 // ─── PRODUCT DATABASE ─────────────────────────────────────────────────────────
+// Note: Each fragrance supports an array of images: [Primary Bottle, Travel Edition 15ml / Secondary View, Notes / Lifestyle].
+// You can freely add or replace image paths in the "images" array for each perfume!
 const products = [
-    { id: 1,  name: "Morning Shower",      gender: "male",   edition: "signature", priceOriginal: 2199, priceDiscounted: 1699, size: "50ml", sizes: [{ size: "50ml", priceOriginal: 2199, priceDiscounted: 1699, label: "Full Flacon" }, { size: "15ml", priceOriginal: 699, priceDiscounted: 499, label: "Travel Edition" }], image: "media/Morning.png", family: "citrus", notes: "Calabrian Bergamot, Lemon Zest, Fresh Mint, Virginia Cedarwood", description: "Morning Shower captures the vibrant energy of a Bright Day — a burst of sparkling citrus melting into fresh mint, anchored by dry, architectural cedarwood.", occasion: "day" },
-    { id: 2,  name: "Night King",          gender: "male",   edition: "signature", priceOriginal: 2199, priceDiscounted: 1699, size: "50ml", sizes: [{ size: "50ml", priceOriginal: 2199, priceDiscounted: 1699, label: "Full Flacon" }, { size: "15ml", priceOriginal: 699, priceDiscounted: 499, label: "Travel Edition" }], image: "media/Night.png",  family: "Gourmand",  notes: "Mysore Sandalwood, Cinamon, Boozy, Muted Iris, Prelin", description: "A Playful, modern interpretation of classic Men. Creamy Mysore sandalwood in cinamon spice and boozy-sweetness that defines a playful night.", occasion: "night" },
-    { id: 3,  name: "Timeless",            gender: "male",   edition: "signature", priceOriginal: 2199, priceDiscounted: 1699, size: "50ml", sizes: [{ size: "50ml", priceOriginal: 2199, priceDiscounted: 1699, label: "Full Flacon" }, { size: "15ml", priceOriginal: 699, priceDiscounted: 499, label: "Travel Edition" }], image: "media/Timeless.png", family: "citrus", notes: "Sea Salt, White Sage, Pink Grapefruit, Driftwood", description: "Mineral-rich and bracing. Salty air with dry sage and sparkling grapefruit over sun-bleached driftwood.", occasion: "day" },
-    { id: 4,  name: "Euphoria",            gender: "unisex",   edition: "signature", priceOriginal: 2199, priceDiscounted: 1699, size: "50ml", sizes: [{ size: "50ml", priceOriginal: 2199, priceDiscounted: 1699, label: "Full Flacon" }, { size: "15ml", priceOriginal: 699, priceDiscounted: 499, label: "Travel Edition" }], image: "media/Euphoria.png",  family: "amber",  notes: "Cherry, Nutmeg, Ambergris, Dry Woods", description: "Fiery cherry and nutmeg with the warm, salty undertones of rare mineral ambergris.", occasion: "SPecial" },
+    { 
+        id: 1,  
+        name: "Morning Shower",      
+        gender: "male",   
+        edition: "signature", 
+        priceOriginal: 2199, 
+        priceDiscounted: 1699, 
+        size: "50ml", 
+        sizes: [
+            { size: "50ml", priceOriginal: 2199, priceDiscounted: 1699, label: "Full Flacon" }, 
+            { size: "15ml", priceOriginal: 699,  priceDiscounted: 499,  label: "Travel Edition" }
+        ], 
+        image: "media/Morning.png",
+        images: [
+            "media/Morning.png",
+            "media/morning15.jpg",
+            "media/citrus.png"
+        ],
+        family: "citrus", 
+        notes: "Calabrian Bergamot, Lemon Zest, Fresh Mint, Virginia Cedarwood", 
+        description: "Morning Shower captures the vibrant energy of a Bright Day — a burst of sparkling citrus melting into fresh mint, anchored by dry, architectural cedarwood.", 
+        occasion: "day" 
+    },
+    { 
+        id: 2,  
+        name: "Night King",          
+        gender: "male",   
+        edition: "signature", 
+        priceOriginal: 2199, 
+        priceDiscounted: 1699, 
+        size: "50ml", 
+        sizes: [
+            { size: "50ml", priceOriginal: 2199, priceDiscounted: 1699, label: "Full Flacon" }, 
+            { size: "15ml", priceOriginal: 699,  priceDiscounted: 499,  label: "Travel Edition" }
+        ], 
+        image: "media/Night.png",  
+        images: [
+            "media/Night.png",
+            "media/night15.jpg",
+            "media/amber.png"
+        ],
+        family: "Gourmand",  
+        notes: "Mysore Sandalwood, Cinamon, Boozy, Muted Iris, Prelin", 
+        description: "A Playful, modern interpretation of classic Men. Creamy Mysore sandalwood in cinamon spice and boozy-sweetness that defines a playful night.", 
+        occasion: "night" 
+    },
+    { 
+        id: 3,  
+        name: "Timeless",            
+        gender: "male",   
+        edition: "signature", 
+        priceOriginal: 2199, 
+        priceDiscounted: 1699, 
+        size: "50ml", 
+        sizes: [
+            { size: "50ml", priceOriginal: 2199, priceDiscounted: 1699, label: "Full Flacon" }, 
+            { size: "15ml", priceOriginal: 699,  priceDiscounted: 499,  label: "Travel Edition" }
+        ], 
+        image: "media/Timeless.png", 
+        images: [
+            "media/Timeless.png",
+            "media/timeless15.jpg",
+            "media/citrus.png"
+        ],
+        family: "citrus", 
+        notes: "Sea Salt, White Sage, Pink Grapefruit, Driftwood", 
+        description: "Mineral-rich and bracing. Salty air with dry sage and sparkling grapefruit over sun-bleached driftwood.", 
+        occasion: "day" 
+    },
+    { 
+        id: 4,  
+        name: "Euphoria",            
+        gender: "unisex",   
+        edition: "signature", 
+        priceOriginal: 2199, 
+        priceDiscounted: 1699, 
+        size: "50ml", 
+        sizes: [
+            { size: "50ml", priceOriginal: 2199, priceDiscounted: 1699, label: "Full Flacon" }, 
+            { size: "15ml", priceOriginal: 699,  priceDiscounted: 499,  label: "Travel Edition" }
+        ], 
+        image: "media/Euphoria.png",  
+        images: [
+            "media/Euphoria.png",
+            "media/amber.png",
+            "media/hero.png"
+        ],
+        family: "amber",  
+        notes: "Cherry, Nutmeg, Ambergris, Dry Woods", 
+        description: "Fiery cherry and nutmeg with the warm, salty undertones of rare mineral ambergris.", 
+        occasion: "SPecial" 
+    },
     //{ id: 5,  name: "Forest Mist",       gender: "male",   edition: "signature", priceOriginal: 2199, priceDiscounted: 1699, size: "80ml", image: "media/woody.png",  family: "woody",  notes: "Siberian Pine, Oakmoss, Patchouli, Green Tea", description: "Crisp alpine air. Damp moss and evergreen pine with grounding patchouli dry-down.", occasion: "day" },
     //{ id: 6,  name: "Oud Imperial",      gender: "male",   edition: "collector", priceOriginal: 4569, priceDiscounted: 3999, size: "80ml", image: "media/woody.png",  family: "woody",  notes: "Assam Oud, Tuscan Leather, Smoked Tobacco, Labdanum", description: "Dark and resinous — wild Indian agarwood paired with fine Italian leather. A collector's masterwork.", occasion: "night" },
     //{ id: 7,  name: "Amber Absolute",    gender: "male",   edition: "collector", priceOriginal: 4569, priceDiscounted: 3999, size: "80ml", image: "media/amber.png",  family: "amber",  notes: "Warm Amber, Sweet Vanilla, Somalian Incense, Benzoin", description: "Rich, enveloping resins with balsamic benzoin and mystical incense, sweetened by Madagascan vanilla.", occasion: "night" },
@@ -15,16 +105,136 @@ const products = [
     //{ id: 9,  name: "Citron Eclipse",    gender: "male",   edition: "collector", priceOriginal: 4569, priceDiscounted: 3999, size: "80ml", image: "media/citrus.png", family: "citrus", notes: "Black Amber, Bergamot, Indonesian Patchouli, Vetiver", description: "The dark side of freshness. Premium bergamot over black amber and earthy patchouli.", occasion: "night" },
     //{ id: 10, name: "Cuir Royale",       gender: "male",   edition: "collector", priceOriginal: 4569, priceDiscounted: 3999, size: "80ml", image: "media/amber.png",  family: "amber",  notes: "Saffron, Golden Amber, Tuscan Suede, Thyme", description: "Aristocratic and compelling — crimson saffron with luxurious velvety suede base.", occasion: "night" },
     //{ id: 11, name: "Jasmine Dew",       gender: "female", edition: "signature", priceOriginal: 2199, priceDiscounted: 1699, size: "80ml", image: "media/floral.png", family: "floral", notes: "Grasse Jasmine Sambac, White Rose Petals, Crisp Pear, White Musk", description: "Fresh, romantic, ethereal. White flowers laden with morning dew, sweetened by crisp pear.", occasion: "day" },
-    { id: 12, name: "Petal Kiss",          gender: "female", edition: "signature", priceOriginal: 2199, priceDiscounted: 1699, size: "50ml", sizes: [{ size: "50ml", priceOriginal: 2199, priceDiscounted: 1699, label: "Full Flacon" }, { size: "15ml", priceOriginal: 699, priceDiscounted: 499, label: "Travel Edition" }], image: "media/Petal Kiss.png", family: "citrus", notes: "Orange Blossom, Bright rose, Green Apple, White Musk", description: "Luminous and solar. Sun-kissed orange flowers, Green Apple.", occasion: "day" },
-    { id: 13, name: "Dusky Rose",          gender: "female", edition: "signature", priceOriginal: 2199, priceDiscounted: 1699, size: "50ml", sizes: [{ size: "50ml", priceOriginal: 2199, priceDiscounted: 1699, label: "Full Flacon" }, { size: "15ml", priceOriginal: 699, priceDiscounted: 499, label: "Travel Edition" }], image: "media/Dusky Rose.png", family: "Ambery floral", notes: "Damask Rose, Wild Honey, Soft Musk, Leather, Coffee", description: "A modern ode to the queen of flowers — rich Damask Rose with golden honey and Damp leather.", occasion: "day" },
-    { id: 14, name: "Adore",               gender: "female", edition: "signature", priceOriginal: 2199, priceDiscounted: 1699, size: "50ml", sizes: [{ size: "50ml", priceOriginal: 2199, priceDiscounted: 1699, label: "Full Flacon" }, { size: "15ml", priceOriginal: 699, priceDiscounted: 499, label: "Travel Edition" }], image: "media/Adore.png",  family: "Ambery sweet",  notes: "Vanilla Bean, Night Orchid, Sandalwood, Coconut Milk", description: "Soft and comforting — warm vanilla orchids with creamy coconut milk and smooth sandalwood.", occasion: "day" },
-    { id: 15, name: "Discovery set Male",   gender: "Male", edition: "signature", priceOriginal: 2199, priceDiscounted: 1699, size: "45ml", sizes: [{ size: "45ml", priceOriginal: 2199, priceDiscounted: 1699, label: "Discovery Set" }], image: "media/Dset 1.png", family: "Set", notes: "French Lavender, Chamomile, Vanilla, Cedarwood", description: "Serene and herbal. French lavender valleys into warm chamomile tea and cozy vanilla.", occasion: "day" },
-    { id: 16, name: "Discovery set Female", gender: "female", edition: "signature", priceOriginal: 2599, priceDiscounted: 1799, size: "45ml", sizes: [{ size: "45ml", priceOriginal: 2599, priceDiscounted: 1799, label: "Discovery Set" }], image: "media/Dset2.png", family: "Set", notes: "Midnight Rose, Patchouli, Dark Chocolate, Amber", description: "Gothic romance — velvety midnight rose with earthy patchouli and dark chocolate.", occasion: "night" },
+    { 
+        id: 12, 
+        name: "Petal Kiss",          
+        gender: "female", 
+        edition: "signature", 
+        priceOriginal: 2199, 
+        priceDiscounted: 1699, 
+        size: "50ml", 
+        sizes: [
+            { size: "50ml", priceOriginal: 2199, priceDiscounted: 1699, label: "Full Flacon" }, 
+            { size: "15ml", priceOriginal: 699,  priceDiscounted: 499,  label: "Travel Edition" }
+        ], 
+        image: "media/Petal Kiss.png", 
+        images: [
+            "media/Petal Kiss.png",
+            "media/petal15.jpg",
+            "media/floral.png"
+        ],
+        family: "citrus", 
+        notes: "Orange Blossom, Bright rose, Green Apple, White Musk", 
+        description: "Luminous and solar. Sun-kissed orange flowers, Green Apple.", 
+        occasion: "day" 
+    },
+    { 
+        id: 13, 
+        name: "Dusky Rose",          
+        gender: "female", 
+        edition: "signature", 
+        priceOriginal: 2199, 
+        priceDiscounted: 1699, 
+        size: "50ml", 
+        sizes: [
+            { size: "50ml", priceOriginal: 2199, priceDiscounted: 1699, label: "Full Flacon" }, 
+            { size: "15ml", priceOriginal: 699,  priceDiscounted: 499,  label: "Travel Edition" }
+        ], 
+        image: "media/Dusky Rose.png", 
+        images: [
+            "media/Dusky Rose.png",
+            "media/dusky15.jpg",
+            "media/floral.png"
+        ],
+        family: "Ambery floral", 
+        notes: "Damask Rose, Wild Honey, Soft Musk, Leather, Coffee", 
+        description: "A modern ode to the queen of flowers — rich Damask Rose with golden honey and Damp leather.", 
+        occasion: "day" 
+    },
+    { 
+        id: 14, 
+        name: "Adore",               
+        gender: "female", 
+        edition: "signature", 
+        priceOriginal: 2199, 
+        priceDiscounted: 1699, 
+        size: "50ml", 
+        sizes: [
+            { size: "50ml", priceOriginal: 2199, priceDiscounted: 1699, label: "Full Flacon" }, 
+            { size: "15ml", priceOriginal: 699,  priceDiscounted: 499,  label: "Travel Edition" }
+        ], 
+        image: "media/Adore.png",  
+        images: [
+            "media/Adore.png",
+            "media/adore15.jpg",
+            "media/amber.png"
+        ],
+        family: "Ambery sweet",  
+        notes: "Vanilla Bean, Night Orchid, Sandalwood, Coconut Milk", 
+        description: "Soft and comforting — warm vanilla orchids with creamy coconut milk and smooth sandalwood.", 
+        occasion: "day" 
+    },
+    { 
+        id: 15, 
+        name: "Discovery set Male",   
+        gender: "Male", 
+        edition: "signature", 
+        priceOriginal: 2199, 
+        priceDiscounted: 1699, 
+        size: "45ml", 
+        sizes: [
+            { size: "45ml", priceOriginal: 2199, priceDiscounted: 1699, label: "Discovery Set" }
+        ], 
+        image: "media/Dset 1.png", 
+        images: [
+            "media/Dset 1.png",
+            "media/Sample set 1.png",
+            "media/hero.png"
+        ],
+        family: "Set", 
+        notes: "French Lavender, Chamomile, Vanilla, Cedarwood", 
+        description: "Serene and herbal. French lavender valleys into warm chamomile tea and cozy vanilla.", 
+        occasion: "day" 
+    },
+    { 
+        id: 16, 
+        name: "Discovery set Female", 
+        gender: "female", 
+        edition: "signature", 
+        priceOriginal: 2599, 
+        priceDiscounted: 1799, 
+        size: "60ml", 
+        sizes: [
+            { size: "60ml", priceOriginal: 2599, priceDiscounted: 1799, label: "Discovery Set" }
+        ], 
+        image: "media/Dset2.png", 
+        images: [
+            "media/Dset2.png",
+            "media/Sample set 1.png",
+            "media/hero.png"
+        ],
+        family: "Set", 
+        notes: "Midnight Rose, Patchouli, Dark Chocolate, Amber", 
+        description: "Gothic romance — velvety midnight rose with earthy patchouli and dark chocolate.", 
+        occasion: "night" 
+    },
     //{ id: 17, name: "Elixir d'Or",       gender: "female", edition: "collector", priceOriginal: 4569, priceDiscounted: 3999, size: "80ml", image: "media/amber.png",  family: "amber",  notes: "Gold Saffron, Jasmine Sambac, Amber, Cashmere Wood", description: "Liquid gold masterpiece. Aromatic saffron with creamy jasmine and warm amber.", occasion: "night" },
     //{ id: 18, name: "Santal de Soie",    gender: "female", edition: "collector", priceOriginal: 4569, priceDiscounted: 3999, size: "80ml", image: "media/woody.png",  family: "woody",  notes: "White Sandalwood, Cashmere Wood, Florentine Iris, Vanilla", description: "Sandalwood spun into pure silk — Florentine iris and velvety cashmere woods.", occasion: "night" },
     //{ id: 19, name: "Bergamote Select",  gender: "female", edition: "collector", priceOriginal: 4569, priceDiscounted: 3999, size: "80ml", image: "media/citrus.png", family: "citrus", notes: "Calabrian Bergamot, Petitgrain, White Musk, Jasmine", description: "A study in refined citrus purity — bergamot elevated by petitgrain and white musk.", occasion: "night" },
     //{ id: 20, name: "Tuberose Intense",  gender: "female", edition: "collector", priceOriginal: 4569, priceDiscounted: 3999, size: "80ml", image: "media/floral.png", family: "floral", notes: "Tuberose Absolu, Ylang-Ylang, Coconut Husk, Sandalwood", description: "Sensual and hypnotic. Creamy tuberose with ylang-ylang and warm coconut husk base.", occasion: "night" }
 ];
+
+// Helper: Get available gallery images for any product
+function getProductImages(product) {
+    if (!product) return [];
+    if (Array.isArray(product.images) && product.images.length > 0) {
+        return product.images;
+    }
+    if (typeof product.images === "string" && product.images.trim()) {
+        return [product.image, product.images].filter(Boolean);
+    }
+    return [product.image].filter(Boolean);
+}
 
 // Helper: Get available sizes for any product
 function getProductSizes(product) {
@@ -969,7 +1179,7 @@ function renderProducts() {
     } else if (currentEditionFilter !== "all" || currentGenderFilter !== "all") {
         info.style.display = "flex";
         const label = [
-            currentEditionFilter === "signature" ? "Signature Edition" : currentEditionFilter === "collector" ? "Collector's Edition" : "",
+            currentEditionFilter === "signature" ? "Signature Edition" : currentEditionFilter === "collector" ? "Heritage Edition" : "",
             currentGenderFilter  === "male"      ? "For Him"           : currentGenderFilter  === "female"    ? "For Her"           : ""
         ].filter(Boolean).join(" · ");
         document.getElementById("active-filters-text").textContent = `Filters: ${label}`;
@@ -987,16 +1197,33 @@ function renderProducts() {
     }
 
     productGrid.innerHTML = list.map(p => {
-        const edLabel  = p.edition === "signature" ? "Signature" : "Collector's";
+        const edLabel  = p.edition === "signature" ? "Signature" : (p.edition === "collector" ? "Heritage" : "Collector's");
         const tagClass = p.edition === "collector"  ? "tag-collector" : "";
         const sizes    = getProductSizes(p);
         const currentSize = selectedProductSizes[p.id] || sizes[0].size;
         const currentSizeInfo = getSelectedSizeInfo(p, currentSize);
+        const images   = getProductImages(p);
+
+        // Pick primary image based on selected size (e.g. 15ml bottle if 15ml selected)
+        const primaryImg = (currentSize === "15ml" && images.find(img => img.toLowerCase().includes("15")))
+            ? images.find(img => img.toLowerCase().includes("15"))
+            : images[0];
+
+        // Secondary image shown on hover
+        const secondaryImg = images.length > 1 
+            ? (images[1] !== primaryImg ? images[1] : (images[0] !== primaryImg ? images[0] : (images[2] || null)))
+            : null;
+
         return `
             <div class="product-card" data-id="${p.id}">
                 <span class="product-tag ${tagClass}">${edLabel}</span>
                 <div class="product-card-media" onclick="openProductModal(${p.id})">
-                    <img src="${p.image}" alt="${p.name}" class="product-card-img" loading="lazy">
+                    <img src="${primaryImg}" alt="${p.name}" class="product-card-img img-primary" id="card-img-${p.id}" loading="lazy">
+                    ${secondaryImg ? `<img src="${secondaryImg}" alt="${p.name} alternate view" class="product-card-img img-secondary" id="card-img-sec-${p.id}" loading="lazy">` : ""}
+                    ${images.length > 1 ? `
+                    <div class="product-card-multi-badge" title="${images.length} views available">
+                        <i class="fa-regular fa-images"></i> <span>${images.length}</span>
+                    </div>` : ""}
                     <div class="product-card-overlay">
                         <button class="btn-quickview"><i class="fa-regular fa-eye"></i> Quick View</button>
                     </div>
@@ -1056,6 +1283,18 @@ window.handleCardSizeChange = function(e, productId, newSize) {
                 <span class="price-discounted">₹${sizeInfo.priceDiscounted.toLocaleString("en-IN")}</span>
             `;
         }
+
+        // Dynamically update card primary image if specific size photo (15ml) exists
+        const cardImg = card.querySelector(`#card-img-${productId}`);
+        if (cardImg) {
+            const images = getProductImages(p);
+            if (newSize === "15ml") {
+                const found15 = images.find(img => img.toLowerCase().includes("15"));
+                if (found15) cardImg.src = found15;
+            } else {
+                cardImg.src = images[0] || p.image;
+            }
+        }
     }
 };
 
@@ -1101,12 +1340,18 @@ window.addToCart = function(id, chosenSize) {
     const sizeInfo = getSelectedSizeInfo(product, chosenSize);
     const cartItemId = `${id}_${sizeInfo.size}`;
 
+    const imgs = getProductImages(product);
+    const imgForSize = (sizeInfo.size === "15ml" && imgs.find(i => i.toLowerCase().includes("15")))
+        ? imgs.find(i => i.toLowerCase().includes("15"))
+        : (imgs[0] || product.image);
+
     const idx = cart.findIndex(i => (i.cartItemId || `${i.id}_${i.size || '50ml'}`) === cartItemId);
     if (idx > -1) {
         cart[idx].quantity++;
     } else {
         cart.push({
             ...product,
+            image: imgForSize,
             cartItemId: cartItemId,
             size: sizeInfo.size,
             priceOriginal: sizeInfo.priceOriginal,
@@ -1163,7 +1408,7 @@ function renderCart() {
             <div class="cart-item-media"><img src="${item.image}" alt="${item.name}"></div>
             <div class="cart-item-info">
                 <h4>${item.name}</h4>
-                <div class="cart-item-meta">${item.gender === "male" ? "For Him" : (item.gender === "female" ? "For Her" : "Universal")} · ${item.edition === "collector" ? "Collector's" : "Signature"} · <strong style="color:var(--color-accent-dark);">${item.size}</strong></div>
+                <div class="cart-item-meta">${item.gender === "male" ? "For Him" : (item.gender === "female" ? "For Her" : "Universal")} · ${item.edition === "collector" ? "Heritage" : "Signature"} · <strong style="color:var(--color-accent-dark);">${item.size}</strong></div>
                 <div class="cart-item-controls">
                     <div class="cart-qty-selector">
                         <button class="qty-btn qty-minus"><i class="fa-solid fa-minus"></i></button>
@@ -1185,18 +1430,55 @@ function updateCartUI() {
 }
 function saveCart() { localStorage.setItem("aavasa_cart", JSON.stringify(cart)); }
 
-// ─── PRODUCT QUICK VIEW MODAL ──────────────────────────────────────────────────
+// ─── PRODUCT QUICK VIEW MODAL & IMAGE GALLERY ─────────────────────────────────
+let currentModalImages = [];
+let currentModalImgIdx = 0;
+
 window.openProductModal = function(id) {
     const product = products.find(p => p.id === id);
     if (!product) return;
-    const edLabel = product.edition === "signature" ? "Signature Edition" : "Collector's Edition";
+    const edLabel = product.edition === "signature" ? "Signature Edition" : (product.edition === "collector" ? "Heritage Edition" : "Collector's Edition");
     const sizes = getProductSizes(product);
     const currentSize = selectedProductSizes[id] || sizes[0].size;
     const sizeInfo = getSelectedSizeInfo(product, currentSize);
 
+    currentModalImages = getProductImages(product);
+    let initialIdx = 0;
+    if (currentSize === "15ml") {
+        const found15Idx = currentModalImages.findIndex(img => img.toLowerCase().includes("15"));
+        if (found15Idx !== -1) initialIdx = found15Idx;
+    }
+    currentModalImgIdx = initialIdx;
+
     document.getElementById("modal-content-container").innerHTML = `
-        <div class="modal-media">
-            <img src="${product.image}" alt="${product.name}" class="modal-img">
+        <div class="modal-media modal-gallery-media">
+            <div class="modal-main-image-wrap">
+                <img src="${currentModalImages[initialIdx]}" alt="${product.name}" id="modal-active-img" class="modal-img">
+                ${currentModalImages.length > 1 ? `
+                    <button type="button" class="modal-nav-arrow prev" onclick="navigateModalGallery(-1)" aria-label="Previous image">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button type="button" class="modal-nav-arrow next" onclick="navigateModalGallery(1)" aria-label="Next image">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                    <div class="modal-image-counter">
+                        <span id="modal-image-counter-text">${initialIdx + 1} / ${currentModalImages.length}</span>
+                    </div>
+                ` : ''}
+            </div>
+            ${currentModalImages.length > 1 ? `
+                <div class="modal-thumbs-strip" id="modal-thumbs-strip">
+                    ${currentModalImages.map((img, idx) => `
+                        <button type="button" 
+                                class="modal-thumb ${idx === initialIdx ? 'active' : ''}" 
+                                data-index="${idx}" 
+                                onclick="setModalActiveImage(${idx})"
+                                aria-label="View photo ${idx + 1}">
+                            <img src="${img}" alt="${product.name} angle ${idx + 1}" loading="lazy">
+                        </button>
+                    `).join("")}
+                </div>
+            ` : ''}
         </div>
         <div class="modal-info">
             <span class="modal-edition">${edLabel}</span>
@@ -1232,6 +1514,32 @@ window.openProductModal = function(id) {
     document.getElementById("product-modal").classList.add("active");
 };
 
+window.setModalActiveImage = function(idx) {
+    if (!currentModalImages || !currentModalImages[idx]) return;
+    currentModalImgIdx = idx;
+    const mainImg = document.getElementById("modal-active-img");
+    if (mainImg) {
+        mainImg.style.opacity = "0.35";
+        setTimeout(() => {
+            mainImg.src = currentModalImages[idx];
+            mainImg.style.opacity = "1";
+        }, 110);
+    }
+    document.querySelectorAll(".modal-thumb").forEach(thumb => {
+        thumb.classList.toggle("active", parseInt(thumb.dataset.index) === idx);
+    });
+    const counterText = document.getElementById("modal-image-counter-text");
+    if (counterText) {
+        counterText.textContent = `${idx + 1} / ${currentModalImages.length}`;
+    }
+};
+
+window.navigateModalGallery = function(dir) {
+    if (!currentModalImages || currentModalImages.length <= 1) return;
+    let nextIdx = (currentModalImgIdx + dir + currentModalImages.length) % currentModalImages.length;
+    setModalActiveImage(nextIdx);
+};
+
 window.selectModalSize = function(productId, newSize) {
     selectedProductSizes[productId] = newSize;
     const product = products.find(p => p.id === productId);
@@ -1250,6 +1558,16 @@ window.selectModalSize = function(productId, newSize) {
         `;
     }
 
+    // Auto-switch modal image if 15ml vs 50ml
+    if (currentModalImages && currentModalImages.length > 1) {
+        if (newSize === "15ml") {
+            const found15Idx = currentModalImages.findIndex(img => img.toLowerCase().includes("15"));
+            if (found15Idx !== -1) setModalActiveImage(found15Idx);
+        } else if (newSize === "50ml") {
+            setModalActiveImage(0);
+        }
+    }
+
     // Sync card if present in DOM
     const card = document.querySelector(`.product-card[data-id="${productId}"]`);
     if (card) {
@@ -1264,6 +1582,16 @@ window.selectModalSize = function(productId, newSize) {
                 <span class="price-original">₹${sizeInfo.priceOriginal.toLocaleString("en-IN")}</span>
                 <span class="price-discounted">₹${sizeInfo.priceDiscounted.toLocaleString("en-IN")}</span>
             `;
+        }
+        const cardImg = card.querySelector(`#card-img-${productId}`);
+        if (cardImg) {
+            const images = getProductImages(product);
+            if (newSize === "15ml") {
+                const found15 = images.find(img => img.toLowerCase().includes("15"));
+                if (found15) cardImg.src = found15;
+            } else {
+                cardImg.src = images[0] || product.image;
+            }
         }
     }
 };
