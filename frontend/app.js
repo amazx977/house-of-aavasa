@@ -257,6 +257,458 @@ function getSelectedSizeInfo(product, chosenSize) {
     return sizes.find(s => s.size === targetSize) || sizes[0];
 }
 
+// ─── SCENTIRA-INSPIRED OLFACTORY NOTES & PERFORMANCE DATABASE ────────────────
+const PERFUME_NOTES_DATA = {
+    1: { // Morning Shower
+        category: "Citrus Aromatic & Crisp Woody",
+        pyramid: {
+            top: {
+                title: "Top Notes",
+                duration: "Opening 15–30 min",
+                notes: ["Calabrian Bergamot", "Lemon Zest", "Fresh Spearmint", "Crisp Marine Accord"],
+                desc: "An invigorating burst of solar citrus and chilled mint that awakens the senses instantly."
+            },
+            heart: {
+                title: "Heart / Middle Notes",
+                duration: "Core 2–4 hours",
+                notes: ["French Lavender", "Orange Blossom", "Crushed Thyme", "Fresh Cardamom"],
+                desc: "Airy aromatics that settle into an elegant, sun-drenched Mediterranean breeze."
+            },
+            base: {
+                title: "Base Notes",
+                duration: "Dry-down 6–10+ hours",
+                notes: ["Virginia Cedarwood", "Haitian Vetiver", "Sheer White Musk", "Golden Amber"],
+                desc: "Dry, architectural cedarwood with grounding earthy vetiver that lingers close to warm skin."
+            }
+        },
+        featuredNotes: [
+            { name: "Calabrian Bergamot", role: "Top Note · Citrus", icon: "fa-solid fa-lemon", desc: "Crisp, effervescent, sun-drenched Italian bergamot." },
+            { name: "Fresh Spearmint", role: "Top Note · Fresh Herbal", icon: "fa-solid fa-leaf", desc: "Cooling botanical freshness with an uplifting sparkle." },
+            { name: "French Lavender", role: "Heart Note · Aromatic", icon: "fa-solid fa-spa", desc: "Subtle Provencal lavender bringing serene floral balance." },
+            { name: "Virginia Cedarwood", role: "Base Note · Woody", icon: "fa-solid fa-tree", desc: "Clean, dry pencil-shaving cedar giving enduring structure." }
+        ],
+        performance: {
+            longevity: "8–10 Hours",
+            longevityLevel: "Long Lasting",
+            sillage: "Moderate to Radiant",
+            sillageDesc: "Creates an energetic 4–5 ft personal aura without overwhelming.",
+            concentration: "Eau de Parfum (22% Oil)",
+            season: "Spring & Summer",
+            timeOfDay: "Morning & Crisp Daytime"
+        }
+    },
+    2: { // Night King
+        category: "Warm Gourmand Woody & Boozy Spice",
+        pyramid: {
+            top: {
+                title: "Top Notes",
+                duration: "Opening 15–30 min",
+                notes: ["Cognac Boozy Accord", "Ceylon Cinnamon", "Nutmeg Grating", "Sweet Candied Orange"],
+                desc: "A rich, heady splash of aged cognac infused with fiery Ceylon cinnamon and warm citrus."
+            },
+            heart: {
+                title: "Heart / Middle Notes",
+                duration: "Core 2–4 hours",
+                notes: ["Muted Tuscan Iris", "Roasted Praline", "Tonka Bean", "Dark Oak Rum"],
+                desc: "Silky, muted iris enveloped by buttery roasted praline and spiced confectionery warmth."
+            },
+            base: {
+                title: "Base Notes",
+                duration: "Dry-down 8–14+ hours",
+                notes: ["Mysore Sandalwood", "Bourbon Vanilla", "Smoked Amber", "Rich Benzoin Resin"],
+                desc: "Creamy Mysore sandalwood fused with decadent vanilla and smoky golden amber that lasts all night."
+            }
+        },
+        featuredNotes: [
+            { name: "Mysore Sandalwood", role: "Base Note · Rich Wood", icon: "fa-solid fa-tree", desc: "Legendary Indian sandalwood: velvety, buttery, and deeply grounding." },
+            { name: "Ceylon Cinnamon", role: "Top Note · Warm Spice", icon: "fa-solid fa-fire", desc: "Fiery, festive spice evoking late-night indulgence." },
+            { name: "Cognac Accord", role: "Top Note · Boozy Gourmand", icon: "fa-solid fa-wine-glass", desc: "Opulent oak-aged spirit with mellow caramel nuances." },
+            { name: "Bourbon Vanilla", role: "Base Note · Sweet Resin", icon: "fa-solid fa-gem", desc: "Smoky, natural Madagascan vanilla pods with rich sillage." }
+        ],
+        performance: {
+            longevity: "10–14 Hours",
+            longevityLevel: "Exceptional / All-Night",
+            sillage: "Enveloping & Heavy",
+            sillageDesc: "Leaves a magnetic, seductive scent trail in any room.",
+            concentration: "Extrait de Parfum (28% High Concentration)",
+            season: "Autumn & Winter",
+            timeOfDay: "Golden Evening & Midnight"
+        }
+    },
+    3: { // Timeless
+        category: "Mineral Marine & Coastal Aromatic Wood",
+        pyramid: {
+            top: {
+                title: "Top Notes",
+                duration: "Opening 15–30 min",
+                notes: ["Pink Grapefruit", "Sea Salt Crystals", "Italian Bergamot", "Ocean Spray"],
+                desc: "Crisp ocean air infused with sparkling pink grapefruit and bracing sea-salt minerals."
+            },
+            heart: {
+                title: "Heart / Middle Notes",
+                duration: "Core 2–4 hours",
+                notes: ["Coastal White Sage", "Juniper Berry", "Crushed Rosemary", "Wild Geranium"],
+                desc: "Aromatic herbs baking under coastal sunshine, dry and invigorating."
+            },
+            base: {
+                title: "Base Notes",
+                duration: "Dry-down 7–10 hours",
+                notes: ["Sun-Bleached Driftwood", "Earthy Oakmoss", "Ambrette Seed", "Clean Cedar"],
+                desc: "Sun-drenched driftwood seasoned by oceanic winds and soft ambrette musk."
+            }
+        },
+        featuredNotes: [
+            { name: "Sea Salt Crystals", role: "Top Note · Mineral Marine", icon: "fa-solid fa-water", desc: "Brisk ocean breeze with a clean, mineral-rich bite." },
+            { name: "Coastal White Sage", role: "Heart Note · Herbal Aromatic", icon: "fa-solid fa-wind", desc: "Purifying, aromatic sage with an untamed coastal spirit." },
+            { name: "Pink Grapefruit", role: "Top Note · Zesty Citrus", icon: "fa-solid fa-lemon", desc: "Tart, ruby grapefruit sparkling over brisk seaside air." },
+            { name: "Sun-Bleached Driftwood", role: "Base Note · Woody Marine", icon: "fa-solid fa-tree", desc: "Dry, weathered wood cured by salt and warm sunlight." }
+        ],
+        performance: {
+            longevity: "8–10 Hours",
+            longevityLevel: "Long Lasting",
+            sillage: "Moderate & Fresh",
+            sillageDesc: "Radiates effortlessly within arm's reach with crisp clarity.",
+            concentration: "Eau de Parfum (20% Oil)",
+            season: "Spring, Summer & Monsoon",
+            timeOfDay: "Morning to Sunset"
+        }
+    },
+    4: { // Euphoria
+        category: "Fiery Amber, Dark Cherry & Exotic Resins",
+        pyramid: {
+            top: {
+                title: "Top Notes",
+                duration: "Opening 15–30 min",
+                notes: ["Dark Black Cherry", "Grated Nutmeg", "Pink Pepper", "Wild Plum Liquor"],
+                desc: "Deep, boozy dark cherry sparkled with spicy nutmeg and zesty pink pepper."
+            },
+            heart: {
+                title: "Heart / Middle Notes",
+                duration: "Core 2–4 hours",
+                notes: ["Turkish Rose", "Bitter Almond", "Smoked Labdanum", "Cinnamon Bark"],
+                desc: "A luxurious heart of velvety crimson rose wrapped in roasted almond and balsamic resins."
+            },
+            base: {
+                title: "Base Notes",
+                duration: "Dry-down 10–14 hours",
+                notes: ["Rare Mineral Ambergris", "Dry Cedarwood", "Golden Amber", "Roasted Tonka Bean"],
+                desc: "Animalic warmth of rare ambergris anchored by dry woods and sensual golden amber."
+            }
+        },
+        featuredNotes: [
+            { name: "Dark Black Cherry", role: "Top Note · Rich Fruit", icon: "fa-solid fa-apple-whole", desc: "Luscious, liqueur-soaked black cherry with hypnotic allure." },
+            { name: "Mineral Ambergris", role: "Base Note · Marine Amber", icon: "fa-solid fa-gem", desc: "Rare oceanic ambergris lending unforgettable warmth and longevity." },
+            { name: "Grated Nutmeg", role: "Top Note · Exotic Spice", icon: "fa-solid fa-fire", desc: "Warm, culinary nutmeg adding fiery mystery to the opening." },
+            { name: "Dry Cedarwood", role: "Base Note · Woody", icon: "fa-solid fa-tree", desc: "Solid, smoky cedar that grounds the fruity-amber sweetness." }
+        ],
+        performance: {
+            longevity: "10–13 Hours",
+            longevityLevel: "Extremely Long Lasting",
+            sillage: "Intense & Enveloping",
+            sillageDesc: "Leaves an intoxicating, head-turning signature scent trail.",
+            concentration: "Extrait de Parfum (25% Oil)",
+            season: "Fall, Winter & Special Evenings",
+            timeOfDay: "Evening & Late Night"
+        }
+    },
+    12: { // Petal Kiss
+        category: "Luminous Solar Floral & Sparkling Citrus",
+        pyramid: {
+            top: {
+                title: "Top Notes",
+                duration: "Opening 15–30 min",
+                notes: ["Grasse Orange Blossom", "Crisp Green Apple", "Mandarin Peel", "Morning Dewdrop"],
+                desc: "An ethereal kiss of dew-kissed orange blossom and crunchy green apple."
+            },
+            heart: {
+                title: "Heart / Middle Notes",
+                duration: "Core 2–4 hours",
+                notes: ["Bright Pink Rose", "Grasse Jasmine Sambac", "White Lily", "Peony Petals"],
+                desc: "A romantic bouquet of freshly cut pink roses and blossoming spring flowers."
+            },
+            base: {
+                title: "Base Notes",
+                duration: "Dry-down 7–10 hours",
+                notes: ["White Cashmere Musk", "Blonde Cedar", "Solar Amber", "Soft Cotton"],
+                desc: "Soft cashmere musk that melts into warm skin like sunlit silk."
+            }
+        },
+        featuredNotes: [
+            { name: "Orange Blossom", role: "Top Note · Solar Floral", icon: "fa-solid fa-spa", desc: "Grasse neroli blossom bursting with honeyed citrus radiance." },
+            { name: "Crisp Green Apple", role: "Top Note · Fruity Fresh", icon: "fa-solid fa-apple-whole", desc: "Crisp Granny Smith apple delivering juicy, youthful vivacity." },
+            { name: "Bright Rose", role: "Heart Note · Romantic Floral", icon: "fa-solid fa-clover", desc: "Dewy pink rose petals capturing the essence of early morning romance." },
+            { name: "White Cashmere Musk", role: "Base Note · Skin Clean", icon: "fa-solid fa-feather", desc: "Velvety, clean musk that feels like a warm embrace." }
+        ],
+        performance: {
+            longevity: "8–10 Hours",
+            longevityLevel: "Long Lasting",
+            sillage: "Graceful & Airy",
+            sillageDesc: "Intimate and delicate, projecting gently as you move.",
+            concentration: "Eau de Parfum (20% Oil)",
+            season: "Spring & Summer",
+            timeOfDay: "Daytime, Brunch & Casual Dates"
+        }
+    },
+    13: { // Dusky Rose
+        category: "Gothic Ambery Floral & Rich Leather",
+        pyramid: {
+            top: {
+                title: "Top Notes",
+                duration: "Opening 15–30 min",
+                notes: ["Wild Golden Honey", "Calabrian Bergamot", "Pink Peppercorn", "Crushed Violet Leaf"],
+                desc: "Dark, sensual golden honey trickling over crushed pink peppercorns and citrus."
+            },
+            heart: {
+                title: "Heart / Middle Notes",
+                duration: "Core 2–4 hours",
+                notes: ["Crimson Damask Rose", "Roasted Coffee Bean", "Smoky Frankincense", "Dark Chocolate"],
+                desc: "Opulent Turkish Damask rose juxtaposed against bitter roasted coffee and dark cacao."
+            },
+            base: {
+                title: "Base Notes",
+                duration: "Dry-down 10–14 hours",
+                notes: ["Supple Tuscan Leather", "Indonesian Patchouli", "Warm Amber", "Velvet Musk"],
+                desc: "Deep, moody leather and earthy patchouli creating an unforgettable nocturnal silhouette."
+            }
+        },
+        featuredNotes: [
+            { name: "Damask Rose", role: "Heart Note · Gothic Floral", icon: "fa-solid fa-spa", desc: "Deep crimson rose with honeyed petals and velvety texture." },
+            { name: "Wild Honey", role: "Top Note · Sweet Golden Nectar", icon: "fa-solid fa-jar", desc: "Raw, viscous forest honey with warm beeswax undertones." },
+            { name: "Roasted Coffee Bean", role: "Heart Note · Dark Gourmand", icon: "fa-solid fa-mug-hot", desc: "Artisanal espresso roast giving rebellious bite and depth." },
+            { name: "Tuscan Leather", role: "Base Note · Dark Smoky Suede", icon: "fa-solid fa-vest", desc: "Buttery, polished leather with smoky elegance." }
+        ],
+        performance: {
+            longevity: "10–14 Hours",
+            longevityLevel: "Exceptional / Nocturnal",
+            sillage: "Bold & Magnetic",
+            sillageDesc: "Unmistakable presence with a 6-foot seductive trail.",
+            concentration: "Extrait de Parfum (26% Oil)",
+            season: "Autumn & Winter",
+            timeOfDay: "Candlelight Dinners & Midnight Soirées"
+        }
+    },
+    14: { // Adore
+        category: "Velvety Ambery Sweet & Creamy Orchid",
+        pyramid: {
+            top: {
+                title: "Top Notes",
+                duration: "Opening 15–30 min",
+                notes: ["Creamy Coconut Milk", "White Peach Nectar", "Heliotrope", "Sweet Almond"],
+                desc: "Velvety coconut milk laced with juicy peach nectar and comforting sweet almond."
+            },
+            heart: {
+                title: "Heart / Middle Notes",
+                duration: "Core 2–4 hours",
+                notes: ["Night-Blooming Orchid", "Vanilla Orchid Petals", "Ylang-Ylang", "Tahitian Gardenia"],
+                desc: "Sensual tropical night orchids and buttery ylang-ylang in full nocturnal bloom."
+            },
+            base: {
+                title: "Base Notes",
+                duration: "Dry-down 9–12 hours",
+                notes: ["Madagascan Vanilla Bean", "Mysore Sandalwood", "Fluffy Marshmallow Musk", "Golden Amber"],
+                desc: "Decadent natural vanilla bean whipped with creamy sandalwood and cloud-like musk."
+            }
+        },
+        featuredNotes: [
+            { name: "Madagascan Vanilla Bean", role: "Base Note · Sweet Amber", icon: "fa-solid fa-gem", desc: "Rich, gourmet vanilla infused with warm balsamic depth." },
+            { name: "Night Orchid", role: "Heart Note · Exotic Floral", icon: "fa-solid fa-spa", desc: "Hypnotic, dark floral with narcotic sweet facets." },
+            { name: "Coconut Milk", role: "Top Note · Creamy Gourmand", icon: "fa-solid fa-water", desc: "Silky, cooling coconut milk bringing tropical luxury." },
+            { name: "Mysore Sandalwood", role: "Base Note · Silky Wood", icon: "fa-solid fa-tree", desc: "Creamy sandalwood that binds the sweet floral heart to the skin." }
+        ],
+        performance: {
+            longevity: "9–12 Hours",
+            longevityLevel: "Long Lasting",
+            sillage: "Alluring & Cozy",
+            sillageDesc: "A warm, comforting scent bubble that invites closeness.",
+            concentration: "Eau de Parfum (22% Oil)",
+            season: "All-Year Versatility",
+            timeOfDay: "Afternoon into Enchanting Evening"
+        }
+    },
+    15: { // Discovery set Male
+        category: "Curated Artisanal Trio for Him (3 x 15ml)",
+        pyramid: {
+            top: {
+                title: "Opening Accords (Across Set)",
+                duration: "Opening 15–30 min",
+                notes: ["Calabrian Bergamot (Morning Shower)", "Aged Cognac & Cinnamon (Night King)", "Sea Salt & Pink Grapefruit (Timeless)"],
+                desc: "Experience three distinct openings: sparkling day citrus, boozy evening spice, and crisp coastal marine."
+            },
+            heart: {
+                title: "Heart Accords (Across Set)",
+                duration: "Core 2–4 hours",
+                notes: ["French Lavender", "Coastal White Sage", "Muted Tuscan Iris", "Roasted Praline"],
+                desc: "A full olfactory journey transitioning from fresh herbs into aristocratic powdery praline."
+            },
+            base: {
+                title: "Base Accords (Across Set)",
+                duration: "Dry-down 8–14 hours",
+                notes: ["Mysore Sandalwood", "Virginia Cedarwood", "Bourbon Vanilla", "Sun-bleached Driftwood"],
+                desc: "Long-lasting foundation of precious Indian sandalwood, dry woods, and comforting amber."
+            }
+        },
+        featuredNotes: [
+            { name: "Calabrian Bergamot", role: "Daytime Freshness", icon: "fa-solid fa-lemon", desc: "Featured in Morning Shower for solar energy." },
+            { name: "Mysore Sandalwood", role: "Night King Foundation", icon: "fa-solid fa-tree", desc: "Creamy sandalwood in our bestselling night blend." },
+            { name: "Sea Salt & Driftwood", role: "Timeless Coastal Air", icon: "fa-solid fa-water", desc: "Marine accords crafted for relaxed confidence." },
+            { name: "Ceylon Cinnamon", role: "Warm Spice Accent", icon: "fa-solid fa-fire", desc: "Rich spicy contrast for dinner and nightlife." }
+        ],
+        performance: {
+            longevity: "8–14 Hours",
+            longevityLevel: "Complete Day-to-Night",
+            sillage: "Versatile Aura",
+            sillageDesc: "Adaptable from fresh office sillage to bold nightclub presence.",
+            concentration: "3 x 15ml Extrait / EDP",
+            season: "Four Seasons Versatile",
+            timeOfDay: "Dawn, Dusk & Midnight"
+        }
+    },
+    16: { // Discovery set Female
+        category: "Curated Artisanal Discovery for Her (4 x 15ml)",
+        pyramid: {
+            top: {
+                title: "Opening Accords (Across Set)",
+                duration: "Opening 15–30 min",
+                notes: ["Orange Blossom & Apple (Petal Kiss)", "Wild Honey & Pepper (Dusky Rose)", "Coconut Milk (Adore)", "Dark Cherry (Euphoria)"],
+                desc: "Four exquisite facets: solar florals, gothic honeyed spice, creamy sweet coconut, and fiery cherry."
+            },
+            heart: {
+                title: "Heart Accords (Across Set)",
+                duration: "Core 2–4 hours",
+                notes: ["Crimson Damask Rose", "Night-Blooming Orchid", "Roasted Coffee", "Grasse Jasmine Sambac"],
+                desc: "Intoxicating floral artistry blended with gourmand coffee and exotic tropical blooms."
+            },
+            base: {
+                title: "Base Accords (Across Set)",
+                duration: "Dry-down 8–14 hours",
+                notes: ["Madagascan Vanilla", "Tuscan Leather", "Cashmere Musk", "Rare Ambergris"],
+                desc: "Sensual trail of velvety vanilla, suede leather, clean skin musk, and marine amber."
+            }
+        },
+        featuredNotes: [
+            { name: "Orange Blossom", role: "Petal Kiss Signature", icon: "fa-solid fa-spa", desc: "Solar radiance for uplifting morning wear." },
+            { name: "Damask Rose", role: "Dusky Rose Core", icon: "fa-solid fa-clover", desc: "Deep romance paired with roasted coffee & leather." },
+            { name: "Madagascan Vanilla", role: "Adore Sweetness", icon: "fa-solid fa-gem", desc: "Warm, velvety comfort that clings to skin." },
+            { name: "Dark Cherry & Amber", role: "Euphoria Magnetism", icon: "fa-solid fa-fire", desc: "Fiery, seductive evening projection." }
+        ],
+        performance: {
+            longevity: "8–14 Hours",
+            longevityLevel: "All-Day Elegance",
+            sillage: "Radiant & Captivating",
+            sillageDesc: "From soft romantic skin scent to head-turning projection.",
+            concentration: "4 x 15ml Extrait / EDP",
+            season: "All-Season Wardrobe",
+            timeOfDay: "Morning, High Tea & Gala Nights"
+        }
+    }
+};
+
+// Helper: Retrieve Olfactory Notes & Scent Details with fallback
+function getProductNotesData(product) {
+    if (!product) return null;
+    if (PERFUME_NOTES_DATA[product.id]) {
+        return PERFUME_NOTES_DATA[product.id];
+    }
+    const rawNotes = (product.notes || "").split(",").map(n => n.trim()).filter(Boolean);
+    const topNotes = rawNotes.slice(0, Math.ceil(rawNotes.length / 3));
+    const heartNotes = rawNotes.slice(Math.ceil(rawNotes.length / 3), Math.ceil((rawNotes.length * 2) / 3));
+    const baseNotes = rawNotes.slice(Math.ceil((rawNotes.length * 2) / 3));
+
+    return {
+        category: product.family ? `${product.family.charAt(0).toUpperCase() + product.family.slice(1)} Fragrance` : "Luxury Artisanal Fragrance",
+        pyramid: {
+            top: {
+                title: "Top Notes",
+                duration: "Opening 15–30 min",
+                notes: topNotes.length ? topNotes : ["Sparkling Citrus", "Aromatic Breeze"],
+                desc: "The bright initial impression upon first spray."
+            },
+            heart: {
+                title: "Heart / Middle Notes",
+                duration: "Core 2–4 hours",
+                notes: heartNotes.length ? heartNotes : ["Floral Bouquet", "Warm Spice"],
+                desc: "The true character and emotional body of the perfume."
+            },
+            base: {
+                title: "Base Notes",
+                duration: "Dry-down 6–10+ hours",
+                notes: baseNotes.length ? baseNotes : ["Precious Woods", "Sensual Amber"],
+                desc: "The lingering dry-down that binds with skin chemistry."
+            }
+        },
+        featuredNotes: (rawNotes.length ? rawNotes : ["Bergamot", "Cedar", "Amber", "Musk"]).slice(0, 4).map((n, i) => ({
+            name: n,
+            role: i === 0 ? "Top Note" : i === 1 ? "Heart Note" : "Base Note",
+            icon: i === 0 ? "fa-solid fa-lemon" : i === 1 ? "fa-solid fa-spa" : "fa-solid fa-tree",
+            desc: `Featured artisanal essence in ${product.name}.`
+        })),
+        performance: {
+            longevity: "8–10 Hours",
+            longevityLevel: "Long Lasting",
+            sillage: "Moderate to Radiant",
+            sillageDesc: "Leaves a distinctive, elegant presence.",
+            concentration: "Eau de Parfum (22% Oil)",
+            season: "All Season Versatile",
+            timeOfDay: product.occasion === "night" ? "Golden Evening" : "Bright Daytime"
+        }
+    };
+}
+
+// ─── SCENTIRA-STYLE CARD IMAGE CAROUSEL CONTROLLER ────────────────────────────
+// Tracks current image index displayed on each product card in the catalog
+let cardImageIndexMap = {};
+
+window.navigateCardImage = function(e, productId, delta) {
+    if (e) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+    const p = products.find(item => item.id === productId);
+    if (!p) return;
+    const images = getProductImages(p);
+    if (!images || images.length <= 1) return;
+
+    let curIdx = cardImageIndexMap[productId] !== undefined ? cardImageIndexMap[productId] : 0;
+    let nextIdx = (curIdx + delta + images.length) % images.length;
+    cardImageIndexMap[productId] = nextIdx;
+
+    updateCardImageDisplay(productId, p, images, nextIdx);
+};
+
+window.setCardImageByIndex = function(e, productId, targetIdx) {
+    if (e) {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+    const p = products.find(item => item.id === productId);
+    if (!p) return;
+    const images = getProductImages(p);
+    if (!images || targetIdx < 0 || targetIdx >= images.length) return;
+
+    cardImageIndexMap[productId] = targetIdx;
+    updateCardImageDisplay(productId, p, images, targetIdx);
+};
+
+function updateCardImageDisplay(productId, product, images, activeIdx) {
+    const card = document.querySelector(`.product-card[data-id="${productId}"]`);
+    if (!card) return;
+
+    const imgEl = card.querySelector(`#card-img-${productId}`);
+    if (imgEl && images[activeIdx]) {
+        imgEl.style.opacity = "0.35";
+        setTimeout(() => {
+            imgEl.src = images[activeIdx];
+            imgEl.style.opacity = "1";
+        }, 90);
+    }
+
+    // Update pagination dots
+    const dots = card.querySelectorAll(".card-image-dot");
+    dots.forEach((dot, i) => {
+        dot.classList.toggle("is-active", i === activeIdx);
+    });
+}
+
 // ─── APP STATE ─────────────────────────────────────────────────────────────────
 let cart = JSON.parse(localStorage.getItem("aavasa_cart") || "[]");
 let currentUser = JSON.parse(localStorage.getItem("aavasa_user") || "null");
@@ -1204,28 +1656,58 @@ function renderProducts() {
         const currentSizeInfo = getSelectedSizeInfo(p, currentSize);
         const images   = getProductImages(p);
 
-        // Pick primary image based on selected size (e.g. 15ml bottle if 15ml selected)
-        const primaryImg = (currentSize === "15ml" && images.find(img => img.toLowerCase().includes("15")))
-            ? images.find(img => img.toLowerCase().includes("15"))
-            : images[0];
+        // Determine active card image index
+        let activeIdx = cardImageIndexMap[p.id];
+        if (activeIdx === undefined) {
+            // Default: if 15ml is selected and a 15ml photo exists, use it
+            if (currentSize === "15ml") {
+                const found15Idx = images.findIndex(img => img.toLowerCase().includes("15"));
+                activeIdx = found15Idx !== -1 ? found15Idx : 0;
+            } else {
+                activeIdx = 0;
+            }
+            cardImageIndexMap[p.id] = activeIdx;
+        } else if (activeIdx >= images.length) {
+            activeIdx = 0;
+            cardImageIndexMap[p.id] = 0;
+        }
 
-        // Secondary image shown on hover
-        const secondaryImg = images.length > 1 
-            ? (images[1] !== primaryImg ? images[1] : (images[0] !== primaryImg ? images[0] : (images[2] || null)))
-            : null;
+        const currentImg = images[activeIdx] || p.image;
 
         return `
             <div class="product-card" data-id="${p.id}">
                 <span class="product-tag ${tagClass}">${edLabel}</span>
                 <div class="product-card-media" onclick="openProductModal(${p.id})">
-                    <img src="${primaryImg}" alt="${p.name}" class="product-card-img img-primary" id="card-img-${p.id}" loading="lazy">
-                    ${secondaryImg ? `<img src="${secondaryImg}" alt="${p.name} alternate view" class="product-card-img img-secondary" id="card-img-sec-${p.id}" loading="lazy">` : ""}
+                    <img src="${currentImg}" alt="${p.name}" class="product-card-img" id="card-img-${p.id}" loading="lazy">
+
                     ${images.length > 1 ? `
-                    <div class="product-card-multi-badge" title="${images.length} views available">
-                        <i class="fa-regular fa-images"></i> <span>${images.length}</span>
-                    </div>` : ""}
+                    <!-- Scentira-Style Floating Prev / Next Image Navigation Buttons -->
+                    <button type="button" 
+                            class="card-image-page-button card-image-page-button--previous" 
+                            onclick="navigateCardImage(event, ${p.id}, -1)" 
+                            aria-label="Previous view of ${p.name}">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button type="button" 
+                            class="card-image-page-button card-image-page-button--next" 
+                            onclick="navigateCardImage(event, ${p.id}, 1)" 
+                            aria-label="Next view of ${p.name}">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                    <!-- Scentira-Style Image Pagination Dots -->
+                    <div class="card-image-dots" onclick="event.stopPropagation()">
+                        ${images.map((_, i) => `
+                            <button type="button" 
+                                    class="card-image-dot ${i === activeIdx ? 'is-active' : ''}" 
+                                    onclick="setCardImageByIndex(event, ${p.id}, ${i})" 
+                                    aria-label="View photo ${i + 1} of ${p.name}">
+                            </button>
+                        `).join('')}
+                    </div>` : ''}
+
                     <div class="product-card-overlay">
-                        <button class="btn-quickview"><i class="fa-regular fa-eye"></i> Quick View</button>
+                        <button class="btn-quickview"><i class="fa-regular fa-eye"></i> Quick View & Notes</button>
                     </div>
                 </div>
                 <div class="product-card-details">
@@ -1233,8 +1715,8 @@ function renderProducts() {
                         <span>${p.gender === "male" ? "For Him" : (p.gender === "female" ? "For Her" : "Universal")}</span>
                         <span class="card-size-label" id="card-size-label-${p.id}">${currentSizeInfo.size}</span>
                     </div>
-                    <h3 class="product-title">${p.name}</h3>
-                    <p class="product-notes">${p.notes}</p>
+                    <h3 class="product-title" onclick="openProductModal(${p.id})" style="cursor:pointer;" title="Click to view notes breakdown">${p.name}</h3>
+                    <p class="product-notes" onclick="openProductModal(${p.id})" style="cursor:pointer;" title="Click to view notes breakdown">${p.notes}</p>
 
                     ${sizes.length > 1 ? `
                     <div class="product-sizes-bar">
@@ -1284,16 +1766,17 @@ window.handleCardSizeChange = function(e, productId, newSize) {
             `;
         }
 
-        // Dynamically update card primary image if specific size photo (15ml) exists
-        const cardImg = card.querySelector(`#card-img-${productId}`);
-        if (cardImg) {
-            const images = getProductImages(p);
-            if (newSize === "15ml") {
-                const found15 = images.find(img => img.toLowerCase().includes("15"));
-                if (found15) cardImg.src = found15;
-            } else {
-                cardImg.src = images[0] || p.image;
+        // Dynamically update card image when size is chosen (e.g. 15ml bottle)
+        const images = getProductImages(p);
+        if (newSize === "15ml") {
+            const found15Idx = images.findIndex(img => img.toLowerCase().includes("15"));
+            if (found15Idx !== -1) {
+                cardImageIndexMap[productId] = found15Idx;
+                updateCardImageDisplay(productId, p, images, found15Idx);
             }
+        } else {
+            cardImageIndexMap[productId] = 0;
+            updateCardImageDisplay(productId, p, images, 0);
         }
     }
 };
@@ -1430,17 +1913,36 @@ function updateCartUI() {
 }
 function saveCart() { localStorage.setItem("aavasa_cart", JSON.stringify(cart)); }
 
-// ─── PRODUCT QUICK VIEW MODAL & IMAGE GALLERY ─────────────────────────────────
+// ─── PRODUCT QUICK VIEW MODAL & NOTES BREAKDOWN (Scentira Experience) ────────
 let currentModalImages = [];
 let currentModalImgIdx = 0;
+let activeModalTab = "overview";
 
-window.openProductModal = function(id) {
+window.switchModalTab = function(tabName) {
+    activeModalTab = tabName;
+    const tabs = ["overview", "notes", "performance"];
+    tabs.forEach(t => {
+        const btn = document.getElementById(`modal-tab-btn-${t}`);
+        const panel = document.getElementById(`modal-tab-panel-${t}`);
+        const isActive = (t === tabName);
+        if (btn) {
+            btn.classList.toggle("active", isActive);
+            btn.setAttribute("aria-selected", isActive ? "true" : "false");
+        }
+        if (panel) {
+            panel.classList.toggle("active", isActive);
+        }
+    });
+};
+
+window.openProductModal = function(id, defaultTab = "overview") {
     const product = products.find(p => p.id === id);
     if (!product) return;
     const edLabel = product.edition === "signature" ? "Signature Edition" : (product.edition === "collector" ? "Heritage Edition" : "Collector's Edition");
     const sizes = getProductSizes(product);
     const currentSize = selectedProductSizes[id] || sizes[0].size;
     const sizeInfo = getSelectedSizeInfo(product, currentSize);
+    const notesData = getProductNotesData(product);
 
     currentModalImages = getProductImages(product);
     let initialIdx = 0;
@@ -1480,36 +1982,201 @@ window.openProductModal = function(id) {
                 </div>
             ` : ''}
         </div>
-        <div class="modal-info">
-            <span class="modal-edition">${edLabel}</span>
-            <h2 class="modal-title">${product.name}</h2>
-            <div class="modal-notes-label">Olfactive Notes:</div>
-            <p class="modal-notes">${product.notes}</p>
-            <p class="modal-desc">${product.description}</p>
-            
-            ${sizes.length > 1 ? `
-            <div class="modal-sizes-container">
-                <span class="modal-sizes-title">Select Vessel Size:</span>
-                <div class="modal-sizes-options">
-                    ${sizes.map(s => `
-                        <button type="button" 
-                                class="modal-size-card ${s.size === currentSize ? 'active' : ''}" 
-                                data-size="${s.size}" 
-                                onclick="selectModalSize(${product.id}, '${s.size}')">
-                            <span class="m-size-vol">${s.size}</span>
-                            <span class="m-size-sub">${s.label || (s.size === '15ml' ? 'Travel Edition' : 'Full Bottle')}</span>
-                            <span class="m-size-price">₹${s.priceDiscounted.toLocaleString("en-IN")}</span>
-                        </button>
-                    `).join("")}
-                </div>
-            </div>` : `
-            <div class="modal-size">Vessel Size: ${sizes[0].size}</div>`}
 
-            <div class="modal-price-block" id="modal-price-block">
-                <span class="modal-price-original">₹${sizeInfo.priceOriginal.toLocaleString("en-IN")}</span>
-                <span class="modal-price-discounted">₹${sizeInfo.priceDiscounted.toLocaleString("en-IN")}</span>
+        <div class="modal-info">
+            <div class="modal-header-meta">
+                <span class="modal-edition">${edLabel}</span>
+                <span class="modal-category-badge">${notesData.category || product.family}</span>
             </div>
-            <button class="btn btn-primary" onclick="addToCart(${product.id}, selectedProductSizes[${product.id}] || '${currentSize}'); document.getElementById('product-modal').classList.remove('active');">Add to Shopping Bag</button>
+            <h2 class="modal-title">${product.name}</h2>
+
+            <!-- Scentira-Style Interactive Tabs -->
+            <div class="modal-tabs-header" role="tablist">
+                <button type="button" 
+                        class="modal-tab-btn ${defaultTab === 'overview' ? 'active' : ''}" 
+                        id="modal-tab-btn-overview" 
+                        onclick="switchModalTab('overview')" 
+                        role="tab" 
+                        aria-selected="${defaultTab === 'overview' ? 'true' : 'false'}">
+                    <i class="fa-solid fa-bottle-droplet"></i> Overview & Sizes
+                </button>
+                <button type="button" 
+                        class="modal-tab-btn ${defaultTab === 'notes' ? 'active' : ''}" 
+                        id="modal-tab-btn-notes" 
+                        onclick="switchModalTab('notes')" 
+                        role="tab" 
+                        aria-selected="${defaultTab === 'notes' ? 'true' : 'false'}">
+                    <i class="fa-solid fa-layer-group"></i> Notes Breakdown
+                </button>
+                <button type="button" 
+                        class="modal-tab-btn ${defaultTab === 'performance' ? 'active' : ''}" 
+                        id="modal-tab-btn-performance" 
+                        onclick="switchModalTab('performance')" 
+                        role="tab" 
+                        aria-selected="${defaultTab === 'performance' ? 'true' : 'false'}">
+                    <i class="fa-solid fa-chart-simple"></i> Scent Profile
+                </button>
+            </div>
+
+            <!-- TAB 1: OVERVIEW & SIZES -->
+            <div class="modal-tab-panel ${defaultTab === 'overview' ? 'active' : ''}" id="modal-tab-panel-overview" role="tabpanel">
+                <div class="modal-quick-notes-teaser" onclick="switchModalTab('notes')" title="Click to view notes breakdown">
+                    <span class="modal-notes-label"><i class="fa-solid fa-wand-magic-sparkles"></i> Olfactive Blend:</span>
+                    <p class="modal-notes">${product.notes}</p>
+                    <span class="modal-teaser-link">View Detailed Notes Breakdown & Olfactory Pyramid &rarr;</span>
+                </div>
+                <p class="modal-desc">${product.description}</p>
+                
+                ${sizes.length > 1 ? `
+                <div class="modal-sizes-container">
+                    <span class="modal-sizes-title">Select Vessel Size:</span>
+                    <div class="modal-sizes-options">
+                        ${sizes.map(s => `
+                            <button type="button" 
+                                    class="modal-size-card ${s.size === currentSize ? 'active' : ''}" 
+                                    data-size="${s.size}" 
+                                    onclick="selectModalSize(${product.id}, '${s.size}')">
+                                <span class="m-size-vol">${s.size}</span>
+                                <span class="m-size-sub">${s.label || (s.size === '15ml' ? 'Travel Edition' : 'Full Bottle')}</span>
+                                <span class="m-size-price">₹${s.priceDiscounted.toLocaleString("en-IN")}</span>
+                            </button>
+                        `).join("")}
+                    </div>
+                </div>` : `
+                <div class="modal-size">Vessel Size: <strong>${sizes[0].size}</strong></div>`}
+
+                <div class="modal-price-block" id="modal-price-block">
+                    <span class="modal-price-original">₹${sizeInfo.priceOriginal.toLocaleString("en-IN")}</span>
+                    <span class="modal-price-discounted">₹${sizeInfo.priceDiscounted.toLocaleString("en-IN")}</span>
+                </div>
+                <button class="btn btn-primary" onclick="addToCart(${product.id}, selectedProductSizes[${product.id}] || '${currentSize}'); document.getElementById('product-modal').classList.remove('active');">
+                    <i class="fa-solid fa-bag-shopping"></i> Add to Shopping Bag
+                </button>
+            </div>
+
+            <!-- TAB 2: NOTES BREAKDOWN (Scentira Olfactory Pyramid + Featured Notes Grid) -->
+            <div class="modal-tab-panel ${defaultTab === 'notes' ? 'active' : ''}" id="modal-tab-panel-notes" role="tabpanel">
+                <div class="notes-breakdown-container">
+                    <div class="pyramid-intro">
+                        <span class="pyramid-sub-badge"><i class="fa-solid fa-shapes"></i> Composition</span>
+                        <h4>Olfactory Pyramid</h4>
+                        <p>Timed fragrance evolution on your skin — from instant opening sparkle to dusk dry-down.</p>
+                    </div>
+
+                    <!-- Top Notes -->
+                    <div class="pyramid-tier tier-top">
+                        <div class="tier-header">
+                            <span class="tier-badge top"><i class="fa-regular fa-sun"></i> Top Notes</span>
+                            <span class="tier-timing">${notesData.pyramid.top.duration}</span>
+                        </div>
+                        <div class="tier-pills">
+                            ${notesData.pyramid.top.notes.map(n => `<span class="pyramid-pill">${n}</span>`).join("")}
+                        </div>
+                        <p class="tier-desc">${notesData.pyramid.top.desc}</p>
+                    </div>
+
+                    <!-- Heart Notes -->
+                    <div class="pyramid-tier tier-heart">
+                        <div class="tier-header">
+                            <span class="tier-badge heart"><i class="fa-solid fa-heart"></i> Heart / Middle Notes</span>
+                            <span class="tier-timing">${notesData.pyramid.heart.duration}</span>
+                        </div>
+                        <div class="tier-pills">
+                            ${notesData.pyramid.heart.notes.map(n => `<span class="pyramid-pill">${n}</span>`).join("")}
+                        </div>
+                        <p class="tier-desc">${notesData.pyramid.heart.desc}</p>
+                    </div>
+
+                    <!-- Base Notes -->
+                    <div class="pyramid-tier tier-base">
+                        <div class="tier-header">
+                            <span class="tier-badge base"><i class="fa-solid fa-tree"></i> Base Notes</span>
+                            <span class="tier-timing">${notesData.pyramid.base.duration}</span>
+                        </div>
+                        <div class="tier-pills">
+                            ${notesData.pyramid.base.notes.map(n => `<span class="pyramid-pill">${n}</span>`).join("")}
+                        </div>
+                        <p class="tier-desc">${notesData.pyramid.base.desc}</p>
+                    </div>
+
+                    <!-- Featured Notes Visual Grid (Scentira style) -->
+                    <div class="featured-notes-section">
+                        <h4 class="featured-notes-heading"><i class="fa-solid fa-leaf"></i> Featured Ingredients</h4>
+                        <div class="notes-grid">
+                            ${notesData.featuredNotes.map(item => `
+                                <div class="note-item">
+                                    <div class="note-icon-circle">
+                                        <i class="${item.icon}"></i>
+                                    </div>
+                                    <span class="note-name">${item.name}</span>
+                                    <span class="note-role">${item.role}</span>
+                                    <p class="note-desc">${item.desc}</p>
+                                </div>
+                            `).join("")}
+                        </div>
+                    </div>
+
+                    <div class="modal-tab-action-row">
+                        <button type="button" class="btn btn-primary" onclick="addToCart(${product.id}, selectedProductSizes[${product.id}] || '${currentSize}'); document.getElementById('product-modal').classList.remove('active');">
+                            <i class="fa-solid fa-bag-shopping"></i> Add to Bag (<span id="modal-notes-add-price">₹${sizeInfo.priceDiscounted.toLocaleString("en-IN")}</span>)
+                        </button>
+                        <button type="button" class="btn btn-outline" onclick="switchModalTab('overview')">
+                            Change Size (<span id="modal-notes-curr-size">${currentSize}</span>)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: SCENT PERFORMANCE -->
+            <div class="modal-tab-panel ${defaultTab === 'performance' ? 'active' : ''}" id="modal-tab-panel-performance" role="tabpanel">
+                <div class="scent-performance-container">
+                    <div class="performance-metric-card">
+                        <div class="perf-metric-header">
+                            <div class="perf-metric-icon"><i class="fa-regular fa-clock"></i></div>
+                            <div class="perf-metric-title-group">
+                                <span class="perf-label">Longevity on Skin</span>
+                                <h4 class="perf-value">${notesData.performance.longevity}</h4>
+                            </div>
+                            <span class="perf-badge">${notesData.performance.longevityLevel}</span>
+                        </div>
+                        <div class="perf-bar-track">
+                            <div class="perf-bar-fill" style="width: 88%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="performance-metric-card">
+                        <div class="perf-metric-header">
+                            <div class="perf-metric-icon"><i class="fa-solid fa-wind"></i></div>
+                            <div class="perf-metric-title-group">
+                                <span class="perf-label">Sillage & Projection</span>
+                                <h4 class="perf-value">${notesData.performance.sillage}</h4>
+                            </div>
+                        </div>
+                        <p class="perf-detail-desc">${notesData.performance.sillageDesc}</p>
+                    </div>
+
+                    <div class="perf-meta-grid">
+                        <div class="perf-mini-card">
+                            <span class="perf-mini-label"><i class="fa-solid fa-vial"></i> Concentration</span>
+                            <strong class="perf-mini-val">${notesData.performance.concentration}</strong>
+                        </div>
+                        <div class="perf-mini-card">
+                            <span class="perf-mini-label"><i class="fa-regular fa-calendar"></i> Best Season</span>
+                            <strong class="perf-mini-val">${notesData.performance.season}</strong>
+                        </div>
+                        <div class="perf-mini-card" style="grid-column: 1 / -1;">
+                            <span class="perf-mini-label"><i class="fa-regular fa-sun"></i> Best Time & Occasion</span>
+                            <strong class="perf-mini-val">${notesData.performance.timeOfDay}</strong>
+                        </div>
+                    </div>
+
+                    <div class="modal-tab-action-row" style="margin-top: 24px;">
+                        <button type="button" class="btn btn-primary" onclick="addToCart(${product.id}, selectedProductSizes[${product.id}] || '${currentSize}'); document.getElementById('product-modal').classList.remove('active');">
+                            <i class="fa-solid fa-bag-shopping"></i> Add to Bag (<span id="modal-perf-add-price">₹${sizeInfo.priceDiscounted.toLocaleString("en-IN")}</span>)
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>`;
     document.getElementById("product-modal").classList.add("active");
 };
@@ -1558,6 +2225,13 @@ window.selectModalSize = function(productId, newSize) {
         `;
     }
 
+    const notesAddPrice = document.getElementById("modal-notes-add-price");
+    if (notesAddPrice) notesAddPrice.textContent = `₹${sizeInfo.priceDiscounted.toLocaleString("en-IN")}`;
+    const notesCurrSize = document.getElementById("modal-notes-curr-size");
+    if (notesCurrSize) notesCurrSize.textContent = newSize;
+    const perfAddPrice = document.getElementById("modal-perf-add-price");
+    if (perfAddPrice) perfAddPrice.textContent = `₹${sizeInfo.priceDiscounted.toLocaleString("en-IN")}`;
+
     // Auto-switch modal image if 15ml vs 50ml
     if (currentModalImages && currentModalImages.length > 1) {
         if (newSize === "15ml") {
@@ -1583,15 +2257,16 @@ window.selectModalSize = function(productId, newSize) {
                 <span class="price-discounted">₹${sizeInfo.priceDiscounted.toLocaleString("en-IN")}</span>
             `;
         }
-        const cardImg = card.querySelector(`#card-img-${productId}`);
-        if (cardImg) {
-            const images = getProductImages(product);
-            if (newSize === "15ml") {
-                const found15 = images.find(img => img.toLowerCase().includes("15"));
-                if (found15) cardImg.src = found15;
-            } else {
-                cardImg.src = images[0] || product.image;
+        const images = getProductImages(product);
+        if (newSize === "15ml") {
+            const found15Idx = images.findIndex(img => img.toLowerCase().includes("15"));
+            if (found15Idx !== -1) {
+                cardImageIndexMap[productId] = found15Idx;
+                updateCardImageDisplay(productId, product, images, found15Idx);
             }
+        } else {
+            cardImageIndexMap[productId] = 0;
+            updateCardImageDisplay(productId, product, images, 0);
         }
     }
 };
