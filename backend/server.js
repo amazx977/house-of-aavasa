@@ -306,6 +306,80 @@ app.get('/reviews', (req, res) => {
     res.sendFile(path.join(FRONTEND_PATH, 'reviews.html'));
 });
 
+// Serve preorder.html
+app.get('/preorder', (req, res) => {
+    res.sendFile(path.join(FRONTEND_PATH, 'preorder.html'));
+});
+app.get('/pre-order', (req, res) => {
+    res.sendFile(path.join(FRONTEND_PATH, 'preorder.html'));
+});
+
+// POST submit new pre-order reservation
+app.post('/api/preorders', (req, res) => {
+    try {
+        const {
+            customer, items, subtotal, discountAmount, couponCode,
+            totalAmount, paymentMethod, loginId, engravingText,
+            perfumeName, bottleSize, batchNumber
+        } = req.body || {};
+
+        const cust = customer || {};
+        const safeCustomer = {
+            fullName: cust.fullName || "Aavasa Collector",
+            email: cust.email || (loginId && loginId !== "guest" ? loginId : "collector@aavasa.com"),
+            phone: cust.phone || "+91 99999 88888",
+            address: cust.address || "Street Address",
+            city: cust.city || "Mumbai",
+            state: cust.state || "Maharashtra",
+            pincode: cust.pincode || "400001"
+        };
+
+        const randomNum = Math.floor(10000 + Math.random() * 90000);
+        const preOrderId = `AAVASA-PRE-${randomNum}`;
+        const randomBottleNum = Math.floor(1 + Math.random() * 250);
+
+        const newPreOrder = db.createOrder({
+            id: preOrderId,
+            orderType: "preorder",
+            isPreorder: true,
+            engravingText: engravingText ? engravingText.trim().toUpperCase() : null,
+            batchNumber: batchNumber || "Batch 002 — Limited Reserve",
+            estimatedDispatch: "November 20, 2026",
+            bottleNumber: `Flacon #${String(randomBottleNum).padStart(3, '0')} / 250`,
+            customer: safeCustomer,
+            items: (items && items.length > 0) ? items : [{
+                id: 99,
+                name: perfumeName || "Private Reserve Master Flacon",
+                size: bottleSize || "50ml",
+                quantity: 1,
+                price: totalAmount || 3199,
+                edition: "collector"
+            }],
+            subtotal: subtotal || totalAmount || 3199,
+            discountAmount: discountAmount || 0,
+            couponCode: couponCode || null,
+            totalAmount: totalAmount || subtotal || 3199,
+            paymentMethod: paymentMethod || "razorpay",
+            paymentStatus: paymentMethod === "cod" ? "Pending (COD on Dispatch)" : "Paid (Reserved)",
+            orderStatus: "Reserved (Batch 002)",
+            loginId: loginId || "guest"
+        });
+
+        console.log(`[AAVASA PRE-ORDER] New reservation: ${newPreOrder.id} | Bottle: ${newPreOrder.bottleNumber} | User: ${newPreOrder.loginId} | ₹${newPreOrder.totalAmount}`);
+        res.status(201).json({
+            success: true,
+            message: "Pre-order reservation confirmed!",
+            order: newPreOrder,
+            preOrderId: newPreOrder.id,
+            bottleNumber: newPreOrder.bottleNumber,
+            estimatedDispatch: newPreOrder.estimatedDispatch
+        });
+    } catch (error) {
+        console.error("Pre-order submission error:", error);
+        res.status(500).json({ success: false, message: "Could not place pre-order. Please try again." });
+    }
+});
+
 // Serve index.html for all other routes
 app.get('*', (req, res) => {
     res.sendFile(path.join(FRONTEND_PATH, 'index.html'));

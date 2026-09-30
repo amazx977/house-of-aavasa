@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Batch 002 Private Reserve Pre-Order | House of Aavasa</title>
+    <meta name="description" content="Secure your numbered bottle of House of Aavasa Batch 002 Limited Reserve. Aged for 120 days, complimentary brass plaque engraving, and first-access dispatch.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js" defer></script>
+    <script src="https://js.stripe.com/v3/" defer></script>
+
+    <style>
+        /* ═══ PRE-ORDER LUXURY THEME VARIABLES ═══ */
+        :root {
+            --po-bg: #0D0C0A;
+            --po-surface: #141310;
+            --po-card: #1A1814;
+            --po-card-border: rgba(197, 160, 89, 0.22);
+            --po-card-hover: rgba(197, 160, 89, 0.45);
+            --po-gold: #C5A059;
+            --po-gold-bright: #E5C378;
+            --po-gold-dim: rgba(197, 160, 89, 0.15);
+            --po-cream: #FAF8F5;
+            --po-muted: #9E988D;
+            --po-dark-text: #1C1A17;
+        }
+
+        body.preorder-body {
+            background-color: var(--po-bg);
+            color: var(--po-cream);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ═══ PRE-ORDER BANNER ═══ */
+        .po-ticker {
+            background: linear-gradient(90deg, #161410 0%, #29241B 50%, #161410 100%);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+            color: var(--po-gold-bright);
+            font-size: 0.76rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            padding: 9px 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            text-align: center;
+            font-weight: 500;
+        }
+        .po-ticker-dot {
+            width: 7px;
+            height: 7px;
+            background-color: #2ecc71;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px #2ecc71;
+            animation: pulse-dot 1.8s infinite ease-in-out;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.3); }
+        }
+
+        /* ═══ PRE-ORDER HEADER ═══ */
+        .po-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(13, 12, 10, 0.94);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 16px 24px;
+        }
+        .po-nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .po-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            letter-spacing: 0.25em;
+            color: var(--po-cream);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .po-brand:hover {
+            color: var(--po-gold-bright);
+        }
+        .po-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+        .po-nav-links a {
+            color: var(--po-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+        .po-nav-links a:hover,
+        .po-nav-links a.active {
+            color: var(--po-gold);
+        }
+        .po-badge-pill {
+            background: rgba(197, 160, 89, 0.15);
+            border: 1px solid var(--po-gold);
+            color: var(--po-gold-bright);
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 20px;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            margin-left: 4px;
+        }
+
+        /* ═══ HERO SECTION ═══ */
+        .po-hero {
+            position: relative;
+            padding: 70px 20px 60px;
+            background: radial-gradient(circle at 50% 20%, rgba(197, 160, 89, 0.12) 0%, rgba(13, 12, 10, 0) 70%),
+                        linear-gradient(180deg, #0D0C0A 0%, #14120E 100%);
+            text-align: center;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+        }
+        .po-hero-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .po-edition-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(197, 160, 89, 0.1);
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            border-radius: 30px;
+            font-size: 0.78rem;
+            letter-spacing: 0.2em;
+            color: var(--po-gold-bright);
+            text-transform: uppercase;
+            margin-bottom: 22px;
+        }
+        .po-hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+            font-weight: 400;
+            line-height: 1.12;
+            letter-spacing: 0.04em;
+            color: var(--po-cream);
+            margin: 0 0 18px;
+        }
+        .po-hero-title em {
+            font-style: italic;
+            color: var(--po-gold);
+            font-weight: 300;
+        }
+        .po-hero-desc {
+            font-size: 1.05rem;
+            line-height: 1.65;
+            color: var(--po-muted);
+            max-width: 680px;
+            margin: 0 auto 34px;
+            font-weight: 300;
+        }
+
+        /* ═══ LIVE ALLOCATION METER ═══ */
+        .allocation-box {
+            background: rgba(20, 19, 16, 0.85);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 12px;
+            padding: 24px 30px;
+            max-width: 620px;
+            margin: 0 auto 36px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+        }
+        .allocation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 0.88rem;
+        }
+        .allocation-title {
+            color: var(--po-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.78rem;
+        }
+        .allocation-count {
+            color: var(--po-gold-bright);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .meter-bar-track {
+            width: 100%;
+            height: 10px;
+            background: #25231F;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+        .meter-bar-fill {
+            height: 100%;
+            width: 77.6%;
+            background: linear-gradient(90deg, #9C7D3C 0%, #E5C378 100%);
+            border-radius: 6px;
+            box-shadow: 0 0 12px rgba(229, 195, 120, 0.6);
+            transition: width 1s ease-in-out;
+        }
+        .allocation-sub {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: var(--po-muted);
+        }
+        .allocation-sub strong {
+            color: #FAF8F5;
+        }
+
+        /* ═══ COUNTDOWN TIMER ═══ */
+        .timer-grid {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 38px;
+        }
+        .timer-cell {
+            background: rgba(26, 24, 20, 0.9);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            border-radius: 8px;
+            padding: 12px 18px;
+            min-width: 74px;
+            text-align: center;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+        .timer-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.1rem;
+            font-weight: 600;
+            color: var(--po-cream);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .timer-lbl {
+            font-size: 0.65rem;
+            color: var(--po-gold);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-po-gold {
+            background: linear-gradient(135deg, #C5A059 0%, #9F7E3B 100%);
+            color: #0D0C0A;
+            font-weight: 600;
+            padding: 15px 34px;
+            border-radius: 6px;
+            border: none;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-size: 0.86rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.35);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .btn-po-gold:hover {
+            background: linear-gradient(135deg, #E5C378 0%, #B8934A 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 26px rgba(197, 160, 89, 0.5);
+            color: #0D0C0A;
+        }
+        .btn-po-ghost {
+            background: transparent;
+            color: var(--po-cream);
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            padding: 14px 28px;
+            border-radius: 6px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-size: 0.86rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-po-ghost:hover {
+            border-color: var(--po-gold);
+            background: rgba(197, 160, 89, 0.1);
+            color: var(--po-gold-bright);
+        }
+
+        /* ═══ COLLECTOR PRIVILEGES ═══ */
+        .po-privileges {
+            padding: 80px 20px;
+            background: #11100D;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+        }
+        .po-section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+        .po-section-eyebrow {
+            font-size: 0.75rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--po-gold);
+            margin-bottom: 10px;
+            display: block;
+        }
+        .po-section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            color: var(--po-cream);
+            margin: 0 0 14px;
+        }
+        .po-section-subtitle {
+            color: var(--po-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .privileges-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .privilege-card {
+            background: var(--po-card);
+            border: 1px solid var(--po-card-border);
+            border-radius: 8px;
+            padding: 32px 26px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .privilege-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--po-gold);
+            transition: height 0.3s ease;
+        }
+        .privilege-card:hover {
+            border-color: var(--po-gold);
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+        }
+        .privilege-card:hover::before {
+            height: 100%;
+        }
+        .privilege-icon {
+            font-size: 1.8rem;
+            color: var(--po-gold);
+            margin-bottom: 18px;
+            display: inline-block;
+        }
+        .privilege-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            color: var(--po-cream);
+            margin: 0 0 10px;
+            font-weight: 500;
+        }
+        .privilege-card p {
+            color: var(--po-muted);
+            font-size: 0.86rem;
+            line-height: 1.6;
+            margin: 0;
+            font-weight: 300;
+        }
+        .privilege-val {
+            margin-top: 14px;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--po-gold-bright);
+            font-weight: 600;
+        }
+
+        /* ═══ RESERVE EDITIONS CATALOG ═══ */
+        .po-catalog {
+            padding: 90px 20px;
+            background: #0D0C0A;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+        }
+        .reserves-grid {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        .reserve-card {
+            background: var(--po-card);
+            border: 1px solid var(--po-card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.35s ease;
+            position: relative;
+        }
+        .reserve-card.featured-card {
+            border-color: var(--po-gold);
+            box-shadow: 0 10px 35px rgba(197, 160, 89, 0.15);
+        }
+        .reserve-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--po-gold-bright);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+        }
+        .reserve-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(13, 12, 10, 0.85);
+            border: 1px solid var(--po-gold);
+            color: var(--po-gold-bright);
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 4px;
+            z-index: 2;
+            font-weight: 600;
+        }
+        .reserve-img-wrap {
+            position: relative;
+            padding: 30px 20px 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at 50% 60%, rgba(197, 160, 89, 0.08) 0%, rgba(20, 19, 16, 0.4) 80%);
+            min-height: 290px;
+        }
+        .reserve-img {
+            max-height: 260px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.7));
+            transition: transform 0.5s ease;
+        }
+        .reserve-card:hover .reserve-img {
+            transform: scale(1.05);
+        }
+        .reserve-body {
+            padding: 24px 26px 30px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .reserve-olfactory-class {
+            font-size: 0.72rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--po-gold);
+            margin-bottom: 6px;
+        }
+        .reserve-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.7rem;
+            color: var(--po-cream);
+            margin: 0 0 10px;
+            font-weight: 500;
+        }
+        .reserve-notes-pill {
+            font-size: 0.8rem;
+            color: var(--po-muted);
+            margin-bottom: 16px;
+            line-height: 1.45;
+        }
+        .reserve-notes-pill strong {
+            color: #FAF8F5;
+        }
+        .reserve-allocation-stat {
+            background: rgba(13, 12, 10, 0.6);
+            border-radius: 6px;
+            padding: 10px 14px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .alloc-stat-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            margin-bottom: 6px;
+        }
+        .alloc-mini-bar {
+            height: 4px;
+            background: #2A2824;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .alloc-mini-fill {
+            height: 100%;
+            background: var(--po-gold);
+        }
+        .reserve-price-wrap {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-top: auto;
+            margin-bottom: 18px;
+        }
+        .reserve-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.9rem;
+            color: var(--po-gold-bright);
+            font-weight: 600;
+        }
+        .reserve-retail {
+            font-size: 0.95rem;
+            color: #6E685F;
+            text-decoration: line-through;
+        }
+        .reserve-savings {
+            font-size: 0.72rem;
+            color: #2ecc71;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .reserve-btn {
+            width: 100%;
+            background: var(--po-gold);
+            color: #0D0C0A;
+            border: none;
+            padding: 13px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.84rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .reserve-btn:hover {
+            background: var(--po-gold-bright);
+            box-shadow: 0 4px 18px rgba(197, 160, 89, 0.4);
+        }
+
+        /* ═══ INTERACTIVE ENGRAVING STUDIO ═══ */
+        .po-engraving-studio {
+            padding: 90px 20px;
+            background: radial-gradient(circle at 30% 50%, rgba(197, 160, 89, 0.09) 0%, rgba(17, 16, 13, 0.95) 70%);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+        }
+        .studio-container {
+            max-width: 1140px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .studio-preview-col {
+            position: relative;
+            background: #141310;
+            border: 1px solid var(--po-card-border);
+            border-radius: 14px;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            min-height: 480px;
+        }
+        .bottle-render-wrap {
+            position: relative;
+            width: 260px;
+            text-align: center;
+        }
+        .bottle-img-render {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8));
+        }
+        /* Virtual Engraving Plaque */
+        .engraved-brass-plaque {
+            position: absolute;
+            bottom: 24%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
+            background: linear-gradient(135deg, #ECC880 0%, #B89246 50%, #8C6A28 100%);
+            border: 1px solid #FFE4A3;
+            border-radius: 4px;
+            padding: 8px 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.7), inset 0 1px 2px rgba(255,255,255,0.4);
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .plaque-batch {
+            font-size: 0.5rem;
+            letter-spacing: 0.15em;
+            color: #38270A;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(56, 39, 10, 0.3);
+            padding-bottom: 2px;
+            margin-bottom: 3px;
+        }
+        .plaque-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            color: #271903;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            text-shadow: 0 1px 1px rgba(255, 240, 200, 0.5);
+            min-height: 18px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .plaque-bottle-num {
+            font-size: 0.5rem;
+            letter-spacing: 0.12em;
+            color: #4A3510;
+            margin-top: 2px;
+            font-weight: 600;
+        }
+
+        .studio-controls-col h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.6rem;
+            color: var(--po-cream);
+            margin: 0 0 12px;
+            font-weight: 400;
+        }
+        .studio-controls-col p {
+            color: var(--po-muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 26px;
+        }
+        .engraving-input-box {
+            margin-bottom: 24px;
+        }
+        .engraving-input-box label {
+            display: block;
+            font-size: 0.78rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--po-gold);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .engraving-input {
+            width: 100%;
+            background: #1B1915;
+            border: 1px solid rgba(197, 160, 89, 0.35);
+            color: var(--po-cream);
+            padding: 14px 18px;
+            border-radius: 6px;
+            font-size: 1.05rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.25s;
+        }
+        .engraving-input:focus {
+            border-color: var(--po-gold-bright);
+            box-shadow: 0 0 12px rgba(197, 160, 89, 0.25);
+        }
+        .char-counter {
+            font-size: 0.72rem;
+            color: var(--po-muted);
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+        }
+
+        .font-options-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+        .font-opt-btn {
+            flex: 1;
+            padding: 10px;
+            background: #171613;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--po-muted);
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.82rem;
+            transition: all 0.2s;
+        }
+        .font-opt-btn.active {
+            border-color: var(--po-gold);
+            color: var(--po-gold-bright);
+            background: rgba(197, 160, 89, 0.12);
+        }
+
+        /* ═══ PRODUCTION ROADMAP TIMELINE ═══ */
+        .po-timeline-section {
+            padding: 90px 20px;
+            background: #11100D;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+        }
+        .timeline-steps-wrap {
+            max-width: 1080px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            position: relative;
+        }
+        .timeline-steps-wrap::before {
+            content: '';
+            position: absolute;
+            top: 26px;
+            left: 5%;
+            right: 5%;
+            height: 2px;
+            background: rgba(197, 160, 89, 0.25);
+            z-index: 1;
+        }
+        .timeline-node {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        .timeline-icon-box {
+            width: 52px;
+            height: 52px;
+            background: #181612;
+            border: 2px solid var(--po-gold);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--po-gold-bright);
+            font-size: 1.1rem;
+            box-shadow: 0 0 16px rgba(197, 160, 89, 0.25);
+            transition: all 0.3s;
+        }
+        .timeline-node.completed .timeline-icon-box {
+            background: var(--po-gold);
+            color: #0D0C0A;
+        }
+        .timeline-node.in-progress .timeline-icon-box {
+            border-color: #2ecc71;
+            color: #2ecc71;
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.4);
+            animation: pulse-border 2s infinite ease-in-out;
+        }
+        @keyframes pulse-border {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+        .timeline-step-tag {
+            font-size: 0.68rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--po-gold);
+            margin-bottom: 6px;
+            display: block;
+        }
+        .timeline-step-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--po-cream);
+            margin: 0 0 6px;
+            font-weight: 500;
+        }
+        .timeline-step-date {
+            font-size: 0.78rem;
+            color: var(--po-muted);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .timeline-step-desc {
+            font-size: 0.78rem;
+            color: #7D776C;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* ═══ PRE-ORDER CHECKOUT MODAL ═══ */
+        .po-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(7, 6, 5, 0.88);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+        .po-modal-overlay.active {
+            display: flex;
+        }
+        .po-modal-card {
+            background: #161411;
+            border: 1px solid var(--po-card-border);
+            border-radius: 12px;
+            max-width: 640px;
+            width: 100%;
+            padding: 34px;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+            color: var(--po-cream);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .po-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: var(--po-muted);
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .po-modal-close:hover {
+            color: var(--po-gold-bright);
+        }
+        .po-modal-badge {
+            font-size: 0.72rem;
+            letter-spacing: 0.16em;
+            color: var(--po-gold);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .po-modal-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.1rem;
+            margin: 0 0 18px;
+            font-weight: 500;
+        }
+        .reservation-summary-pill {
+            background: #1F1D18;
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            border-radius: 8px;
+            padding: 16px 18px;
+            margin-bottom: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .res-sum-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--po-cream);
+        }
+        .res-sum-meta {
+            font-size: 0.78rem;
+            color: var(--po-muted);
+            margin-top: 3px;
+        }
+        .res-sum-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--po-gold-bright);
+            font-weight: 600;
+        }
+
+        .po-form-group {
+            margin-bottom: 14px;
+        }
+        .po-form-group label {
+            display: block;
+            font-size: 0.74rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--po-muted);
+            margin-bottom: 6px;
+        }
+        .po-form-input {
+            width: 100%;
+            background: #1A1915;
+            border: 1px solid rgba(255,255,255,0.12);
+            color: var(--po-cream);
+            padding: 11px 14px;
+            border-radius: 6px;
+            font-size: 0.92rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .po-form-input:focus {
+            border-color: var(--po-gold);
+        }
+        .po-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .po-grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        .po-payment-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin: 18px 0;
+        }
+        .po-pay-tab {
+            background: #1A1915;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px 8px;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .po-pay-tab.active {
+            border-color: var(--po-gold);
+            background: rgba(197, 160, 89, 0.12);
+        }
+        .po-pay-icon {
+            font-size: 1.25rem;
+            margin-bottom: 4px;
+            display: block;
+            color: var(--po-gold);
+        }
+        .po-pay-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--po-cream);
+            display: block;
+        }
+        .po-pay-sub {
+            font-size: 0.65rem;
+            color: var(--po-muted);
+        }
+
+        .po-submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #C5A059 0%, #9F7E3B 100%);
+            color: #0D0C0A;
+            border: none;
+            padding: 15px;
+            border-radius: 6px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            margin-top: 10px;
+        }
+        .po-submit-btn:hover {
+            background: linear-gradient(135deg, #E5C378 0%, #B8934A 100%);
+            box-shadow: 0 8px 25px rgba(197, 160, 89, 0.4);
+        }
+
+        /* ═══ RESERVATION CERTIFICATE MODAL ═══ */
+        .cert-card {
+            background: #14120E;
+            border: 2px solid var(--po-gold);
+            border-radius: 12px;
+            padding: 34px 28px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.85);
+            max-width: 520px;
+            width: 100%;
+        }
+        .cert-wax-seal {
+            width: 64px;
+            height: 64px;
+            background: radial-gradient(circle, #B91C1C 0%, #7F1D1D 100%);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FAF8F5;
+            font-size: 1.6rem;
+            box-shadow: 0 4px 14px rgba(185, 28, 28, 0.5);
+            border: 2px dashed rgba(255,255,255,0.4);
+        }
+        .cert-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.1rem;
+            color: var(--po-gold-bright);
+            margin: 0 0 6px;
+        }
+        .cert-flacon-no {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.7rem;
+            color: #FAF8F5;
+            letter-spacing: 0.1em;
+            margin: 14px 0;
+            padding: 10px;
+            border-top: 1px solid rgba(197, 160, 89, 0.3);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+        }
+
+        /* ═══ RECENT RESERVATION TOAST ═══ */
+        .po-toast-ticker {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            background: rgba(22, 20, 17, 0.95);
+            border: 1px solid var(--po-gold);
+            border-radius: 8px;
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 900;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            max-width: 380px;
+            animation: slideInToast 0.5s ease;
+            transition: opacity 0.5s ease;
+        }
+        @keyframes slideInToast {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .po-toast-dot {
+            width: 10px;
+            height: 10px;
+            background: #2ecc71;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .po-toast-text {
+            font-size: 0.78rem;
+            color: var(--po-cream);
+            line-height: 1.4;
+        }
+        .po-toast-text strong {
+            color: var(--po-gold-bright);
+        }
+
+        /* ═══ MOBILE RESPONSIVE OPTIMIZATION (Including 20:9 and 22:9) ═══ */
+        @media (max-width: 900px) {
+            .studio-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .timeline-steps-wrap {
+                grid-template-columns: 1fr 1fr;
+                gap: 28px;
+            }
+            .timeline-steps-wrap::before {
+                display: none;
+            }
+            .po-nav-links {
+                display: none;
+            }
+        }
+        @media (max-width: 600px) {
+            .timeline-steps-wrap {
+                grid-template-columns: 1fr;
+            }
+            .po-hero {
+                padding: 45px 16px 40px;
+            }
+            .po-modal-card {
+                padding: 24px 18px;
+            }
+            .po-grid-2, .po-grid-3 {
+                grid-template-columns: 1fr;
+            }
+            .timer-cell {
+                min-width: 58px;
+                padding: 8px 10px;
+            }
+            .timer-num {
+                font-size: 1.6rem;
+            }
+            .po-toast-ticker {
+                left: 12px;
+                right: 12px;
+                max-width: none;
+                bottom: 12px;
+            }
+        }
+    </style>
+</head>
+<body class="preorder-body">
+
+    <!-- ═══ TOP ANNOUNCEMENT TICKER ═══ -->
+    <div class="po-ticker">
+        <span class="po-ticker-dot"></span>
+        <span>Batch 002 Private Reserve Allocation is Live &nbsp;·&nbsp; Only 250 Individually Numbered Flacons</span>
+    </div>
+
+    <!-- ═══ PRE-ORDER HEADER ═══ -->
+    <header class="po-header">
+        <div class="po-nav-container">
+            <a href="index.html" class="po-brand">AAVASA</a>
+
+            <nav class="po-nav-links">
+                <a href="index.html#catalog">Catalogue</a>
+                <a href="index.html#quiz-section">Scent Finder</a>
+                <a href="reviews.html">Reviews</a>
+                <a href="#reserves-section" class="active">Reserve Drops <span class="po-badge-pill">Batch 002</span></a>
+                <a href="#engraving-studio">Engraving Studio</a>
+                <a href="#roadmap">Maceration Timeline</a>
+            </nav>
+
+            <div style="display:flex; align-items:center; gap:14px;">
+                <a href="index.html" class="btn-po-ghost" style="padding: 8px 16px; font-size: 0.76rem;">
+                    <i class="fa-solid fa-arrow-left"></i> Main Store
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══ MAIN HERO SECTION ═══ -->
+    <section class="po-hero">
+        <div class="po-hero-inner">
+            <div class="po-edition-tag">
+                <i class="fa-solid fa-gem"></i> Strictly Limited Allocation · Micro-Batch
+            </div>
+
+            <h1 class="po-hero-title">
+                The Private Reserve<br><em>Batch 002 — Autumn Distillation</em>
+            </h1>
+
+            <p class="po-hero-desc">
+                Harvested from rare Assam oud wood, Kannauj Damask petals, and amber resin. 
+                Currently undergoing a mandatory 120-day oak barrel maceration to reach unprecedented depth. 
+                Only 250 individually numbered collector flacons are poured.
+            </p>
+
+            <!-- Live Allocation Progress -->
+            <div class="allocation-box">
+                <div class="allocation-header">
+                    <span class="allocation-title"><i class="fa-solid fa-fire" style="color:var(--po-gold);"></i> Batch Allocation Status</span>
+                    <span class="allocation-count" id="alloc-counter-text">194 of 250 Claimed</span>
+                </div>
+                <div class="meter-bar-track">
+                    <div class="meter-bar-fill" id="alloc-meter-bar" style="width: 77.6%;"></div>
+                </div>
+                <div class="allocation-sub">
+                    <span>Vault allocation: <strong>77.6% Allocated</strong></span>
+                    <span>Remaining for reservation: <strong style="color:var(--po-gold-bright);" id="alloc-remaining-text">56 Bottles</strong></span>
+                </div>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="timer-grid">
+                <div class="timer-cell">
+                    <div class="timer-num" id="cd-days">18</div>
+                    <div class="timer-lbl">Days</div>
+                </div>
+                <div class="timer-cell">
+                    <div class="timer-num" id="cd-hours">14</div>
+                    <div class="timer-lbl">Hours</div>
+                </div>
+                <div class="timer-cell">
+                    <div class="timer-num" id="cd-mins">32</div>
+                    <div class="timer-lbl">Mins</div>
+                </div>
+                <div class="timer-cell">
+                    <div class="timer-num" id="cd-secs">48</div>
+                    <div class="timer-lbl">Secs</div>
+                </div>
+            </div>
+
+            <div class="hero-cta-group">
+                <a href="#reserves-section" class="btn-po-gold">
+                    <i class="fa-solid fa-key"></i> Claim Your Flacon
+                </a>
+                <a href="#engraving-studio" class="btn-po-ghost">
+                    <i class="fa-solid fa-signature"></i> Customize Bottle Engraving
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ COLLECTOR PRIVILEGES ═══ -->
+    <section class="po-privileges">
+        <div class="po-section-header">
+            <span class="po-section-eyebrow">The Patronage Experience</span>
+            <h2 class="po-section-title">Collector Privileges</h2>
+            <p class="po-section-subtitle">Pre-ordering an Aavasa Private Reserve ensures privileges never extended during standard commercial production.</p>
+        </div>
+
+        <div class="privileges-grid">
+            <div class="privilege-card">
+                <i class="fa-solid fa-certificate privilege-icon"></i>
+                <h3>Individually Numbered Flacon</h3>
+                <p>Every bottle in Batch 002 is laser-inscribed with its unique production sequence (e.g., Flacon #087 / 250). Never reprinted.</p>
+                <div class="privilege-val">Guaranteed Provenance</div>
+            </div>
+
+            <div class="privilege-card">
+                <i class="fa-solid fa-feather-pointed privilege-icon"></i>
+                <h3>Complimentary Brass Plaque Engraving</h3>
+                <p>Personalize your flacon with your initials, name, or a personal milestone date on a solid satin brass nameplate.</p>
+                <div class="privilege-val">Complimentary (₹599 Value)</div>
+            </div>
+
+            <div class="privilege-card">
+                <i class="fa-solid fa-spray-can-sparkles privilege-icon"></i>
+                <h3>Complimentary 15ml Extrait Flacon</h3>
+                <p>Receive a matched 15ml pocket atomizer of the rare reserve concentrate so your main flacon remains untouched on your vanity.</p>
+                <div class="privilege-val">Complimentary (₹699 Value)</div>
+            </div>
+
+            <div class="privilege-card">
+                <i class="fa-solid fa-plane-circle-check privilege-icon"></i>
+                <h3>Temperature-Controlled VIP Dispatch</h3>
+                <p>Shipped directly from our cellar in climate-shielded packaging via priority air express on November 20, 2026.</p>
+                <div class="privilege-val">Zero Freight Charges</div>
+            </div>
+
+            <div class="privilege-card">
+                <i class="fa-solid fa-shield-halved privilege-icon"></i>
+                <h3>Unconditional Reserve Guarantee</h3>
+                <p>Cancel your reservation anytime before dispatch with zero questions asked for a 100% instant refund.</p>
+                <div class="privilege-val">100% Risk Free</div>
+            </div>
+
+            <div class="privilege-card">
+                <i class="fa-solid fa-scroll privilege-icon"></i>
+                <h3>Cellar Master Certificate</h3>
+                <p>Wax-sealed certificate inscribed with harvest batch notes and signed by the master perfumer documenting your patronage.</p>
+                <div class="privilege-val">Collector Archive</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ PRIVATE RESERVE EDITIONS ═══ -->
+    <section class="po-catalog" id="reserves-section">
+        <div class="po-section-header">
+            <span class="po-section-eyebrow">Micro-Distillation Portfolio</span>
+            <h2 class="po-section-title">The Batch 002 Reserves</h2>
+            <p class="po-section-subtitle">Extrait de Parfum concentration (32% oil maceration) crafted for unmatched sillage and longevity.</p>
+        </div>
+
+        <div class="reserves-grid">
+            <!-- 1. Oud Imperial Reserve -->
+            <div class="reserve-card featured-card">
+                <span class="reserve-badge"><i class="fa-solid fa-award"></i> Master Reserve</span>
+                <div class="reserve-img-wrap">
+                    <img src="media/woody.png" alt="Oud Imperial Reserve Bottle" class="reserve-img">
+                </div>
+                <div class="reserve-body">
+                    <span class="reserve-olfactory-class">Smoky Agarwood & Mysore Sandal</span>
+                    <h3 class="reserve-name">Oud Imperial Reserve</h3>
+                    <p class="reserve-notes-pill">
+                        <strong>Notes:</strong> Aged Assam Oud, Spanish Saffron, Mysore Sandalwood, Smoked Frankincense.
+                    </p>
+
+                    <div class="reserve-allocation-stat">
+                        <div class="alloc-stat-row">
+                            <span style="color:var(--po-muted);">Batch 002 Allocation:</span>
+                            <span style="color:var(--po-gold-bright); font-weight:600;">51 / 60 Claimed</span>
+                        </div>
+                        <div class="alloc-mini-bar"><div class="alloc-mini-fill" style="width: 85%;"></div></div>
+                    </div>
+
+                    <div class="reserve-price-wrap">
+                        <span class="reserve-price">₹2,999</span>
+                        <span class="reserve-retail">₹4,499</span>
+                        <span class="reserve-savings">Save ₹1,500</span>
+                    </div>
+
+                    <button class="reserve-btn" onclick="openPreOrderModal('Oud Imperial Reserve', 2999, '50ml Extrait', 'media/woody.png')">
+                        <i class="fa-solid fa-lock"></i> Reserve Flacon (₹2,999)
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. Night King Grand Reserve -->
+            <div class="reserve-card">
+                <span class="reserve-badge">Most Coveted</span>
+                <div class="reserve-img-wrap">
+                    <img src="media/Night.png" alt="Night King Grand Reserve Bottle" class="reserve-img">
+                </div>
+                <div class="reserve-body">
+                    <span class="reserve-olfactory-class">Sensual Leather & Dark Spices</span>
+                    <h3 class="reserve-name">Night King Grand Reserve</h3>
+                    <p class="reserve-notes-pill">
+                        <strong>Notes:</strong> Cardamom Pods, Midnight Leather, Smoky Birch, Madagascar Vanilla.
+                    </p>
+
+                    <div class="reserve-allocation-stat">
+                        <div class="alloc-stat-row">
+                            <span style="color:var(--po-muted);">Batch 002 Allocation:</span>
+                            <span style="color:var(--po-gold-bright); font-weight:600;">58 / 65 Claimed</span>
+                        </div>
+                        <div class="alloc-mini-bar"><div class="alloc-mini-fill" style="width: 89%;"></div></div>
+                    </div>
+
+                    <div class="reserve-price-wrap">
+                        <span class="reserve-price">₹3,199</span>
+                        <span class="reserve-retail">₹4,799</span>
+                        <span class="reserve-savings">Save ₹1,600</span>
+                    </div>
+
+                    <button class="reserve-btn" onclick="openPreOrderModal('Night King Grand Reserve', 3199, '50ml Extrait', 'media/Night.png')">
+                        <i class="fa-solid fa-lock"></i> Reserve Flacon (₹3,199)
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. Amber Absolute Reserve -->
+            <div class="reserve-card">
+                <span class="reserve-badge">Liquid Gold</span>
+                <div class="reserve-img-wrap">
+                    <img src="media/amber.png" alt="Amber Absolute Reserve Bottle" class="reserve-img">
+                </div>
+                <div class="reserve-body">
+                    <span class="reserve-olfactory-class">Resinous Ambergris & Bourbon Vanilla</span>
+                    <h3 class="reserve-name">Amber Absolute Reserve</h3>
+                    <p class="reserve-notes-pill">
+                        <strong>Notes:</strong> Golden Ambergris, Labdanum Tears, Indonesian Patchouli, Benzoin.
+                    </p>
+
+                    <div class="reserve-allocation-stat">
+                        <div class="alloc-stat-row">
+                            <span style="color:var(--po-muted);">Batch 002 Allocation:</span>
+                            <span style="color:var(--po-gold-bright); font-weight:600;">44 / 50 Claimed</span>
+                        </div>
+                        <div class="alloc-mini-bar"><div class="alloc-mini-fill" style="width: 88%;"></div></div>
+                    </div>
+
+                    <div class="reserve-price-wrap">
+                        <span class="reserve-price">₹2,899</span>
+                        <span class="reserve-retail">₹4,299</span>
+                        <span class="reserve-savings">Save ₹1,400</span>
+                    </div>
+
+                    <button class="reserve-btn" onclick="openPreOrderModal('Amber Absolute Reserve', 2899, '50ml Extrait', 'media/amber.png')">
+                        <i class="fa-solid fa-lock"></i> Reserve Flacon (₹2,899)
+                    </button>
+                </div>
+            </div>
+
+            <!-- 4. Dusky Rose Nocturnal Reserve -->
+            <div class="reserve-card">
+                <span class="reserve-badge">Intoxicating Floral</span>
+                <div class="reserve-img-wrap">
+                    <img src="media/Dusky Rose.png" alt="Dusky Rose Reserve Bottle" class="reserve-img">
+                </div>
+                <div class="reserve-body">
+                    <span class="reserve-olfactory-class">Kannauj Damask Rose & Dark Praline</span>
+                    <h3 class="reserve-name">Dusky Rose Nocturnal</h3>
+                    <p class="reserve-notes-pill">
+                        <strong>Notes:</strong> Kannauj Royal Rose, Turkish Praline, Smoky Oud, White Musk.
+                    </p>
+
+                    <div class="reserve-allocation-stat">
+                        <div class="alloc-stat-row">
+                            <span style="color:var(--po-muted);">Batch 002 Allocation:</span>
+                            <span style="color:var(--po-gold-bright); font-weight:600;">32 / 50 Claimed</span>
+                        </div>
+                        <div class="alloc-mini-bar"><div class="alloc-mini-fill" style="width: 64%;"></div></div>
+                    </div>
+
+                    <div class="reserve-price-wrap">
+                        <span class="reserve-price">₹2,999</span>
+                        <span class="reserve-retail">₹4,499</span>
+                        <span class="reserve-savings">Save ₹1,500</span>
+                    </div>
+
+                    <button class="reserve-btn" onclick="openPreOrderModal('Dusky Rose Nocturnal Reserve', 2999, '50ml Extrait', 'media/Dusky Rose.png')">
+                        <i class="fa-solid fa-lock"></i> Reserve Flacon (₹2,999)
+                    </button>
+                </div>
+            </div>
+
+            <!-- 5. Master Collector's Vault (Trio Box) -->
+            <div class="reserve-card featured-card" style="grid-column: 1 / -1; max-width: 850px; margin: 0 auto; width: 100%;">
+                <span class="reserve-badge" style="background:#C5A059; color:#0D0C0A; font-weight:700;">Exclusive Presentation Box</span>
+                <div style="display:flex; flex-wrap:wrap; align-items:center;">
+                    <div class="reserve-img-wrap" style="flex: 1; min-width: 280px;">
+                        <img src="media/Dset 1.png" alt="Master Collector Vault Trio" class="reserve-img" style="max-height: 280px;">
+                    </div>
+                    <div class="reserve-body" style="flex: 1.2; min-width: 300px;">
+                        <span class="reserve-olfactory-class">The Grand Patrimony Trio</span>
+                        <h3 class="reserve-name" style="font-size: 2.1rem;">The Master Collector's Vault</h3>
+                        <p class="reserve-notes-pill">
+                            All three supreme reserves (Oud Imperial, Night King, and Amber Absolute) presented in a bespoke handcrafted walnut presentation chest with engraved brass locks and 3 matched travel atomizers.
+                        </p>
+
+                        <div class="reserve-allocation-stat">
+                            <div class="alloc-stat-row">
+                                <span style="color:var(--po-muted);">Vault Edition Allocation:</span>
+                                <span style="color:var(--po-gold-bright); font-weight:600;">9 of 25 Vaults Claimed</span>
+                            </div>
+                            <div class="alloc-mini-bar"><div class="alloc-mini-fill" style="width: 36%;"></div></div>
+                        </div>
+
+                        <div class="reserve-price-wrap">
+                            <span class="reserve-price" style="font-size: 2.2rem;">₹7,499</span>
+                            <span class="reserve-retail" style="font-size: 1.1rem;">₹12,999</span>
+                            <span class="reserve-savings" style="font-size: 0.82rem;">Save ₹5,500 (VIP Set)</span>
+                        </div>
+
+                        <button class="reserve-btn" onclick="openPreOrderModal('Master Collector Vault Trio', 7499, '3x 50ml Master Vault', 'media/Dset 1.png')">
+                            <i class="fa-solid fa-crown"></i> Reserve Master Vault (₹7,499)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ INTERACTIVE ENGRAVING STUDIO ═══ -->
+    <section class="po-engraving-studio" id="engraving-studio">
+        <div class="studio-container">
+            <!-- Left: Bottle with Real-Time Plaque Preview -->
+            <div class="studio-preview-col">
+                <div class="bottle-render-wrap">
+                    <img src="media/Night.png" alt="Engraved Aavasa Flacon Preview" id="studio-bottle-img" class="bottle-img-render">
+                    
+                    <!-- Brass Plaque Overlay -->
+                    <div class="engraved-brass-plaque" id="plaque-preview">
+                        <div class="plaque-batch">HOUSE OF AAVASA · RESERVE</div>
+                        <div class="plaque-text" id="plaque-live-text">A. SHARMA</div>
+                        <div class="plaque-bottle-num">FLACON #087 / 250</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Interactive Controls -->
+            <div class="studio-controls-col">
+                <span class="po-section-eyebrow">Atelier Personalization</span>
+                <h2>Complimentary Bottle Engraving</h2>
+                <p>
+                    Every pre-ordered reserve flacon is outfitted with a hand-polished solid brass nameplate. 
+                    Inscribe your name, initials, or a memorable date to commemorate your private reserve.
+                </p>
+
+                <div class="engraving-input-box">
+                    <label for="engraving-text-input">Inscribe Name / Monogram (Max 14 chars)</label>
+                    <input type="text" id="engraving-text-input" class="engraving-input" placeholder="e.g. A. SHARMA" maxlength="14" value="A. SHARMA" oninput="updateEngravingPreview(this.value)">
+                    <div class="char-counter">
+                        <span>Previewed in real-time on the flacon</span>
+                        <span id="char-count-disp">8 / 14</span>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 14px;">
+                    <label style="display:block; font-size:0.76rem; color:var(--po-gold); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">Choose Inscription Style</label>
+                    <div class="font-options-row">
+                        <div class="font-opt-btn active" onclick="setFontStyle('serif', this)">
+                            <strong>Classic Roman</strong><br><small>Cormorant</small>
+                        </div>
+                        <div class="font-opt-btn" onclick="setFontStyle('sans', this)">
+                            <strong>Modern Minimal</strong><br><small>Inter Sans</small>
+                        </div>
+                        <div class="font-opt-btn" onclick="setFontStyle('italic', this)">
+                            <strong>Royal Monogram</strong><br><small>Garamond Italic</small>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-po-gold" style="width: 100%;" onclick="openPreOrderWithEngraving()">
+                    <i class="fa-solid fa-stamp"></i> Apply Inscription & Reserve Bottle
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ PRODUCTION ROADMAP TIMELINE ═══ -->
+    <section class="po-timeline-section" id="roadmap">
+        <div class="po-section-header">
+            <span class="po-section-eyebrow">Transparent Artisanal Craft</span>
+            <h2 class="po-section-title">The Maceration & Aging Roadmap</h2>
+            <p class="po-section-subtitle">True luxury cannot be hurried. Follow the exact chronological journey of Batch 002 from raw petal to your vanity.</p>
+        </div>
+
+        <div class="timeline-steps-wrap">
+            <!-- Step 1 -->
+            <div class="timeline-node completed">
+                <div class="timeline-icon-box"><i class="fa-solid fa-seedling"></i></div>
+                <span class="timeline-step-tag">Phase 1 · Completed</span>
+                <h4 class="timeline-step-title">Botanical Harvest</h4>
+                <div class="timeline-step-date">August 2026</div>
+                <p class="timeline-step-desc">First-yield harvest of Assam agarwood & hydro-distilled Kannauj rose.</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="timeline-node in-progress">
+                <div class="timeline-icon-box"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <span class="timeline-step-tag" style="color:#2ecc71;">Phase 2 · Active</span>
+                <h4 class="timeline-step-title">120-Day Maceration</h4>
+                <div class="timeline-step-date">Sept – Oct 2026</div>
+                <p class="timeline-step-desc">Extrait oils rest in temperature-regulated French oak casks to harmonize nuances.</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="timeline-node">
+                <div class="timeline-icon-box"><i class="fa-solid fa-wine-bottle"></i></div>
+                <span class="timeline-step-tag">Phase 3 · Upcoming</span>
+                <h4 class="timeline-step-title">Bottling & Engraving</h4>
+                <div class="timeline-step-date">Nov 10 – Nov 15, 2026</div>
+                <p class="timeline-step-desc">Individual bottle numbering, brass plate laser-engraving, and crimson wax sealing.</p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="timeline-node">
+                <div class="timeline-icon-box"><i class="fa-solid fa-box-open"></i></div>
+                <span class="timeline-step-tag">Phase 4 · Dispatch</span>
+                <h4 class="timeline-step-title">VIP Air Dispatch</h4>
+                <div class="timeline-step-date">November 20, 2026</div>
+                <p class="timeline-step-desc">Dispatched via priority air courier in velvet-lined collectors' packaging.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ PRE-ORDER CHECKOUT MODAL ═══ -->
+    <div class="po-modal-overlay" id="preorder-checkout-modal">
+        <div class="po-modal-card">
+            <button class="po-modal-close" onclick="closePreOrderModal()"><i class="fa-solid fa-xmark"></i></button>
+            <span class="po-modal-badge"><i class="fa-solid fa-crown"></i> House of Aavasa Private Allocation</span>
+            <h3 class="po-modal-title">Batch 002 Reservation</h3>
+
+            <div class="reservation-summary-pill">
+                <div>
+                    <div class="res-sum-name" id="modal-reserve-name">Night King Grand Reserve</div>
+                    <div class="res-sum-meta" id="modal-reserve-meta">50ml Extrait + 15ml Atomizer + Free Engraving</div>
+                </div>
+                <div class="res-sum-price" id="modal-reserve-price">₹3,199</div>
+            </div>
+
+            <!-- Pre-order Form -->
+            <form id="preorder-form" onsubmit="handlePreOrderSubmit(event)">
+                <div class="po-form-group">
+                    <label for="po-fullname">Collector Full Name *</label>
+                    <input type="text" id="po-fullname" class="po-form-input" placeholder="e.g. Maharani Ananya Rao" required>
+                </div>
+
+                <div class="po-grid-2">
+                    <div class="po-form-group">
+                        <label for="po-email">Email Address (For Certificate) *</label>
+                        <input type="email" id="po-email" class="po-form-input" placeholder="collector@gmail.com" required>
+                    </div>
+                    <div class="po-form-group">
+                        <label for="po-phone">WhatsApp / Phone *</label>
+                        <input type="tel" id="po-phone" class="po-form-input" placeholder="+91 98765 43210" required>
+                    </div>
+                </div>
+
+                <div class="po-form-group">
+                    <label for="po-engraving">Engraving Text on Brass Plaque (Optional)</label>
+                    <input type="text" id="po-engraving" class="po-form-input" placeholder="e.g. A. SHARMA" maxlength="14">
+                </div>
+
+                <div class="po-form-group">
+                    <label for="po-address">Delivery Address (VIP Air Dispatch) *</label>
+                    <input type="text" id="po-address" class="po-form-input" placeholder="Suite, Flat, Street Address" required>
+                </div>
+
+                <div class="po-grid-3">
+                    <div class="po-form-group">
+                        <label for="po-city">City *</label>
+                        <input type="text" id="po-city" class="po-form-input" placeholder="Mumbai" required>
+                    </div>
+                    <div class="po-form-group">
+                        <label for="po-state">State *</label>
+                        <input type="text" id="po-state" class="po-form-input" placeholder="Maharashtra" required>
+                    </div>
+                    <div class="po-form-group">
+                        <label for="po-pincode">Pincode *</label>
+                        <input type="text" id="po-pincode" class="po-form-input" placeholder="400001" required>
+                    </div>
+                </div>
+
+                <!-- Payment Method Selection -->
+                <div style="margin-top: 14px;">
+                    <label style="display:block; font-size:0.74rem; text-transform:uppercase; color:var(--po-muted); margin-bottom:6px;">Select Reservation Guarantee</label>
+                    <div class="po-payment-options">
+                        <div class="po-pay-tab active" data-method="razorpay" onclick="selectPoPayment('razorpay', this)">
+                            <i class="fa-solid fa-qrcode po-pay-icon"></i>
+                            <span class="po-pay-title">UPI / Cards</span>
+                            <span class="po-pay-sub">Razorpay Instant</span>
+                        </div>
+                        <div class="po-pay-tab" data-method="stripe" onclick="selectPoPayment('stripe', this)">
+                            <i class="fa-brands fa-stripe po-pay-icon" style="color:#6772E5;"></i>
+                            <span class="po-pay-title">Credit Card</span>
+                            <span class="po-pay-sub">Stripe Global</span>
+                        </div>
+                        <div class="po-pay-tab" data-method="cod" onclick="selectPoPayment('cod', this)">
+                            <i class="fa-solid fa-truck-ramp-box po-pay-icon"></i>
+                            <span class="po-pay-title">Pay on Delivery</span>
+                            <span class="po-pay-sub">COD on Dispatch</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="po-submit-btn" id="po-submit-btn">
+                    <i class="fa-solid fa-lock"></i> Confirm & Seal Reservation
+                </button>
+
+                <p style="font-size:0.72rem; color:var(--po-muted); text-align:center; margin-top:12px;">
+                    <i class="fa-solid fa-shield-halved" style="color:var(--po-gold);"></i> 100% Refund Guarantee. Cancel anytime before Nov 20 dispatch with full refund.
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- ═══ CERTIFICATE OF RESERVATION SUCCESS MODAL ═══ -->
+    <div class="po-modal-overlay" id="cert-success-modal">
+        <div class="cert-card">
+            <div class="cert-wax-seal"><i class="fa-solid fa-feather"></i></div>
+            <div style="font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--po-gold); margin-bottom:4px;">House of Aavasa · Cellar Master</div>
+            <h2 class="cert-title">Certificate of Reservation</h2>
+            <p style="color:var(--po-muted); font-size:0.86rem; margin:0 0 16px;">
+                Your allocation in <strong>Batch 002 Limited Reserve</strong> has been permanently registered in the House of Aavasa Ledger.
+            </p>
+
+            <div class="cert-flacon-no" id="cert-bottle-num">FLACON #087 / 250</div>
+
+            <div style="background:#1B1915; border-radius:8px; padding:14px; text-align:left; font-size:0.8rem; margin-bottom:20px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                    <span style="color:var(--po-muted);">Reservation ID:</span>
+                    <strong style="color:var(--po-gold-bright);" id="cert-order-id">AAVASA-PRE-82741</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                    <span style="color:var(--po-muted);">Reserve Edition:</span>
+                    <strong style="color:#FAF8F5;" id="cert-perfume-name">Night King Grand Reserve</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                    <span style="color:var(--po-muted);">Engraving Inscription:</span>
+                    <strong style="color:var(--po-gold-bright);" id="cert-engraving-disp">"A. SHARMA"</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between;">
+                    <span style="color:var(--po-muted);">Estimated Dispatch:</span>
+                    <strong style="color:#FAF8F5;">November 20, 2026</strong>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+                <button class="btn-po-ghost" onclick="window.location.href='index.html'" style="font-size:0.8rem; padding:10px 18px;">
+                    <i class="fa-solid fa-store"></i> Return to Store
+                </button>
+                <button class="btn-po-gold" onclick="window.print()" style="font-size:0.8rem; padding:10px 18px;">
+                    <i class="fa-solid fa-print"></i> Print Certificate
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ FLOATING SOCIAL PROOF TOAST ═══ -->
+    <div class="po-toast-ticker" id="po-toast">
+        <span class="po-toast-dot"></span>
+        <div class="po-toast-text" id="po-toast-text">
+            <strong>Vikram S.</strong> from South Delhi just reserved <strong>Flacon #189</strong> (Oud Imperial Reserve).
+        </div>
+    </div>
+
+    <!-- ═══ PRE-ORDER JAVASCRIPT LOGIC ═══ -->
+    <script>
+        // ── Selected Pre-Order Item State ──
+        let activeReserve = {
+            name: 'Night King Grand Reserve',
+            price: 3199,
+            size: '50ml Extrait',
+            img: 'media/Night.png'
+        };
+        let chosenPaymentMethod = 'razorpay';
+
+        // ── Auto-fill logged in user info if available ──
+        document.addEventListener("DOMContentLoaded", () => {
+            const rawUser = localStorage.getItem("aavasa_user");
+            if (rawUser) {
+                try {
+                    const u = JSON.parse(rawUser);
+                    if (u.fullName && document.getElementById("po-fullname")) document.getElementById("po-fullname").value = u.fullName;
+                    if (u.loginId && document.getElementById("po-email")) document.getElementById("po-email").value = u.loginId;
+                    if (u.phone && document.getElementById("po-phone")) document.getElementById("po-phone").value = u.phone;
+                    if (u.address && document.getElementById("po-address")) document.getElementById("po-address").value = u.address;
+                    if (u.city && document.getElementById("po-city")) document.getElementById("po-city").value = u.city;
+                    if (u.state && document.getElementById("po-state")) document.getElementById("po-state").value = u.state;
+                    if (u.pincode && document.getElementById("po-pincode")) document.getElementById("po-pincode").value = u.pincode;
+                } catch(e) {}
+            }
+
+            initCountdownTimer();
+            initSocialProofTicker();
+        });
+
+        // ── Live Countdown Timer to Nov 20, 2026 ──
+        function initCountdownTimer() {
+            const targetDate = new Date("2026-11-20T00:00:00+05:30").getTime();
+
+            function updateTimer() {
+                const now = new Date().getTime();
+                const dist = targetDate - now;
+
+                if (dist > 0) {
+                    const days = Math.floor(dist / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const mins = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+                    const secs = Math.floor((dist % (1000 * 60)) / 1000);
+
+                    document.getElementById("cd-days").textContent = String(days).padStart(2, '0');
+                    document.getElementById("cd-hours").textContent = String(hours).padStart(2, '0');
+                    document.getElementById("cd-mins").textContent = String(mins).padStart(2, '0');
+                    document.getElementById("cd-secs").textContent = String(secs).padStart(2, '0');
+                }
+            }
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
+        // ── Real-Time Bottle Engraving Studio ──
+        function updateEngravingPreview(val) {
+            const clean = val.toUpperCase();
+            document.getElementById("plaque-live-text").textContent = clean || "AAVASA";
+            document.getElementById("char-count-disp").textContent = `${clean.length} / 14`;
+            
+            // Also mirror to checkout form if user opens it
+            const formInput = document.getElementById("po-engraving");
+            if (formInput) formInput.value = clean;
+        }
+
+        function setFontStyle(style, btn) {
+            document.querySelectorAll(".font-opt-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            const plaqueText = document.getElementById("plaque-live-text");
+            if (style === 'serif') {
+                plaqueText.style.fontFamily = "'Cormorant Garamond', serif";
+                plaqueText.style.fontStyle = "normal";
+            } else if (style === 'sans') {
+                plaqueText.style.fontFamily = "'Inter', sans-serif";
+                plaqueText.style.fontStyle = "normal";
+            } else if (style === 'italic') {
+                plaqueText.style.fontFamily = "'Cormorant Garamond', serif";
+                plaqueText.style.fontStyle = "italic";
+            }
+        }
+
+        function openPreOrderWithEngraving() {
+            const engravingVal = document.getElementById("engraving-text-input").value;
+            openPreOrderModal(activeReserve.name, activeReserve.price, activeReserve.size, activeReserve.img, engravingVal);
+        }
+
+        // ── Open / Close Pre-Order Modal ──
+        function openPreOrderModal(name, price, size, img, engravingText = "") {
+            activeReserve = { name, price, size, img };
+            document.getElementById("modal-reserve-name").textContent = name;
+            document.getElementById("modal-reserve-price").textContent = `₹${price.toLocaleString()}`;
+            document.getElementById("modal-reserve-meta").textContent = `${size} · Matched 15ml Extrait · Free Engraving`;
+            
+            if (engravingText) {
+                document.getElementById("po-engraving").value = engravingText;
+            } else {
+                const studioVal = document.getElementById("engraving-text-input").value;
+                document.getElementById("po-engraving").value = studioVal || "";
+            }
+
+            document.getElementById("preorder-checkout-modal").classList.add("active");
+        }
+
+        function closePreOrderModal() {
+            document.getElementById("preorder-checkout-modal").classList.remove("active");
+        }
+
+        function selectPoPayment(method, element) {
+            chosenPaymentMethod = method;
+            document.querySelectorAll(".po-pay-tab").forEach(tab => tab.classList.remove("active"));
+            element.classList.add("active");
+            const btn = document.getElementById("po-submit-btn");
+            if (method === 'cod') {
+                btn.innerHTML = `<i class="fa-solid fa-truck-ramp-box"></i> Reserve Bottle with COD (Pay ₹${activeReserve.price} on Delivery)`;
+            } else {
+                btn.innerHTML = `<i class="fa-solid fa-lock"></i> Confirm & Seal Reservation (₹${activeReserve.price})`;
+            }
+        }
+
+        // ── Handle Pre-Order Form Submission ──
+        async function handlePreOrderSubmit(e) {
+            e.preventDefault();
+
+            const fullName = document.getElementById("po-fullname").value.trim();
+            const email = document.getElementById("po-email").value.trim();
+            const phone = document.getElementById("po-phone").value.trim();
+            const engraving = document.getElementById("po-engraving").value.trim().toUpperCase();
+            const address = document.getElementById("po-address").value.trim();
+            const city = document.getElementById("po-city").value.trim();
+            const state = document.getElementById("po-state").value.trim();
+            const pincode = document.getElementById("po-pincode").value.trim();
+
+            const submitBtn = document.getElementById("po-submit-btn");
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Securing Flacon in Vault...`;
+
+            let loginId = "guest";
+            const rawUser = localStorage.getItem("aavasa_user");
+            if (rawUser) {
+                try {
+                    const u = JSON.parse(rawUser);
+                    loginId = u.loginId || u.email || "guest";
+                } catch(e) {}
+            }
+
+            const payload = {
+                customer: {
+                    fullName,
+                    email,
+                    phone,
+                    address,
+                    city,
+                    state,
+                    pincode
+                },
+                perfumeName: activeReserve.name,
+                bottleSize: activeReserve.size,
+                engravingText: engraving || "COLLECTOR EDITION",
+                subtotal: activeReserve.price,
+                totalAmount: activeReserve.price,
+                paymentMethod: chosenPaymentMethod,
+                loginId: loginId,
+                batchNumber: "Batch 002 — Limited Reserve",
+                items: [{
+                    id: 99,
+                    name: activeReserve.name,
+                    size: activeReserve.size,
+                    price: activeReserve.price,
+                    quantity: 1,
+                    image: activeReserve.img,
+                    engraving: engraving || null
+                }]
+            };
+
+            try {
+                const response = await fetch("/api/preorders", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.order) {
+                    // Save to user local orders history so it appears in My Orders
+                    try {
+                        const existing = JSON.parse(localStorage.getItem("aavasa_orders") || "[]");
+                        existing.unshift(data.order);
+                        localStorage.setItem("aavasa_orders", JSON.stringify(existing));
+                    } catch(err) {}
+
+                    // Close checkout modal, show Certificate Modal
+                    closePreOrderModal();
+                    showCertificateModal(data.order);
+                } else {
+                    alert(data.message || "Could not complete reservation. Please try again.");
+                }
+            } catch (err) {
+                console.warn("Backend API unavailable, executing local reservation simulation:", err);
+                
+                // Fallback simulation if running purely in static test environment
+                const randId = `AAVASA-PRE-${Math.floor(10000 + Math.random() * 90000)}`;
+                const randBottle = `Flacon #${String(Math.floor(1 + Math.random() * 250)).padStart(3, '0')} / 250`;
+                const simOrder = {
+                    id: randId,
+                    bottleNumber: randBottle,
+                    perfumeName: activeReserve.name,
+                    engravingText: engraving || "COLLECTOR EDITION",
+                    totalAmount: activeReserve.price,
+                    estimatedDispatch: "November 20, 2026",
+                    orderStatus: "Reserved (Batch 002)",
+                    createdAt: new Date().toISOString()
+                };
+
+                try {
+                    const existing = JSON.parse(localStorage.getItem("aavasa_orders") || "[]");
+                    existing.unshift(simOrder);
+                    localStorage.setItem("aavasa_orders", JSON.stringify(existing));
+                } catch(e) {}
+
+                closePreOrderModal();
+                showCertificateModal(simOrder);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Confirm & Seal Reservation`;
+            }
+        }
+
+        // ── Show Certificate of Reservation ──
+        function showCertificateModal(order) {
+            document.getElementById("cert-bottle-num").textContent = order.bottleNumber || "FLACON #087 / 250";
+            document.getElementById("cert-order-id").textContent = order.id;
+            document.getElementById("cert-perfume-name").textContent = order.perfumeName || activeReserve.name;
+            document.getElementById("cert-engraving-disp").textContent = `"${order.engravingText || 'COLLECTOR EDITION'}"`;
+            
+            document.getElementById("cert-success-modal").classList.add("active");
+        }
+
+        // ── Social Proof Floating Notifications ──
+        function initSocialProofTicker() {
+            const toast = document.getElementById("po-toast");
+            const textEl = document.getElementById("po-toast-text");
+            
+            const proofEvents = [
+                { name: "Dr. Ananya V.", city: "Bangalore", bottle: "#188", perfume: "Night King Grand Reserve" },
+                { name: "Vikram S.", city: "South Delhi", bottle: "#189", perfume: "Master Collector Vault Trio" },
+                { name: "Meera K.", city: "Mumbai", bottle: "#190", perfume: "Amber Absolute Reserve" },
+                { name: "Kabir M.", city: "Hyderabad", bottle: "#191", perfume: "Oud Imperial Reserve" },
+                { name: "Radhika P.", city: "Pune", bottle: "#192", perfume: "Dusky Rose Nocturnal" },
+                { name: "Aditya S.", city: "Chandigarh", bottle: "#193", perfume: "Night King Grand Reserve" }
+            ];
+
+            let index = 0;
+            setInterval(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => {
+                    index = (index + 1) % proofEvents.length;
+                    const ev = proofEvents[index];
+                    textEl.innerHTML = `<strong>${ev.name}</strong> from ${ev.city} reserved <strong>Flacon ${ev.bottle}</strong> (${ev.perfume}).`;
+                    toast.style.opacity = '1';
+                }, 500);
+            }, 6500);
+        }
+    </script>
+</body>
+</html>
