@@ -21,6 +21,18 @@
       "destination": "/frontend/reviews.html"
     },
     {
+      "source": "/preorder",
+      "destination": "/frontend/preorder.html"
+    },
+    {
+      "source": "/pre-order",
+      "destination": "/frontend/preorder.html"
+    },
+    {
+      "source": "/preorder.html",
+      "destination": "/frontend/preorder.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/frontend/$1"
     }
