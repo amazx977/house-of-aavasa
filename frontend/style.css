@@ -4189,3 +4189,121 @@ button {
         padding: 40px 20px;
     }
 }
+
+/* ==========================================================================
+   HOUSE OF AAVASA — PRE-ORDER SYSTEM STYLING
+   ========================================================================== */
+.preorder-nav-pill {
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+    color: #ffffff;
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 2px 7px;
+    border-radius: 12px;
+    margin-right: 4px;
+    display: inline-block;
+    vertical-align: middle;
+    box-shadow: 0 2px 6px rgba(197, 160, 89, 0.4);
+}
+
+/* Pre-Order Spotlight Banner (Homepage) */
+.preorder-spotlight-section {
+    padding: clamp(48px, 6vh, 72px) 20px;
+    background: radial-gradient(circle at center, #F4EEE4 0%, #FAF8F5 100%);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.preorder-spotlight-container {
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.preorder-spotlight-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--color-accent-dark);
+    background: rgba(197, 160, 89, 0.12);
+    border: 1px solid rgba(197, 160, 89, 0.35);
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+}
+
+.live-dot {
+    width: 7px;
+    height: 7px;
+    background: #2E7D32;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 8px #2E7D32;
+    animation: livePulse 1.8s infinite ease-in-out;
+}
+
+@keyframes livePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.preorder-spotlight-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    color: var(--color-text);
+    margin-bottom: 14px;
+    font-weight: 400;
+    line-height: 1.15;
+}
+
+.preorder-spotlight-subtitle {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    max-width: 620px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+}
+
+.preorder-spotlight-perks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.spotlight-perk {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.76rem;
+    font-weight: 500;
+    color: var(--color-text);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 8px rgba(28, 26, 23, 0.04);
+}
+
+.spotlight-perk i {
+    color: var(--color-accent-dark);
+}
+
+.preorder-spotlight-actions .btn {
+    padding: 14px 34px;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+}
+

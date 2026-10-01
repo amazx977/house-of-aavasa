@@ -25,10 +25,6 @@
       "destination": "/frontend/preorder.html"
     },
     {
-      "source": "/pre-order",
-      "destination": "/frontend/preorder.html"
-    },
-    {
       "source": "/preorder.html",
       "destination": "/frontend/preorder.html"
     },

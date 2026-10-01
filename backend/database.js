@@ -254,16 +254,10 @@ function getOrdersByLoginId(loginId) {
 function createOrder(orderData) {
     const orders = getAllOrders();
     const randomNum = Math.floor(10000 + Math.random() * 90000);
-    const orderId = orderData.id || (orderData.isPreorder ? `AAVASA-PRE-${randomNum}` : `AAVASA-ORD-${randomNum}`);
+    const orderId = `AAVASA-ORD-${randomNum}`;
 
     const newOrder = {
         id: orderId,
-        orderType: orderData.orderType || (orderData.isPreorder ? "preorder" : "standard"),
-        isPreorder: orderData.isPreorder || false,
-        engravingText: orderData.engravingText || null,
-        batchNumber: orderData.batchNumber || null,
-        estimatedDispatch: orderData.estimatedDispatch || null,
-        bottleNumber: orderData.bottleNumber || null,
         loginId: orderData.loginId || "guest",
         customer: {
             fullName: orderData.customer?.fullName || "Guest Customer",
@@ -281,8 +275,11 @@ function createOrder(orderData) {
         shippingFee: 0,
         totalAmount: orderData.totalAmount || orderData.subtotal || 0,
         paymentMethod: orderData.paymentMethod || "cod",
-        paymentStatus: orderData.paymentStatus || (orderData.paymentMethod === "cod" ? "Pending (COD)" : "Paid"),
-        orderStatus: orderData.orderStatus || (orderData.isPreorder ? "Reserved" : "Processing"),
+        paymentStatus: orderData.paymentMethod === "cod" ? "Pending (COD)" : "Paid",
+        orderStatus: orderData.isPreorder ? "Pre-Order Reserved (Batch 01)" : "Processing",
+        isPreorder: Boolean(orderData.isPreorder),
+        orderType: orderData.orderType || (orderData.isPreorder ? "Pre-Order Batch 01" : "Standard Order"),
+        monogram: orderData.monogram || null,
         createdAt: new Date().toISOString()
     };
 

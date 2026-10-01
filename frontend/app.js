@@ -1619,6 +1619,7 @@ async function submitOrderToBackend(payload, btn) {
 
 // ─── CATALOG SYSTEM ────────────────────────────────────────────────────────────
 function renderProducts() {
+    if (!productGrid) return;
     let list = [...products];
     if (currentEditionFilter !== "all") list = list.filter(p => p.edition === currentEditionFilter);
     if (currentGenderFilter  !== "all") list = list.filter(p => p.gender === currentGenderFilter);
