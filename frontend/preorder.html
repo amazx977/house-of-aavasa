@@ -433,12 +433,276 @@
             max-width: 82%;
             max-height: 82%;
             object-fit: contain;
-            transition: opacity 0.2s ease, transform 0.3s ease;
             filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.12));
         }
 
-        .po-card:hover .po-card-img {
-            transform: scale(1.04);
+        .po-card-img-primary {
+            position: relative;
+            z-index: 1;
+            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .po-card-img-secondary {
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            z-index: 2;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .po-card:hover .po-card-img-primary {
+            transform: scale(1.05);
+        }
+
+        .po-card:hover .po-card-img-secondary {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        /* XLNC-Style Multi-Image Badge */
+        .po-card-multi-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(28, 26, 23, 0.68);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            color: #FFFFFF;
+            font-size: 0.68rem;
+            font-weight: 500;
+            padding: 3px 8px;
+            border-radius: 14px;
+            z-index: 4;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            pointer-events: none;
+            transition: all 0.2s ease;
+            letter-spacing: 0.03em;
+        }
+
+        .po-card:hover .po-card-multi-badge {
+            background: rgba(28, 26, 23, 0.88);
+            transform: translateY(-2px);
+        }
+
+        /* ── XLNC-STYLE PREORDER MODAL GALLERY ── */
+        .po-modal-notes-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 1.35fr;
+            gap: 0;
+        }
+
+        .po-modal-gallery-col {
+            background: radial-gradient(circle at center, #F8F5EE 0%, #EDE6D9 100%);
+            padding: 30px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            border-right: 1px solid var(--po-border);
+        }
+
+        .po-modal-hero-wrap {
+            position: relative;
+            width: 100%;
+            height: 290px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: zoom-in;
+            margin-bottom: 14px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .po-modal-hero-wrap.is-zoomed {
+            cursor: zoom-out;
+        }
+
+        .po-modal-hero-img {
+            max-width: 86%;
+            max-height: 260px;
+            object-fit: contain;
+            filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.15));
+            transition: opacity 0.22s ease-in-out, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .po-modal-hero-wrap.is-zoomed .po-modal-hero-img {
+            transform: scale(1.75);
+            cursor: zoom-out;
+        }
+
+        .po-modal-zoom-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--po-border);
+            color: var(--po-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            cursor: pointer;
+            z-index: 6;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .po-modal-zoom-btn:hover {
+            background: #FFFFFF;
+            color: var(--po-gold-dark);
+            transform: scale(1.1);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+        }
+
+        .po-modal-nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--po-border);
+            color: var(--po-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            cursor: pointer;
+            z-index: 5;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .po-modal-nav-arrow:hover {
+            background: #FFFFFF;
+            color: var(--po-gold-dark);
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .po-modal-nav-arrow.prev { left: 8px; }
+        .po-modal-nav-arrow.next { right: 8px; }
+
+        .po-modal-counter {
+            position: absolute;
+            bottom: 8px;
+            right: 10px;
+            background: rgba(28, 26, 23, 0.68);
+            backdrop-filter: blur(4px);
+            color: #FFFFFF;
+            font-size: 0.68rem;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 10px;
+            pointer-events: none;
+            z-index: 5;
+            letter-spacing: 0.04em;
+        }
+
+        .po-modal-thumbs-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .po-modal-thumb {
+            position: relative;
+            width: 62px;
+            height: 62px;
+            border-radius: 6px;
+            border: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            opacity: 0.65;
+        }
+
+        .po-modal-thumb img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .po-modal-thumb:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+        }
+
+        .po-modal-thumb.active {
+            border-color: var(--po-gold-dark);
+            opacity: 1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(197, 160, 89, 0.38);
+        }
+
+        .po-modal-thumb-badge {
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(28, 26, 23, 0.78);
+            color: #FFFFFF;
+            font-size: 0.52rem;
+            font-weight: 600;
+            padding: 1px 4px;
+            border-radius: 3px;
+            white-space: nowrap;
+            pointer-events: none;
+            letter-spacing: 0.02em;
+        }
+
+        .po-modal-meta-box {
+            text-align: center;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .po-modal-title {
+            font-family: var(--po-font-serif);
+            font-size: 1.6rem;
+            margin: 8px 0 2px;
+            color: var(--po-text);
+        }
+
+        .po-modal-family {
+            font-size: 0.78rem;
+            color: var(--po-text-muted);
+            margin: 0 0 10px;
+        }
+
+        .po-modal-price {
+            font-family: var(--po-font-serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--po-gold-dark);
+        }
+
+        .po-modal-price-orig {
+            font-size: 0.85rem;
+            text-decoration: line-through;
+            color: var(--po-text-muted);
+            margin-left: 6px;
         }
 
         /* Scentira-Style Floating Image Carousel Arrows */
@@ -1182,6 +1446,20 @@
             .po-cert-card {
                 padding: 28px 18px;
             }
+            .po-modal-notes-grid {
+                grid-template-columns: 1fr !important;
+            }
+            .po-modal-gallery-col {
+                border-right: none;
+                border-bottom: 1px solid var(--po-border);
+                padding: 24px 16px;
+            }
+            .po-modal-hero-wrap {
+                height: 240px;
+            }
+            .po-modal-hero-img {
+                max-height: 220px;
+            }
         }
     </style>
 </head>
@@ -1832,6 +2110,7 @@
                 }
                 const activeImgIdx = cardImageIndices[p.id];
                 const activeImg = p.images[activeImgIdx] || p.image;
+                const secondaryImg = p.images.length > 1 ? (p.images[(activeImgIdx + 1) % p.images.length] || p.images[1]) : null;
 
                 return `
                 <div class="po-card" data-id="${p.id}">
@@ -1840,7 +2119,14 @@
                     </div>
 
                     <div class="po-card-media" onclick="openNotesModal(${p.id})">
-                        <img src="${activeImg}" alt="${p.name}" class="po-card-img" id="po-img-${p.id}" loading="lazy">
+                        <img src="${activeImg}" alt="${p.name}" class="po-card-img po-card-img-primary" id="po-img-${p.id}" loading="lazy">
+                        ${secondaryImg ? `
+                        <img src="${secondaryImg}" alt="${p.name} alternate angle" class="po-card-img po-card-img-secondary" id="po-hover-img-${p.id}" loading="lazy">
+                        ` : ''}
+
+                        ${p.images.length > 1 ? `
+                        <span class="po-card-multi-badge"><i class="fa-regular fa-images"></i> ${p.images.length} Angles</span>
+                        ` : ''}
 
                         ${p.images.length > 1 ? `
                             <button type="button" class="po-carousel-nav prev" onclick="navigateCardImage(event, ${p.id}, -1)" aria-label="Previous view">
@@ -1949,6 +2235,12 @@
                 }, 80);
             }
 
+            const hoverImgEl = card.querySelector(`#po-hover-img-${productId}`);
+            if (hoverImgEl && product.images.length > 1) {
+                const nextHoverIdx = (idx + 1) % product.images.length;
+                hoverImgEl.src = product.images[nextHoverIdx];
+            }
+
             const dots = card.querySelectorAll('.po-dot');
             dots.forEach((dot, i) => dot.classList.toggle('active', i === idx));
         }
@@ -1991,29 +2283,83 @@
             }
         };
 
-        // ─── SCENTIRA QUICK VIEW & NOTES MODAL ───
+        // ─── SCENTIRA & XLNC QUICK VIEW & NOTES MODAL ───
+        let poModalActiveProductId = null;
+        let poModalActiveImgIdx = 0;
+
         window.openNotesModal = function(productId, defaultTab = 'overview') {
             const product = PREORDER_PRODUCTS.find(p => p.id === productId);
             if (!product) return;
 
+            poModalActiveProductId = productId;
             const breakdown = NOTES_BREAKDOWN_DATA[productId] || NOTES_BREAKDOWN_DATA[1];
             const chosenSize = selectedSizes[productId] || '50ml';
             const sizeInfo = product.sizes.find(s => s.size === chosenSize) || product.sizes[0];
 
+            let initialIdx = 0;
+            if (chosenSize === '15ml') {
+                const found15Idx = product.images.findIndex(img => img.toLowerCase().includes('15'));
+                if (found15Idx !== -1) initialIdx = found15Idx;
+            }
+            poModalActiveImgIdx = initialIdx;
+
             const modalContent = document.getElementById("po-notes-modal-content");
             modalContent.innerHTML = `
-                <div style="display:grid; grid-template-columns:1fr 1.3fr; gap:0;">
-                    <div style="background:radial-gradient(circle at center, #F7F3EB 0%, #EDE6D9 100%); padding:40px 30px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
-                        <img src="${product.image}" alt="${product.name}" style="max-width:85%; max-height:280px; object-fit:contain; filter:drop-shadow(0 15px 25px rgba(0,0,0,0.15)); margin-bottom:20px;">
-                        <span class="po-batch-badge"><i class="fa-solid fa-gem"></i> Batch 01</span>
-                        <h3 style="font-family:var(--po-font-serif); font-size:1.8rem; margin:10px 0 4px;">${product.name}</h3>
-                        <p style="font-size:0.8rem; color:var(--po-text-muted); margin:0 0 16px;">${product.family} · ${product.gender === 'male' ? 'For Him' : (product.gender === 'female' ? 'For Her' : 'Universal')}</p>
-                        <div style="font-family:var(--po-font-serif); font-size:1.6rem; font-weight:600; color:var(--po-gold-dark);">
-                            ₹${sizeInfo.priceDiscounted.toLocaleString('en-IN')}
-                            <span style="font-size:0.9rem; text-decoration:line-through; color:var(--po-text-muted); margin-left:6px;">₹${sizeInfo.priceOriginal.toLocaleString('en-IN')}</span>
+                <div class="po-modal-notes-grid">
+                    <!-- Left: XLNC-Style Interactive Product Gallery -->
+                    <div class="po-modal-gallery-col">
+                        <div class="po-modal-hero-wrap" id="po-modal-hero-wrap" onclick="togglePoModalZoom(event)">
+                            <img src="${product.images[initialIdx] || product.image}" alt="${product.name}" class="po-modal-hero-img" id="po-modal-active-img">
+                            
+                            <button type="button" class="po-modal-zoom-btn" onclick="togglePoModalZoom(event)" aria-label="Toggle zoom preview" title="Click to inspect detail">
+                                <i class="fa-solid fa-magnifying-glass-plus" id="po-modal-zoom-icon"></i>
+                            </button>
+
+                            ${product.images.length > 1 ? `
+                            <button type="button" class="po-modal-nav-arrow prev" onclick="navigatePoModalGallery(-1); event.stopPropagation();" aria-label="Previous view">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <button type="button" class="po-modal-nav-arrow next" onclick="navigatePoModalGallery(1); event.stopPropagation();" aria-label="Next view">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                            <div class="po-modal-counter">
+                                <span id="po-modal-counter-text">${initialIdx + 1} / ${product.images.length}</span>
+                            </div>
+                            ` : ''}
+                        </div>
+
+                        <!-- XLNC Interactive Thumbnail Strip -->
+                        ${product.images.length > 1 ? `
+                        <div class="po-modal-thumbs-strip" id="po-modal-thumbs-strip">
+                            ${product.images.map((img, idx) => {
+                                const thumbLabel = idx === 0 ? "50ml Flacon" : (idx === 1 && img.includes("15") ? "15ml Travel" : "Notes & Accords");
+                                const badgeText = idx === 0 ? "50ml" : (idx === 1 && img.includes("15") ? "15ml" : "Notes");
+                                return `
+                                <button type="button" 
+                                        class="po-modal-thumb ${idx === initialIdx ? 'active' : ''}" 
+                                        data-index="${idx}" 
+                                        onclick="setPoModalImage(${idx})"
+                                        aria-label="View photo ${idx + 1}: ${thumbLabel}"
+                                        title="${thumbLabel}">
+                                    <img src="${img}" alt="${product.name} angle ${idx + 1}" loading="lazy">
+                                    <span class="po-modal-thumb-badge">${badgeText}</span>
+                                </button>
+                            `}).join("")}
+                        </div>
+                        ` : ''}
+
+                        <div class="po-modal-meta-box">
+                            <span class="po-batch-badge"><i class="fa-solid fa-gem"></i> Batch 01 Reserved</span>
+                            <h3 class="po-modal-title">${product.name}</h3>
+                            <p class="po-modal-family">${product.family} · ${product.gender === 'male' ? 'For Him' : (product.gender === 'female' ? 'For Her' : 'Universal')}</p>
+                            <div class="po-modal-price" id="po-modal-price-display">
+                                ₹${sizeInfo.priceDiscounted.toLocaleString('en-IN')}
+                                <span class="po-modal-price-orig">₹${sizeInfo.priceOriginal.toLocaleString('en-IN')}</span>
+                            </div>
                         </div>
                     </div>
 
+                    <!-- Right: Overview, Notes Pyramid & Performance -->
                     <div style="padding:34px 28px;">
                         <!-- Scentira Style Tabs -->
                         <div style="display:flex; gap:8px; border-bottom:1px solid var(--po-border); padding-bottom:12px; margin-bottom:20px;">
@@ -2031,6 +2377,25 @@
                         <!-- Tab 1: Overview -->
                         <div id="tab-overview" style="display:${defaultTab === 'overview' ? 'block' : 'none'};">
                             <p style="font-size:0.9rem; line-height:1.6; color:var(--po-text); margin-bottom:16px;">${product.description}</p>
+                            
+                            <!-- Vessel Size Selector in Modal -->
+                            <div style="margin-bottom:18px;">
+                                <strong style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--po-gold-dark); display:block; margin-bottom:8px;">
+                                    Select Vessel Size:
+                                </strong>
+                                <div style="display:flex; gap:10px;">
+                                    ${product.sizes.map(s => `
+                                        <div class="po-size-chip ${s.size === chosenSize ? 'active' : ''}" 
+                                             id="po-modal-chip-${s.size}"
+                                             style="flex:1; cursor:pointer;"
+                                             onclick="switchPoModalSize(${product.id}, '${s.size}')">
+                                            <strong>${s.size}</strong>
+                                            <span>${s.size === '50ml' ? 'Full Flacon + Gift' : 'Travel Edition'}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+
                             <div style="background:#FFFDF9; border:1px solid var(--po-border); border-radius:4px; padding:12px 16px; margin-bottom:20px;">
                                 <strong style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--po-gold-dark); display:block; margin-bottom:4px;">
                                     <i class="fa-solid fa-wand-magic-sparkles"></i> Scent Summary:
@@ -2106,6 +2471,82 @@
             `;
 
             document.getElementById("po-notes-modal").classList.add("active");
+        };
+
+        window.setPoModalImage = function(idx) {
+            const product = PREORDER_PRODUCTS.find(p => p.id === poModalActiveProductId);
+            if (!product || !product.images[idx]) return;
+
+            poModalActiveImgIdx = idx;
+            const heroImg = document.getElementById("po-modal-active-img");
+            const heroWrap = document.getElementById("po-modal-hero-wrap");
+            const zoomIcon = document.getElementById("po-modal-zoom-icon");
+            if (heroWrap) heroWrap.classList.remove("is-zoomed");
+            if (zoomIcon) zoomIcon.className = "fa-solid fa-magnifying-glass-plus";
+
+            if (heroImg) {
+                heroImg.style.opacity = '0.35';
+                setTimeout(() => {
+                    heroImg.src = product.images[idx];
+                    heroImg.style.opacity = '1';
+                }, 100);
+            }
+
+            document.querySelectorAll(".po-modal-thumb").forEach(thumb => {
+                thumb.classList.toggle("active", parseInt(thumb.dataset.index) === idx);
+            });
+
+            const counterText = document.getElementById("po-modal-counter-text");
+            if (counterText) {
+                counterText.textContent = `${idx + 1} / ${product.images.length}`;
+            }
+        };
+
+        window.navigatePoModalGallery = function(dir) {
+            const product = PREORDER_PRODUCTS.find(p => p.id === poModalActiveProductId);
+            if (!product || product.images.length <= 1) return;
+
+            let nextIdx = (poModalActiveImgIdx + dir + product.images.length) % product.images.length;
+            setPoModalImage(nextIdx);
+        };
+
+        window.togglePoModalZoom = function(e) {
+            if (e) e.stopPropagation();
+            const wrap = document.getElementById("po-modal-hero-wrap");
+            const icon = document.getElementById("po-modal-zoom-icon");
+            if (!wrap) return;
+
+            wrap.classList.toggle("is-zoomed");
+            const isZoomed = wrap.classList.contains("is-zoomed");
+            if (icon) {
+                icon.className = isZoomed ? "fa-solid fa-magnifying-glass-minus" : "fa-solid fa-magnifying-glass-plus";
+            }
+        };
+
+        window.switchPoModalSize = function(productId, size) {
+            handleCardSizeSelect(null, productId, size);
+            const product = PREORDER_PRODUCTS.find(p => p.id === productId);
+            if (!product) return;
+
+            const sizeInfo = product.sizes.find(s => s.size === size) || product.sizes[0];
+            const priceEl = document.getElementById("po-modal-price-display");
+            if (priceEl) {
+                priceEl.innerHTML = `
+                    ₹${sizeInfo.priceDiscounted.toLocaleString('en-IN')}
+                    <span class="po-modal-price-orig">₹${sizeInfo.priceOriginal.toLocaleString('en-IN')}</span>
+                `;
+            }
+
+            document.querySelectorAll("#tab-overview .po-size-chip").forEach(chip => {
+                chip.classList.toggle("active", chip.querySelector("strong")?.textContent === size);
+            });
+
+            if (size === '15ml') {
+                const found15Idx = product.images.findIndex(img => img.toLowerCase().includes('15'));
+                if (found15Idx !== -1) setPoModalImage(found15Idx);
+            } else {
+                setPoModalImage(0);
+            }
         };
 
         window.switchNotesTab = function(tabName) {

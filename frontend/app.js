@@ -702,6 +702,12 @@ function updateCardImageDisplay(productId, product, images, activeIdx) {
         }, 90);
     }
 
+    const hoverImgEl = card.querySelector(`#card-hover-img-${productId}`);
+    if (hoverImgEl && images.length > 1) {
+        const nextHoverIdx = (activeIdx + 1) % images.length;
+        hoverImgEl.src = images[nextHoverIdx];
+    }
+
     // Update pagination dots
     const dots = card.querySelectorAll(".card-image-dot");
     dots.forEach((dot, i) => {
@@ -1674,15 +1680,23 @@ function renderProducts() {
         }
 
         const currentImg = images[activeIdx] || p.image;
+        const secondaryImg = images.length > 1 ? (images[(activeIdx + 1) % images.length] || images[1]) : null;
 
         return `
             <div class="product-card" data-id="${p.id}">
                 <span class="product-tag ${tagClass}">${edLabel}</span>
                 <div class="product-card-media" onclick="openProductModal(${p.id})">
-                    <img src="${currentImg}" alt="${p.name}" class="product-card-img" id="card-img-${p.id}" loading="lazy">
+                    <img src="${currentImg}" alt="${p.name}" class="product-card-img img-primary" id="card-img-${p.id}" loading="lazy">
+                    ${secondaryImg ? `
+                    <img src="${secondaryImg}" alt="${p.name} alternate view" class="product-card-img img-secondary" id="card-hover-img-${p.id}" loading="lazy">
+                    ` : ''}
 
                     ${images.length > 1 ? `
-                    <!-- Scentira-Style Floating Prev / Next Image Navigation Buttons -->
+                    <span class="product-card-multi-badge"><i class="fa-regular fa-images"></i> ${images.length} Views</span>
+                    ` : ''}
+
+                    ${images.length > 1 ? `
+                    <!-- XLNC & Scentira-Style Floating Prev / Next Image Navigation Buttons -->
                     <button type="button" 
                             class="card-image-page-button card-image-page-button--previous" 
                             onclick="navigateCardImage(event, ${p.id}, -1)" 
@@ -1696,7 +1710,7 @@ function renderProducts() {
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
 
-                    <!-- Scentira-Style Image Pagination Dots -->
+                    <!-- XLNC & Scentira-Style Image Pagination Dots -->
                     <div class="card-image-dots" onclick="event.stopPropagation()">
                         ${images.map((_, i) => `
                             <button type="button" 
@@ -1955,13 +1969,16 @@ window.openProductModal = function(id, defaultTab = "overview") {
 
     document.getElementById("modal-content-container").innerHTML = `
         <div class="modal-media modal-gallery-media">
-            <div class="modal-main-image-wrap">
+            <div class="modal-main-image-wrap" id="modal-main-image-wrap" onclick="toggleModalZoom(event)">
                 <img src="${currentModalImages[initialIdx]}" alt="${product.name}" id="modal-active-img" class="modal-img">
+                <button type="button" class="modal-zoom-btn" onclick="toggleModalZoom(event)" aria-label="Toggle zoom preview" title="Click to zoom">
+                    <i class="fa-solid fa-magnifying-glass-plus" id="modal-zoom-icon"></i>
+                </button>
                 ${currentModalImages.length > 1 ? `
-                    <button type="button" class="modal-nav-arrow prev" onclick="navigateModalGallery(-1)" aria-label="Previous image">
+                    <button type="button" class="modal-nav-arrow prev" onclick="navigateModalGallery(-1); event.stopPropagation();" aria-label="Previous image">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
-                    <button type="button" class="modal-nav-arrow next" onclick="navigateModalGallery(1)" aria-label="Next image">
+                    <button type="button" class="modal-nav-arrow next" onclick="navigateModalGallery(1); event.stopPropagation();" aria-label="Next image">
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
                     <div class="modal-image-counter">
@@ -1971,15 +1988,20 @@ window.openProductModal = function(id, defaultTab = "overview") {
             </div>
             ${currentModalImages.length > 1 ? `
                 <div class="modal-thumbs-strip" id="modal-thumbs-strip">
-                    ${currentModalImages.map((img, idx) => `
+                    ${currentModalImages.map((img, idx) => {
+                        const thumbLabel = idx === 0 ? "50ml Flacon" : (idx === 1 && img.includes("15") ? "15ml Travel" : "Notes & Accords");
+                        const badgeText = idx === 0 ? "50ml" : (idx === 1 && img.includes("15") ? "15ml" : "Notes");
+                        return `
                         <button type="button" 
                                 class="modal-thumb ${idx === initialIdx ? 'active' : ''}" 
                                 data-index="${idx}" 
                                 onclick="setModalActiveImage(${idx})"
-                                aria-label="View photo ${idx + 1}">
+                                aria-label="View photo ${idx + 1}: ${thumbLabel}"
+                                title="${thumbLabel}">
                             <img src="${img}" alt="${product.name} angle ${idx + 1}" loading="lazy">
+                            <span class="modal-thumb-badge">${badgeText}</span>
                         </button>
-                    `).join("")}
+                    `}).join("")}
                 </div>
             ` : ''}
         </div>
@@ -2186,6 +2208,11 @@ window.setModalActiveImage = function(idx) {
     if (!currentModalImages || !currentModalImages[idx]) return;
     currentModalImgIdx = idx;
     const mainImg = document.getElementById("modal-active-img");
+    const wrap = document.getElementById("modal-main-image-wrap");
+    const icon = document.getElementById("modal-zoom-icon");
+    if (wrap) wrap.classList.remove("is-zoomed");
+    if (icon) icon.className = "fa-solid fa-magnifying-glass-plus";
+
     if (mainImg) {
         mainImg.style.opacity = "0.35";
         setTimeout(() => {
@@ -2199,6 +2226,21 @@ window.setModalActiveImage = function(idx) {
     const counterText = document.getElementById("modal-image-counter-text");
     if (counterText) {
         counterText.textContent = `${idx + 1} / ${currentModalImages.length}`;
+    }
+};
+
+window.toggleModalZoom = function(e) {
+    if (e) {
+        e.stopPropagation();
+    }
+    const wrap = document.getElementById("modal-main-image-wrap");
+    const icon = document.getElementById("modal-zoom-icon");
+    if (!wrap) return;
+
+    wrap.classList.toggle("is-zoomed");
+    const isZoomed = wrap.classList.contains("is-zoomed");
+    if (icon) {
+        icon.className = isZoomed ? "fa-solid fa-magnifying-glass-minus" : "fa-solid fa-magnifying-glass-plus";
     }
 };
 

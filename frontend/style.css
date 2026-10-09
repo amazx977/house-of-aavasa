@@ -1629,7 +1629,43 @@ button {
     height: 100%;
     max-height: 540px;
     object-fit: cover;
-    transition: opacity 0.22s ease-in-out;
+    transition: opacity 0.22s ease-in-out, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: zoom-in;
+}
+
+.modal-main-image-wrap.is-zoomed .modal-img {
+    transform: scale(1.75);
+    cursor: zoom-out;
+}
+
+/* XLNC-Style Zoom Button */
+.modal-zoom-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(229, 223, 213, 0.95);
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.82rem;
+    cursor: pointer;
+    z-index: 7;
+    transition: all var(--transition-fast);
+    box-shadow: 0 4px 12px rgba(28, 26, 23, 0.12);
+}
+
+.modal-zoom-btn:hover {
+    background: #ffffff;
+    color: var(--color-accent-dark);
+    transform: scale(1.08);
+    box-shadow: 0 6px 16px rgba(28, 26, 23, 0.2);
 }
 
 .modal-nav-arrow {
@@ -1704,9 +1740,10 @@ button {
 }
 
 .modal-thumb {
-    width: 62px;
-    height: 62px;
-    border-radius: 4px;
+    position: relative;
+    width: 66px;
+    height: 66px;
+    border-radius: 6px;
     overflow: hidden;
     border: 2px solid transparent;
     background: var(--color-bg-alt);
@@ -1714,7 +1751,7 @@ button {
     flex-shrink: 0;
     padding: 0;
     transition: all var(--transition-fast);
-    opacity: 0.58;
+    opacity: 0.62;
 }
 
 .modal-thumb:hover {
@@ -1725,7 +1762,25 @@ button {
 .modal-thumb.active {
     border-color: var(--color-accent);
     opacity: 1;
-    box-shadow: 0 2px 10px rgba(197, 160, 89, 0.32);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(197, 160, 89, 0.38);
+}
+
+.modal-thumb-badge {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(28, 26, 23, 0.75);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    font-size: 0.55rem;
+    font-weight: 600;
+    padding: 1px 5px;
+    border-radius: 4px;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    pointer-events: none;
 }
 
 .modal-thumb img {
