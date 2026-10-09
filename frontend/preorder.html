@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>House of Aavasa | Batch 01 Pre-Order — Artisanal Normal Blends Allocation</title>
-    <meta name="description" content="Reserve your numbered flacon from Batch 01 of House of Aavasa's seven signature blends. Slow cold-macerated for 28 days with complimentary collar monogramming and 5ml travel gift.">
+    <title>House of Aavasa | Batch 01 Pre-Order — Artisanal Signature Blends</title>
+    <meta name="description" content="Reserve your flacon from Batch 01 of House of Aavasa's seven signature blends. Slow cold-macerated with complimentary bespoke collar monogramming and 5ml travel gift.">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,7 @@
 
     <style>
         /* ═══════════════════════════════════════════════════════════════════════
-           HOUSE OF AAVASA — BATCH 01 PRE-ORDER STYLING SYSTEM
+           HOUSE OF AAVASA — MINIMALIST PRE-ORDER STYLING SYSTEM
            ═══════════════════════════════════════════════════════════════════════ */
         :root {
             --po-bg: #FAF8F5;
@@ -27,14 +27,12 @@
             --po-gold: #C5A059;
             --po-gold-dark: #9F7E3B;
             --po-gold-light: #F7F1E5;
-            --po-burgundy: #6D1B29;
-            --po-success: #2E7D32;
             --po-radius: 4px;
-            --po-radius-lg: 12px;
+            --po-radius-lg: 10px;
             --po-font-serif: 'Cormorant Garamond', Georgia, serif;
             --po-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --po-shadow: 0 10px 30px rgba(28, 26, 23, 0.06);
-            --po-shadow-hover: 0 18px 45px rgba(28, 26, 23, 0.12);
+            --po-shadow: 0 8px 24px rgba(28, 26, 23, 0.05);
+            --po-shadow-hover: 0 16px 36px rgba(28, 26, 23, 0.09);
         }
 
         * {
@@ -53,40 +51,21 @@
             padding-bottom: env(safe-area-inset-bottom, 20px);
         }
 
-        /* ── TOP ANNOUNCEMENT BANNER ── */
+        /* ── TOP ANNOUNCEMENT BANNER (Minimalist) ── */
         .po-top-bar {
-            background: #151412;
-            color: #FAF8F5;
-            padding: 10px 20px;
+            background: #171614;
+            color: #EDE8DF;
+            padding: 9px 20px;
             font-size: 0.72rem;
-            letter-spacing: 0.16em;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
             text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            border-bottom: 1px solid rgba(197, 160, 89, 0.25);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
             position: relative;
             z-index: 101;
         }
 
-        .po-top-bar .live-dot {
-            width: 7px;
-            height: 7px;
-            background: #4ade80;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 8px #4ade80;
-            animation: poPulse 1.8s infinite ease-in-out;
-        }
-
-        @keyframes poPulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.35; transform: scale(0.85); }
-        }
-
-        /* ── PRE-ORDER HEADER ── */
+        /* ── HEADER ── */
         .po-header {
             position: sticky;
             top: 0;
@@ -95,7 +74,7 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--po-border);
-            padding: 14px 28px;
+            padding: 14px 32px;
             padding-top: max(14px, env(safe-area-inset-top));
             display: flex;
             align-items: center;
@@ -138,7 +117,7 @@
         .po-nav-links {
             display: flex;
             align-items: center;
-            gap: 22px;
+            gap: 24px;
         }
 
         .po-nav-link {
@@ -146,9 +125,8 @@
             text-decoration: none;
             color: var(--po-text);
             font-weight: 500;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.04em;
             transition: color 0.2s ease;
-            position: relative;
         }
 
         .po-nav-link:hover {
@@ -194,33 +172,31 @@
             line-height: 1;
         }
 
-        /* ── HERO ALLOCATION SECTION ── */
+        /* ── HERO SECTION (Quiet Luxury & Minimalist) ── */
         .po-hero {
-            padding: clamp(48px, 6vw, 76px) 20px 40px;
-            max-width: 1140px;
+            padding: clamp(56px, 8vw, 90px) 20px 48px;
+            max-width: 900px;
             margin: 0 auto;
             text-align: center;
         }
 
         .po-hero-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.72rem;
-            letter-spacing: 0.2em;
+            display: inline-block;
+            font-size: 0.7rem;
+            letter-spacing: 0.22em;
             text-transform: uppercase;
             color: var(--po-gold-dark);
-            background: rgba(197, 160, 89, 0.12);
-            border: 1px solid rgba(197, 160, 89, 0.35);
-            padding: 6px 14px;
+            background: rgba(197, 160, 89, 0.1);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            padding: 6px 16px;
             border-radius: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             font-weight: 600;
         }
 
         .po-hero-title {
             font-family: var(--po-font-serif);
-            font-size: clamp(2.3rem, 5.5vw, 3.8rem);
+            font-size: clamp(2.4rem, 5.5vw, 3.8rem);
             font-weight: 400;
             line-height: 1.12;
             color: var(--po-text);
@@ -234,127 +210,30 @@
         }
 
         .po-hero-desc {
-            font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+            font-size: clamp(0.95rem, 1.8vw, 1.08rem);
             color: var(--po-text-muted);
-            max-width: 720px;
+            max-width: 680px;
             margin: 0 auto 36px;
-            line-height: 1.65;
+            line-height: 1.7;
         }
 
-        /* Cellar Allocation Dashboard Card */
-        .po-dashboard-card {
-            background: #FFFFFF;
-            border: 1px solid var(--po-border);
-            border-radius: var(--po-radius-lg);
-            padding: 28px 24px;
-            box-shadow: var(--po-shadow);
-            max-width: 920px;
-            margin: 0 auto 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .po-dashboard-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #C5A059 0%, #D4AF37 50%, #A4813D 100%);
-        }
-
-        .po-metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid var(--po-border);
-            margin-bottom: 22px;
-        }
-
-        .po-metric-item {
-            text-align: center;
-        }
-
-        .po-metric-label {
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--po-text-muted);
-            margin-bottom: 6px;
-            display: block;
-            font-weight: 500;
-        }
-
-        .po-metric-val {
-            font-family: var(--po-font-serif);
-            font-size: 1.7rem;
-            font-weight: 600;
-            color: var(--po-text);
-            line-height: 1.1;
-        }
-
-        .po-metric-val.highlight {
-            color: var(--po-gold-dark);
-        }
-
-        .po-progress-wrap {
-            text-align: left;
-        }
-
-        .po-progress-header {
+        .po-hero-actions {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-            font-size: 0.78rem;
-            font-weight: 500;
-            color: var(--po-text);
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
         }
 
-        .po-progress-header span:last-child {
-            color: var(--po-gold-dark);
-            font-weight: 600;
-        }
-
-        .po-progress-bar-track {
-            width: 100%;
-            height: 10px;
-            background: var(--po-bg-alt);
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .po-progress-bar-fill {
-            height: 100%;
-            width: 76%;
-            background: linear-gradient(90deg, #A4813D, #C5A059, #F5D77F);
-            border-radius: 10px;
-            box-shadow: 0 0 12px rgba(197, 160, 89, 0.45);
-            transition: width 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        .po-progress-note {
-            font-size: 0.75rem;
-            color: var(--po-text-muted);
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* ── PRIVILEGES SECTION ── */
+        /* ── PRIVILEGES SECTION (Clean 3-Card Minimalist Grid) ── */
         .po-privileges-section {
             padding: 40px 20px 60px;
-            max-width: 1140px;
+            max-width: 1040px;
             margin: 0 auto;
         }
 
         .po-section-header {
             text-align: center;
-            margin-bottom: 36px;
+            margin-bottom: 38px;
         }
 
         .po-section-tag {
@@ -369,39 +248,39 @@
 
         .po-section-title {
             font-family: var(--po-font-serif);
-            font-size: clamp(1.8rem, 3.8vw, 2.5rem);
+            font-size: clamp(1.8rem, 3.8vw, 2.4rem);
             color: var(--po-text);
-            margin: 0 0 12px;
+            margin: 0 0 10px;
             font-weight: 400;
         }
 
         .po-section-subtitle {
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             color: var(--po-text-muted);
-            max-width: 600px;
+            max-width: 580px;
             margin: 0 auto;
             line-height: 1.6;
         }
 
         .po-privileges-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
         }
 
         .po-privilege-card {
             background: #FFFFFF;
             border: 1px solid var(--po-border);
             border-radius: var(--po-radius-lg);
-            padding: 24px 20px;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            padding: 28px 24px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
         }
 
         .po-privilege-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-3px);
             box-shadow: var(--po-shadow-hover);
             border-color: var(--po-gold);
         }
@@ -428,91 +307,16 @@
         }
 
         .po-privilege-desc {
-            font-size: 0.82rem;
+            font-size: 0.84rem;
             color: var(--po-text-muted);
             line-height: 1.55;
             margin: 0;
         }
 
-        /* ── MACERATION TRACKER SECTION ── */
-        .po-timeline-section {
-            background: var(--po-bg-alt);
-            border-top: 1px solid var(--po-border);
-            border-bottom: 1px solid var(--po-border);
-            padding: 50px 20px 60px;
-        }
-
-        .po-timeline-container {
-            max-width: 1040px;
-            margin: 0 auto;
-        }
-
-        .po-timeline-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            position: relative;
-            margin-top: 36px;
-        }
-
-        .po-timeline-card {
-            background: #FFFFFF;
-            border: 1px solid var(--po-border);
-            border-radius: var(--po-radius);
-            padding: 20px 16px;
-            position: relative;
-        }
-
-        .po-timeline-card.active {
-            border-color: var(--po-gold-dark);
-            box-shadow: 0 4px 16px rgba(197, 160, 89, 0.18);
-        }
-
-        .po-timeline-step-badge {
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            padding: 3px 8px;
-            border-radius: 12px;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        .po-timeline-card.done .po-timeline-step-badge {
-            background: #E8F5E9;
-            color: #2E7D32;
-        }
-
-        .po-timeline-card.active .po-timeline-step-badge {
-            background: #FFF8E1;
-            color: #B78103;
-        }
-
-        .po-timeline-card.upcoming .po-timeline-step-badge {
-            background: var(--po-bg-alt);
-            color: var(--po-text-muted);
-        }
-
-        .po-timeline-step-title {
-            font-family: var(--po-font-serif);
-            font-size: 1.15rem;
-            color: var(--po-text);
-            margin: 0 0 6px;
-            font-weight: 500;
-        }
-
-        .po-timeline-step-desc {
-            font-size: 0.78rem;
-            color: var(--po-text-muted);
-            line-height: 1.5;
-            margin: 0;
-        }
-
         /* ── CATALOG SECTION (NORMAL BLENDS ONLY) ── */
         .po-catalog-section {
-            padding: 60px 20px 80px;
-            max-width: 1180px;
+            padding: 50px 20px 80px;
+            max-width: 1140px;
             margin: 0 auto;
         }
 
@@ -522,12 +326,11 @@
             align-items: center;
             justify-content: space-between;
             gap: 16px;
-            padding: 16px 20px;
+            padding: 14px 20px;
             background: #FFFFFF;
             border: 1px solid var(--po-border);
             border-radius: var(--po-radius-lg);
-            margin-bottom: 36px;
-            box-shadow: 0 4px 14px rgba(28, 26, 23, 0.03);
+            margin-bottom: 34px;
         }
 
         .po-filter-groups {
@@ -581,7 +384,7 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             position: relative;
         }
 
@@ -591,7 +394,7 @@
             border-color: var(--po-gold);
         }
 
-        .po-card-allocation-tag {
+        .po-card-tag {
             position: absolute;
             top: 14px;
             left: 14px;
@@ -607,10 +410,10 @@
             backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
-        .po-card-allocation-tag i {
+        .po-card-tag i {
             color: var(--po-gold);
         }
 
@@ -819,19 +622,19 @@
         .po-size-chip.active {
             border-color: var(--po-gold-dark);
             background: #FFFDF9;
-            box-shadow: 0 2px 8px rgba(197, 160, 89, 0.2);
+            box-shadow: 0 2px 8px rgba(197, 160, 89, 0.18);
         }
 
         .po-size-chip.active strong {
             color: var(--po-gold-dark);
         }
 
-        /* Price & Reservation Privileges Row */
+        /* Price Row */
         .po-price-row {
             display: flex;
             align-items: baseline;
             gap: 10px;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
         .po-price-original {
@@ -873,7 +676,7 @@
             border-radius: var(--po-radius);
             font-size: 0.78rem;
             font-weight: 600;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -897,7 +700,7 @@
             border-radius: var(--po-radius);
             font-size: 0.75rem;
             font-weight: 600;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.05em;
             cursor: pointer;
             transition: all 0.2s ease;
             white-space: nowrap;
@@ -940,13 +743,13 @@
             max-height: 90dvh;
             overflow-y: auto;
             position: relative;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.22);
             border: 1px solid var(--po-border);
-            animation: poModalSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: poModalSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes poModalSlide {
-            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            from { opacity: 0; transform: translateY(16px) scale(0.98); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
@@ -1277,7 +1080,7 @@
 
         /* ── FAQ SECTION ── */
         .po-faq-section {
-            padding: 60px 20px 80px;
+            padding: 50px 20px 80px;
             max-width: 860px;
             margin: 0 auto;
         }
@@ -1341,10 +1144,13 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             .po-privileges-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
-            .po-timeline-grid {
-                grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 850px) {
+            .po-privileges-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1355,19 +1161,9 @@
             .po-nav-links {
                 display: none;
             }
-            .po-metrics-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 16px;
-            }
             .po-products-grid {
                 grid-template-columns: 1fr;
                 gap: 24px;
-            }
-            .po-privileges-grid {
-                grid-template-columns: 1fr;
-            }
-            .po-timeline-grid {
-                grid-template-columns: 1fr;
             }
             .po-res-grid {
                 grid-template-columns: 1fr;
@@ -1393,23 +1189,22 @@
 
     <!-- ── TOP PROMO BANNER ── -->
     <div class="po-top-bar">
-        <span><span class="live-dot"></span> BATCH 01 CELLAR ALLOCATION • ONLY 150 FLACONS PER BLEND • 28-DAY SLOW COLD MACERATION ACTIVE</span>
+        <span>✦ BATCH 01 PRE-ORDER &middot; BESPOKE COLLAR ENGRAVING INCLUDED</span>
     </div>
 
     <!-- ── NAVIGATION ── -->
     <header class="po-header">
         <a href="index.html" class="po-brand-wrap" title="Return to House of Aavasa homepage">
             <span class="po-brand-title">AAVASA</span>
-            <span class="po-batch-badge"><i class="fa-solid fa-gem"></i> Batch 01 Pre-Order</span>
+            <span class="po-batch-badge"><i class="fa-solid fa-gem"></i> Batch 01</span>
         </a>
 
         <nav class="po-nav-links">
             <a href="index.html" class="po-nav-link">The House</a>
-            <a href="index.html#catalog" class="po-nav-link">Main Catalog</a>
+            <a href="index.html#catalog" class="po-nav-link">Catalog</a>
             <a href="#preorder-catalog" class="po-nav-link">The 7 Blends</a>
-            <a href="#privileges-section" class="po-nav-link">Pre-Order Privileges</a>
-            <a href="#maceration-section" class="po-nav-link">Maceration Science</a>
-            <a href="reviews.html" class="po-nav-link">Consumer Reviews</a>
+            <a href="#privileges-section" class="po-nav-link">Privileges</a>
+            <a href="reviews.html" class="po-nav-link">Reviews</a>
             <a href="#faq-section" class="po-nav-link">FAQs</a>
         </nav>
 
@@ -1425,70 +1220,34 @@
         </div>
     </header>
 
-    <!-- ── HERO ALLOCATION DASHBOARD ── -->
-    <section class="po-hero" id="allocation-section">
+    <!-- ── HERO SECTION (Minimalist) ── -->
+    <section class="po-hero" id="hero-section">
         <div class="po-hero-eyebrow">
-            <span class="live-dot"></span> LIMITED CELLAR HARVEST · DAY 19 OF 28
+            BATCH 01 · MAIDEN HARVEST
         </div>
         <h1 class="po-hero-title">
-            The Maiden Harvest of <em>House of Aavasa</em>
+            The Pure Blends of <em>House of Aavasa</em>
         </h1>
         <p class="po-hero-desc">
-            Seven signature formulations undergoing our signature 28-day slow cold-maceration in dark steel flacons. Secure your individually numbered flacon from our premiere batch prior to national release.
+            Seven signature formulations compounded with artisanal precision. Reserve your flacon from our maiden release with complimentary bespoke collar engraving and a luxury 5ml travel gift.
         </p>
 
-        <!-- Cellar Allocation Dashboard Card -->
-        <div class="po-dashboard-card">
-            <div class="po-metrics-grid">
-                <div class="po-metric-item">
-                    <span class="po-metric-label">Allocation Status</span>
-                    <span class="po-metric-val highlight">76% Claimed</span>
-                </div>
-                <div class="po-metric-item">
-                    <span class="po-metric-label">Cellar Phase</span>
-                    <span class="po-metric-val">Day 19 / 28</span>
-                </div>
-                <div class="po-metric-item">
-                    <span class="po-metric-label">Batch Cap</span>
-                    <span class="po-metric-val">150 Flacons</span>
-                </div>
-                <div class="po-metric-item">
-                    <span class="po-metric-label">Est. Air Dispatch</span>
-                    <span class="po-metric-val highlight">Late Oct 2026</span>
-                </div>
-            </div>
-
-            <div class="po-progress-wrap">
-                <div class="po-progress-header">
-                    <span><strong>Batch 01 Global Reservation Progress</strong> (114 of 150 flacons reserved per blend)</span>
-                    <span>36 Flacons Remaining</span>
-                </div>
-                <div class="po-progress-bar-track">
-                    <div class="po-progress-bar-fill" id="po-progress-bar"></div>
-                </div>
-                <div class="po-progress-note">
-                    <i class="fa-solid fa-circle-check" style="color:var(--po-success);"></i>
-                    <span>Allocation strictly honoured in order of reservation timestamp. Complimentary bespoke laser monogramming included.</span>
-                </div>
-            </div>
-        </div>
-
-        <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
-            <a href="#preorder-catalog" class="po-btn-reserve" style="padding:14px 28px; text-decoration:none;">
-                <i class="fa-solid fa-gem"></i> Select From The 7 Blends
+        <div class="po-hero-actions">
+            <a href="#preorder-catalog" class="po-btn-reserve" style="padding:14px 30px; text-decoration:none;">
+                Explore The 7 Blends &darr;
             </a>
             <a href="#privileges-section" class="po-btn-bag" style="padding:14px 24px; text-decoration:none;">
-                Explore Patron Privileges &rarr;
+                Patron Privileges
             </a>
         </div>
     </section>
 
-    <!-- ── PRE-ORDER EXCLUSIVE PRIVILEGES ── -->
+    <!-- ── PRE-ORDER PRIVILEGES (Clean 3-Card Grid) ── -->
     <section class="po-privileges-section" id="privileges-section">
         <div class="po-section-header">
             <span class="po-section-tag">Batch 01 Patronage</span>
-            <h2 class="po-section-title">The Pre-Order Privileges</h2>
-            <p class="po-section-subtitle">Every Batch 01 reservation is treated as an inaugural patron of our artisanal perfumery house.</p>
+            <h2 class="po-section-title">Pre-Order Privileges</h2>
+            <p class="po-section-subtitle">Every pre-order reservation is prepared with personalized attention from our perfumery atelier.</p>
         </div>
 
         <div class="po-privileges-grid">
@@ -1505,46 +1264,7 @@
             <div class="po-privilege-card">
                 <div class="po-privilege-icon"><i class="fa-solid fa-certificate"></i></div>
                 <h3 class="po-privilege-title">Wax-Sealed Certificate</h3>
-                <p class="po-privilege-desc">An individually numbered Certificate of Batch Allocation signed by our master compounder and sealed in hot burgundy wax.</p>
-            </div>
-            <div class="po-privilege-card">
-                <div class="po-privilege-icon"><i class="fa-solid fa-plane-departure"></i></div>
-                <h3 class="po-privilege-title">Priority Air Courier</h3>
-                <p class="po-privilege-desc">Dispatched within 48 hours of final cryo-filtration in temperature-controlled protective presentation packaging.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ── MACERATION SCIENCE TIMELINE ── -->
-    <section class="po-timeline-section" id="maceration-section">
-        <div class="po-timeline-container">
-            <div class="po-section-header">
-                <span class="po-section-tag">Cellar Chronology</span>
-                <h2 class="po-section-title">Why Batch 01 is Pre-Ordered</h2>
-                <p class="po-section-subtitle">True artisanal perfumery cannot be rushed. Discover the 28-day maturation journey occurring right now.</p>
-            </div>
-
-            <div class="po-timeline-grid">
-                <div class="po-timeline-card done">
-                    <span class="po-timeline-step-badge">Completed · Day 1</span>
-                    <h3 class="po-timeline-step-title">1. Essential Compounding</h3>
-                    <p class="po-timeline-step-desc">Pure perfume oils blended with organic grain alcohol in temperature-controlled dark chambers.</p>
-                </div>
-                <div class="po-timeline-card active">
-                    <span class="po-timeline-step-badge">Active Now · Day 19 of 28</span>
-                    <h3 class="po-timeline-step-title">2. Cold Maceration</h3>
-                    <p class="po-timeline-step-desc">Molecular binding of woods, spices, and floras at steady 16°C. Sillage density increases by 34%.</p>
-                </div>
-                <div class="po-timeline-card upcoming">
-                    <span class="po-timeline-step-badge">Day 28 · Maturation End</span>
-                    <h3 class="po-timeline-step-title">3. Cryo Micro-Filtration</h3>
-                    <p class="po-timeline-step-desc">Chilled micro-filtration removes precipitation, leaving an ultra-clear, luminous fragrant elixir.</p>
-                </div>
-                <div class="po-timeline-card upcoming">
-                    <span class="po-timeline-step-badge">Late Oct 2026</span>
-                    <h3 class="po-timeline-step-title">4. Wax Seal & Air Dispatch</h3>
-                    <p class="po-timeline-step-desc">Hand-bottled, collar engraved with your monogram, boxed with numbered certificate, and dispatched.</p>
-                </div>
+                <p class="po-privilege-desc">An individually numbered Certificate of Authenticity signed by our compounder and sealed in hot wax with every flacon.</p>
             </div>
         </div>
     </section>
@@ -1552,9 +1272,9 @@
     <!-- ── CATALOG: THE 7 SIGNATURE NORMAL BLENDS ── -->
     <section class="po-catalog-section" id="preorder-catalog">
         <div class="po-section-header">
-            <span class="po-section-tag">Artisanal Normal Blends</span>
-            <h2 class="po-section-title">The 7 Pre-Order Formulations</h2>
-            <p class="po-section-subtitle">Exclusively featuring our individual signature flacons. Multi-fragrance discovery sets are excluded from Batch 01 allocation.</p>
+            <span class="po-section-tag">Private Pre-Order</span>
+            <h2 class="po-section-title">The 7 Signature Blends</h2>
+            <p class="po-section-subtitle">Exclusively featuring our individual signature flacons.</p>
         </div>
 
         <!-- Filter Bar -->
@@ -1566,7 +1286,7 @@
                 <button class="po-filter-btn" data-filter="unisex" onclick="filterPreorderCatalog('unisex')">Universal (1)</button>
             </div>
             <div class="po-catalog-counter" id="po-catalog-counter">
-                Showing 7 of 7 Cellar Blends
+                7 Formulations Available
             </div>
         </div>
 
@@ -1579,9 +1299,9 @@
     <!-- ── FREQUENTLY ASKED QUESTIONS ── -->
     <section class="po-faq-section" id="faq-section">
         <div class="po-section-header">
-            <span class="po-section-tag">Clarity & Confidence</span>
+            <span class="po-section-tag">Frequently Asked</span>
             <h2 class="po-section-title">Pre-Order Inquiries</h2>
-            <p class="po-section-subtitle">Everything you need to know regarding Batch 01 reservations and cellar dispatch.</p>
+            <p class="po-section-subtitle">Key information regarding Batch 01 reservations and dispatch.</p>
         </div>
 
         <div class="po-faq-list">
@@ -1591,7 +1311,7 @@
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div class="po-faq-answer">
-                    Batch 01 represents the virgin extraction and cellar bottling of House of Aavasa. Capped strictly at 150 flacons per formulation, each bottle receives hand-poured attention, slow 28-day cold maceration, complimentary laser monogramming, and an archival wax-sealed authenticity certificate.
+                    Batch 01 represents the virgin extraction and cellar bottling of House of Aavasa. Each bottle receives hand-poured attention, slow cold maceration, complimentary laser monogramming, and an archival wax-sealed authenticity certificate.
                 </div>
             </div>
             <div class="po-faq-item">
@@ -1600,7 +1320,7 @@
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div class="po-faq-answer">
-                    Maceration concludes on Day 28 (late October 2026). Bottles will undergo micro-filtration, hand-bottling, and collar engraving, before shipping via 48-hour priority air courier across India. You will receive active WhatsApp and SMS tracking the moment your flacon departs the cellar.
+                    Bottles will undergo micro-filtration, hand-bottling, and collar engraving, before shipping via express insured courier across India in late October 2026. You will receive active tracking the moment your flacon departs our atelier.
                 </div>
             </div>
             <div class="po-faq-item">
@@ -1609,7 +1329,7 @@
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div class="po-faq-answer">
-                    Yes. You may reserve your numbered flacon today with zero advance payment. You simply pay upon courier delivery at your doorstep when the matured bottle arrives in late October.
+                    Yes. You may reserve your flacon today with zero advance payment. You simply pay upon courier delivery at your doorstep when the bottle arrives.
                 </div>
             </div>
             <div class="po-faq-item">
@@ -1627,7 +1347,7 @@
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div class="po-faq-answer">
-                    Absolutely. Reservations can be updated or cancelled at any time up until 48 hours prior to bottling dispatch by emailing concierge@houseofaavasa.com or messaging our concierge line.
+                    Yes. Reservations can be updated or cancelled at any time up until dispatch by contacting concierge@houseofaavasa.com.
                 </div>
             </div>
         </div>
@@ -1649,7 +1369,7 @@
             <div class="po-res-grid">
                 <!-- Summary Column -->
                 <div class="po-res-summary-col">
-                    <span class="po-batch-badge" style="margin-bottom:16px;"><i class="fa-solid fa-gem"></i> Batch 01 Allocation</span>
+                    <span class="po-batch-badge" style="margin-bottom:16px;"><i class="fa-solid fa-gem"></i> Batch 01</span>
                     <div class="po-res-img-wrap">
                         <img id="res-summary-img" src="" alt="Flacon preview">
                         <div class="po-monogram-visualizer">
@@ -1664,7 +1384,7 @@
                             <span style="font-size:0.75rem; color:var(--po-text-muted);">Reservation Price:</span>
                             <strong id="res-summary-price" style="font-family:var(--po-font-serif); font-size:1.4rem; color:var(--po-gold-dark);"></strong>
                         </div>
-                        <div style="font-size:0.68rem; color:var(--po-success); margin-top:4px;">
+                        <div style="font-size:0.68rem; color:#2E7D32; margin-top:4px;">
                             <i class="fa-solid fa-check"></i> Free 5ml Travel Atomizer Included
                         </div>
                     </div>
@@ -1673,7 +1393,7 @@
                 <!-- Form Details Column -->
                 <div class="po-res-details-col">
                     <h3 class="po-res-form-title">Reserve Your Flacon</h3>
-                    <p class="po-res-form-sub">Lock in your numbered Batch 01 reservation. Your flacon will be personalized and cold-dispatched in late October 2026.</p>
+                    <p class="po-res-form-sub">Your flacon will be handcrafted with personalized collar engraving and dispatched in late October 2026.</p>
 
                     <form id="po-reservation-form" onsubmit="handleReservationSubmit(event)">
                         <!-- Monogram Input -->
@@ -1689,24 +1409,24 @@
                                    placeholder="e.g. RSM" 
                                    oninput="updateMonogramPreview(this.value)">
                             <div style="font-size:0.68rem; color:var(--po-text-muted); text-align:center; margin-top:6px;">
-                                Laser-etched onto the mirror-finish 24K-gold electroplated collar.
+                                Laser-etched onto the polished gold flacon collar.
                             </div>
                         </div>
 
                         <!-- Customer Details -->
                         <div class="po-form-group">
-                            <label class="po-form-label" for="po-res-name">Patron Full Name *</label>
-                            <input type="text" id="po-res-name" class="po-form-input" placeholder="Full name for Certificate of Authenticity" required>
+                            <label class="po-form-label" for="po-res-name">Full Name *</label>
+                            <input type="text" id="po-res-name" class="po-form-input" placeholder="Name for Certificate of Authenticity" required>
                         </div>
 
                         <div class="po-form-row-2">
                             <div class="po-form-group">
                                 <label class="po-form-label" for="po-res-phone">Mobile Number *</label>
-                                <input type="tel" id="po-res-phone" class="po-form-input" placeholder="For WhatsApp dispatch tracking" required>
+                                <input type="tel" id="po-res-phone" class="po-form-input" placeholder="For dispatch updates" required>
                             </div>
                             <div class="po-form-group">
                                 <label class="po-form-label" for="po-res-email">Email Address *</label>
-                                <input type="email" id="po-res-email" class="po-form-input" placeholder="To receive your digital certificate" required>
+                                <input type="email" id="po-res-email" class="po-form-input" placeholder="For reservation confirmation" required>
                             </div>
                         </div>
 
@@ -1750,7 +1470,7 @@
                         </div>
 
                         <button type="submit" class="po-btn-submit-res" id="po-submit-btn">
-                            <i class="fa-solid fa-stamp"></i> Confirm Batch 01 Reservation
+                            <i class="fa-solid fa-check"></i> Confirm Batch 01 Reservation
                         </button>
                     </form>
                 </div>
@@ -1760,14 +1480,14 @@
 
     <!-- ── RESERVATION SUCCESS & CERTIFICATE MODAL ── -->
     <div class="po-modal-overlay" id="po-cert-modal">
-        <div class="po-modal-container" style="max-width: 600px; background:transparent; border:none; box-shadow:none;">
+        <div class="po-modal-container" style="max-width: 580px; background:transparent; border:none; box-shadow:none;">
             <div class="po-cert-card">
                 <button class="po-modal-close-btn" onclick="closeCertModal()"><i class="fa-solid fa-xmark"></i></button>
 
                 <div class="po-cert-wax-seal">
                     <i class="fa-solid fa-award"></i>
                 </div>
-                <div class="po-cert-eyebrow">HOUSE OF AAVASA · CELLAR ALLOCATION</div>
+                <div class="po-cert-eyebrow">HOUSE OF AAVASA</div>
                 <h2 class="po-cert-title">Certificate of Reservation</h2>
                 <div class="po-cert-divider"></div>
 
@@ -1785,25 +1505,25 @@
                         <span id="cert-blend-size">50ml Full Flacon</span>
                     </div>
                     <div class="po-cert-meta-row">
-                        <span>Bespoke Collar Monogram:</span>
+                        <span>Collar Monogram:</span>
                         <span id="cert-monogram" style="letter-spacing:0.15em;">A · V · S</span>
                     </div>
                     <div class="po-cert-meta-row">
                         <span>Registered Patron:</span>
-                        <span id="cert-patron-name">Rahul Sharma</span>
+                        <span id="cert-patron-name">Patron Name</span>
                     </div>
                     <div class="po-cert-meta-row">
                         <span>Payment Status:</span>
                         <span id="cert-payment-status">Confirmed</span>
                     </div>
                     <div class="po-cert-meta-row">
-                        <span>Est. Cellar Air Dispatch:</span>
+                        <span>Estimated Delivery:</span>
                         <span>Late October 2026</span>
                     </div>
                 </div>
 
                 <p style="font-size:0.78rem; color:var(--po-text-muted); line-height:1.5; margin-bottom:24px;">
-                    Your flacon is securely maturing in our cold cellar. A digital copy of this certificate along with receipt details has been sent to your email.
+                    Your flacon is securely registered in our atelier. A digital copy of this confirmation has been dispatched to your email.
                 </p>
 
                 <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
@@ -1811,7 +1531,7 @@
                         <i class="fa-solid fa-print"></i> Print Certificate
                     </button>
                     <button class="po-btn-reserve" onclick="closeCertModal(); openPreorderCart();" style="padding:12px 24px;">
-                        <i class="fa-solid fa-bag-shopping"></i> View My Bag / Reservations
+                        <i class="fa-solid fa-bag-shopping"></i> View Bag / Reservations
                     </button>
                 </div>
             </div>
@@ -1838,18 +1558,18 @@
                     Continue Shopping Full Catalog
                 </a>
                 <button class="btn btn-primary" id="po-drawer-checkout-btn" onclick="goToStoreCheckout()">
-                    Proceed to Standard Checkout &rarr;
+                    Proceed to Checkout &rarr;
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- ── LUXURY FOOTER ── -->
+    <!-- ── FOOTER ── -->
     <footer class="main-footer" style="margin-top:60px;">
         <div class="footer-container">
             <div class="footer-brand">
                 <a href="index.html" class="footer-logo">AAVASA</a>
-                <p class="footer-tagline">Artisanal Indian perfumery crafted through slow cold maceration.</p>
+                <p class="footer-tagline">Artisanal Indian perfumery crafted with pure botanical essences.</p>
                 <div class="footer-socials">
                     <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
                     <a href="#" aria-label="Pinterest"><i class="fa-brands fa-pinterest"></i></a>
@@ -1857,10 +1577,9 @@
                 </div>
             </div>
             <div class="footer-links-group">
-                <h4>Batch 01 Privileges</h4>
+                <h4>Batch 01 Pre-Order</h4>
                 <a href="#preorder-catalog">The 7 Formulations</a>
                 <a href="#privileges-section">Complimentary Monogram</a>
-                <a href="#maceration-section">28-Day Cold Maturation</a>
                 <a href="#faq-section">Pre-Order FAQs</a>
             </div>
             <div class="footer-links-group">
@@ -1871,9 +1590,9 @@
                 <a href="index.html#catalog">Standard Collection</a>
             </div>
             <div class="footer-newsletter">
-                <h4>Cellar Allocation Alerts</h4>
-                <p>Receive live dispatch notifications and private invitations to Batch 02.</p>
-                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('You are on the Batch 01 VIP Dispatch Gazette.');">
+                <h4>The Gazette</h4>
+                <p>Receive notifications for private releases and olfactive essays.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('You are subscribed to House of Aavasa.');">
                     <input type="email" placeholder="Enter your email" required aria-label="Newsletter email">
                     <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-arrow-right"></i></button>
                 </form>
@@ -1908,8 +1627,7 @@
                 image: "media/Morning.png",
                 images: ["media/Morning.png", "media/morning15.jpg", "media/citrus.png"],
                 notes: "Calabrian Bergamot, Lemon Zest, Fresh Mint, Virginia Cedarwood",
-                description: "Captures the crystalline vibrancy of a sunlit morning — cold-pressed Italian citrus bursting over crisp spearmint, structured by enduring cedarwood.",
-                remainingAllocation: 34
+                description: "Captures the crystalline vibrancy of a sunlit morning — cold-pressed Italian citrus bursting over crisp spearmint, structured by enduring cedarwood."
             },
             {
                 id: 2,
@@ -1925,8 +1643,7 @@
                 image: "media/Night.png",
                 images: ["media/Night.png", "media/night15.jpg", "media/amber.png"],
                 notes: "Mysore Sandalwood, Cinnamon, Boozy Cognac, Muted Iris, Praline",
-                description: "An intoxicating interpretation of masculine warmth. Rich Mysore sandalwood bathed in boozy aged cognac and festive Ceylon cinnamon.",
-                remainingAllocation: 28
+                description: "An intoxicating interpretation of masculine warmth. Rich Mysore sandalwood bathed in boozy aged cognac and festive Ceylon cinnamon."
             },
             {
                 id: 3,
@@ -1942,8 +1659,7 @@
                 image: "media/Timeless.png",
                 images: ["media/Timeless.png", "media/timeless15.jpg", "media/citrus.png"],
                 notes: "Sea Salt Crystals, White Sage, Pink Grapefruit, Sun-Bleached Driftwood",
-                description: "Mineral-rich and bracing. Sun-bleached driftwood weathered by ocean breezes, elevated by sparkling pink grapefruit and purifying white sage.",
-                remainingAllocation: 38
+                description: "Mineral-rich and bracing. Sun-bleached driftwood weathered by ocean breezes, elevated by sparkling pink grapefruit and purifying white sage."
             },
             {
                 id: 4,
@@ -1959,8 +1675,7 @@
                 image: "media/Euphoria.png",
                 images: ["media/Euphoria.png", "media/amber.png", "media/hero.png"],
                 notes: "Black Cherry, Nutmeg, Rare Ambergris, Dry Cedarwood",
-                description: "Fiery black cherry liqueur wrapped in exotic nutmeg and the animalic, sun-warmed undertones of rare mineral ambergris.",
-                remainingAllocation: 31
+                description: "Fiery black cherry liqueur wrapped in exotic nutmeg and the animalic, sun-warmed undertones of rare mineral ambergris."
             },
             {
                 id: 12,
@@ -1976,8 +1691,7 @@
                 image: "media/Petal Kiss.png",
                 images: ["media/Petal Kiss.png", "media/petal15.jpg", "media/floral.png"],
                 notes: "Orange Blossom, Bright Rose, Green Apple, White Musk",
-                description: "Luminous, dew-kissed petals. Sunlit Grasse orange blossoms and crisp green apples resting against ethereal cashmere musk.",
-                remainingAllocation: 42
+                description: "Luminous, dew-kissed petals. Sunlit Grasse orange blossoms and crisp green apples resting against ethereal cashmere musk."
             },
             {
                 id: 13,
@@ -1993,8 +1707,7 @@
                 image: "media/Dusky Rose.png",
                 images: ["media/Dusky Rose.png", "media/dusky15.jpg", "media/floral.png"],
                 notes: "Damask Rose, Wild Honey, Soft Leather, Roasted Coffee",
-                description: "A dark, seductive ode to nocturnal romance. Opulent Turkish Damask rose infused with raw golden honey, smoky leather, and artisanal espresso.",
-                remainingAllocation: 29
+                description: "A dark, seductive ode to nocturnal romance. Opulent Turkish Damask rose infused with raw golden honey, smoky leather, and artisanal espresso."
             },
             {
                 id: 14,
@@ -2010,8 +1723,7 @@
                 image: "media/Adore.png",
                 images: ["media/Adore.png", "media/adore15.jpg", "media/amber.png"],
                 notes: "Vanilla Bean, Night Orchid, Sandalwood, Coconut Milk",
-                description: "Sensual, comforting indulgence. Night-blooming orchids steeped in velvety coconut milk and warm Madagascan vanilla bean.",
-                remainingAllocation: 35
+                description: "Sensual, comforting indulgence. Night-blooming orchids steeped in velvety coconut milk and warm Madagascan vanilla bean."
             }
         ];
 
@@ -2023,12 +1735,6 @@
                     heart: { title: "Heart Notes", duration: "Core 2–4 hours", notes: ["French Lavender", "Orange Blossom", "Crushed Thyme"], desc: "Subtle Provencal herbs blowing over an azure coast." },
                     base: { title: "Base Notes", duration: "Dry-down 8–10 hours", notes: ["Virginia Cedarwood", "Haitian Vetiver", "Clean White Musk"], desc: "Dry, architectural cedarwood with grounding earthy vetiver." }
                 },
-                featured: [
-                    { name: "Calabrian Bergamot", role: "Top Note", icon: "fa-solid fa-lemon", desc: "Zesty solar citrus." },
-                    { name: "Fresh Spearmint", role: "Top Note", icon: "fa-solid fa-leaf", desc: "Botanical cooling freshness." },
-                    { name: "French Lavender", role: "Heart Note", icon: "fa-solid fa-spa", desc: "Serene Provencal lavender." },
-                    { name: "Virginia Cedarwood", role: "Base Note", icon: "fa-solid fa-tree", desc: "Noble pencil-shaving cedar." }
-                ],
                 performance: { longevity: "8–10 Hours", sillage: "Moderate to Radiant (4–5 ft)", concentration: "Extrait (22% Oil)", season: "Spring & Summer", timeOfDay: "Daytime & Crisp Morning" }
             },
             2: { // Night King
@@ -2037,12 +1743,6 @@
                     heart: { title: "Heart Notes", duration: "Core 2–4 hours", notes: ["Muted Tuscan Iris", "Roasted Praline", "Tonka Bean"], desc: "Silky powdery iris dusted with caramelized hazelnut praline." },
                     base: { title: "Base Notes", duration: "Dry-down 10–14 hours", notes: ["Mysore Sandalwood", "Bourbon Vanilla", "Smoked Amber"], desc: "Buttery Indian sandalwood paired with balsamic vanilla resin." }
                 },
-                featured: [
-                    { name: "Mysore Sandalwood", role: "Base Note", icon: "fa-solid fa-tree", desc: "Authentic buttery Indian sandalwood." },
-                    { name: "Ceylon Cinnamon", role: "Top Note", icon: "fa-solid fa-fire", desc: "Festive, sultry spice." },
-                    { name: "Cognac Accord", role: "Top Note", icon: "fa-solid fa-wine-glass", desc: "Aged oak liquor nuances." },
-                    { name: "Bourbon Vanilla", role: "Base Note", icon: "fa-solid fa-gem", desc: "Rich Madagascan vanilla pods." }
-                ],
                 performance: { longevity: "10–14 Hours", sillage: "Enveloping & Heavy (6 ft)", concentration: "Extrait de Parfum (28%)", season: "Autumn & Winter", timeOfDay: "Golden Evening & Midnight" }
             },
             3: { // Timeless
@@ -2051,12 +1751,6 @@
                     heart: { title: "Heart Notes", duration: "Core 2–4 hours", notes: ["Coastal White Sage", "Juniper Berry", "Crushed Rosemary"], desc: "Wild herbs baking on seaside cliffs." },
                     base: { title: "Base Notes", duration: "Dry-down 8–10 hours", notes: ["Sun-Bleached Driftwood", "Earthy Oakmoss", "Ambrette Seed"], desc: "Dry, sun-cured oceanic timber and soft musk." }
                 },
-                featured: [
-                    { name: "Sea Salt Crystals", role: "Top Note", icon: "fa-solid fa-water", desc: "Mineral marine freshness." },
-                    { name: "White Sage", role: "Heart Note", icon: "fa-solid fa-wind", desc: "Untamed coastal herbal spirit." },
-                    { name: "Pink Grapefruit", role: "Top Note", icon: "fa-solid fa-lemon", desc: "Ruby citrus spark." },
-                    { name: "Sun-Bleached Driftwood", role: "Base Note", icon: "fa-solid fa-tree", desc: "Aromatic salty wood." }
-                ],
                 performance: { longevity: "8–10 Hours", sillage: "Moderate & Radiant", concentration: "Eau de Parfum (20%)", season: "Spring, Summer, Monsoon", timeOfDay: "Sunrise to Sunset" }
             },
             4: { // Euphoria
@@ -2065,12 +1759,6 @@
                     heart: { title: "Heart Notes", duration: "Core 2–4 hours", notes: ["Turkish Rose", "Bitter Almond", "Smoked Labdanum"], desc: "Velvety crimson petals and toasted almond confection." },
                     base: { title: "Base Notes", duration: "Dry-down 10–14 hours", notes: ["Rare Ambergris", "Dry Cedarwood", "Golden Amber"], desc: "Animalic ocean ambergris anchored by smoky cedar." }
                 },
-                featured: [
-                    { name: "Black Cherry", role: "Top Note", icon: "fa-solid fa-apple-whole", desc: "Hypnotic, boozy stone fruit." },
-                    { name: "Rare Ambergris", role: "Base Note", icon: "fa-solid fa-gem", desc: "Sensual warm mineral amber." },
-                    { name: "Nutmeg", role: "Top Note", icon: "fa-solid fa-fire", desc: "Fiery culinary warmth." },
-                    { name: "Dry Cedarwood", role: "Base Note", icon: "fa-solid fa-tree", desc: "Smoky structure." }
-                ],
                 performance: { longevity: "10–14 Hours", sillage: "Intense & Magnetic", concentration: "Extrait de Parfum (25%)", season: "Fall & Winter", timeOfDay: "Nocturnal & Gala Evenings" }
             },
             12: { // Petal Kiss
@@ -2079,12 +1767,6 @@
                     heart: { title: "Heart Notes", duration: "Core 2–4 hours", notes: ["Bright Rose Petals", "Jasmine Sambac", "White Lily"], desc: "A lush garden bouquet in early spring." },
                     base: { title: "Base Notes", duration: "Dry-down 7–10 hours", notes: ["Cashmere Musk", "Blonde Cedar", "Solar Amber"], desc: "Silky, warm skin musk that whispers elegance." }
                 },
-                featured: [
-                    { name: "Orange Blossom", role: "Top Note", icon: "fa-solid fa-spa", desc: "Grasse floral radiance." },
-                    { name: "Green Apple", role: "Top Note", icon: "fa-solid fa-apple-whole", desc: "Crisp, vibrant bite." },
-                    { name: "Bright Rose", role: "Heart Note", icon: "fa-solid fa-clover", desc: "Morning-picked rose petals." },
-                    { name: "Cashmere Musk", role: "Base Note", icon: "fa-solid fa-feather", desc: "Soft, clean silk comfort." }
-                ],
                 performance: { longevity: "8–10 Hours", sillage: "Graceful & Delicate (3–4 ft)", concentration: "Eau de Parfum (20%)", season: "Spring & Summer", timeOfDay: "Daytime, Brunch, Rendezvous" }
             },
             13: { // Dusky Rose
@@ -2093,12 +1775,6 @@
                     heart: { title: "Heart Notes", duration: "Core 2–4 hours", notes: ["Damask Rose", "Artisanal Coffee", "Frankincense"], desc: "Gothic crimson rose tempered with dark roasted espresso." },
                     base: { title: "Base Notes", duration: "Dry-down 10–14 hours", notes: ["Tuscan Leather", "Indonesian Patchouli", "Velvet Amber"], desc: "Moody smoky suede and damp earthy resins." }
                 },
-                featured: [
-                    { name: "Damask Rose", role: "Heart Note", icon: "fa-solid fa-spa", desc: "Opulent crimson Gothic rose." },
-                    { name: "Wild Honey", role: "Top Note", icon: "fa-solid fa-jar", desc: "Sweet, golden nectar." },
-                    { name: "Roasted Coffee", role: "Heart Note", icon: "fa-solid fa-mug-hot", desc: "Bittersweet artisanal roast." },
-                    { name: "Tuscan Leather", role: "Base Note", icon: "fa-solid fa-vest", desc: "Buttery, polished suede." }
-                ],
                 performance: { longevity: "10–14 Hours", sillage: "Bold & Magnetic (6 ft)", concentration: "Extrait de Parfum (26%)", season: "Autumn & Winter", timeOfDay: "Candlelight Soirées & Midnight" }
             },
             14: { // Adore
@@ -2107,12 +1783,6 @@
                     heart: { title: "Heart Notes", duration: "Core 2–4 hours", notes: ["Night-Blooming Orchid", "Vanilla Orchid", "Ylang-Ylang"], desc: "Sensual tropical night florals in full bloom." },
                     base: { title: "Base Notes", duration: "Dry-down 9–12 hours", notes: ["Madagascan Vanilla Bean", "Mysore Sandalwood", "Marshmallow Musk"], desc: "Decadent natural vanilla whipped with creamy woods." }
                 },
-                featured: [
-                    { name: "Vanilla Bean", role: "Base Note", icon: "fa-solid fa-gem", desc: "Warm, gourmet balsam vanilla." },
-                    { name: "Night Orchid", role: "Heart Note", icon: "fa-solid fa-spa", desc: "Exotic nocturnal floral." },
-                    { name: "Coconut Milk", role: "Top Note", icon: "fa-solid fa-water", desc: "Creamy tropical freshness." },
-                    { name: "Mysore Sandalwood", role: "Base Note", icon: "fa-solid fa-tree", desc: "Silky grounding timber." }
-                ],
                 performance: { longevity: "9–12 Hours", sillage: "Alluring & Cozy (4–5 ft)", concentration: "Eau de Parfum (22%)", season: "All-Year Versatility", timeOfDay: "Afternoon & Enchanting Evening" }
             }
         };
@@ -2149,7 +1819,7 @@
                 return p.gender === activeFilter;
             });
 
-            document.getElementById("po-catalog-counter").textContent = `Showing ${filtered.length} of ${PREORDER_PRODUCTS.length} Cellar Blends`;
+            document.getElementById("po-catalog-counter").textContent = `${filtered.length} Formulations Available`;
 
             grid.innerHTML = filtered.map(p => {
                 // Initialize default size and active image index
@@ -2165,8 +1835,8 @@
 
                 return `
                 <div class="po-card" data-id="${p.id}">
-                    <div class="po-card-allocation-tag">
-                        <i class="fa-solid fa-gem"></i> Batch 01 · ${p.remainingAllocation} Left
+                    <div class="po-card-tag">
+                        <i class="fa-solid fa-gem"></i> Batch 01
                     </div>
 
                     <div class="po-card-media" onclick="openNotesModal(${p.id})">
@@ -2223,7 +1893,7 @@
                         <!-- Actions -->
                         <div class="po-card-actions">
                             <button class="po-btn-reserve" onclick="openReservationModal(${p.id})">
-                                <i class="fa-solid fa-stamp"></i> Reserve Flacon
+                                Pre-Order
                             </button>
                             <button class="po-btn-bag" onclick="addPreorderToCart(${p.id})">
                                 <i class="fa-solid fa-plus"></i> Bag
@@ -2335,7 +2005,7 @@
                 <div style="display:grid; grid-template-columns:1fr 1.3fr; gap:0;">
                     <div style="background:radial-gradient(circle at center, #F7F3EB 0%, #EDE6D9 100%); padding:40px 30px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
                         <img src="${product.image}" alt="${product.name}" style="max-width:85%; max-height:280px; object-fit:contain; filter:drop-shadow(0 15px 25px rgba(0,0,0,0.15)); margin-bottom:20px;">
-                        <span class="po-batch-badge"><i class="fa-solid fa-gem"></i> Batch 01 Allocation</span>
+                        <span class="po-batch-badge"><i class="fa-solid fa-gem"></i> Batch 01</span>
                         <h3 style="font-family:var(--po-font-serif); font-size:1.8rem; margin:10px 0 4px;">${product.name}</h3>
                         <p style="font-size:0.8rem; color:var(--po-text-muted); margin:0 0 16px;">${product.family} · ${product.gender === 'male' ? 'For Him' : (product.gender === 'female' ? 'For Her' : 'Universal')}</p>
                         <div style="font-family:var(--po-font-serif); font-size:1.6rem; font-weight:600; color:var(--po-gold-dark);">
@@ -2368,8 +2038,8 @@
                                 <span style="font-size:0.85rem; color:var(--po-text);">${product.notes}</span>
                             </div>
                             <div style="font-size:0.78rem; color:var(--po-text-muted); margin-bottom:24px; line-height:1.5;">
-                                <i class="fa-solid fa-check" style="color:var(--po-success);"></i> Includes complimentary 5ml luxury travel atomizer with 50ml flacon reservation.<br>
-                                <i class="fa-solid fa-check" style="color:var(--po-success);"></i> Free custom 3-initial collar monogram laser-engraved for Batch 01.
+                                <i class="fa-solid fa-check" style="color:#2E7D32;"></i> Includes complimentary 5ml luxury travel atomizer with 50ml flacon reservation.<br>
+                                <i class="fa-solid fa-check" style="color:#2E7D32;"></i> Free custom 3-initial collar monogram laser-engraved for Batch 01.
                             </div>
                         </div>
 
@@ -2425,7 +2095,7 @@
                         <!-- Modal Actions -->
                         <div style="display:flex; gap:10px; margin-top:24px;">
                             <button class="po-btn-reserve" style="flex:1.5; padding:14px;" onclick="closeNotesModal(); openReservationModal(${product.id});">
-                                <i class="fa-solid fa-stamp"></i> Reserve This Flacon
+                                Pre-Order Flacon
                             </button>
                             <button class="po-btn-bag" style="flex:1; padding:14px;" onclick="addPreorderToCart(${product.id}); closeNotesModal();">
                                 Add to Bag
@@ -2586,7 +2256,7 @@
             document.getElementById("po-cert-modal").classList.add("active");
 
             btn.disabled = false;
-            btn.innerHTML = `<i class="fa-solid fa-stamp"></i> Confirm Batch 01 Reservation`;
+            btn.innerHTML = `<i class="fa-solid fa-check"></i> Confirm Batch 01 Reservation`;
         };
 
         window.closeCertModal = function() {
