@@ -2844,20 +2844,38 @@
                 btn.innerHTML = originalBtnHtml;
             };
 
-            // Fetch Razorpay public key
+            // Fetch Razorpay public key and create order
             let razorpayKey = "rzp_test_1DP5mmOlF5G5ag";
+            let razorpayOrderId = null;
             try {
-                const keyRes = await fetch("/api/razorpay/key");
-                const keyData = await keyRes.json();
-                if (keyData.key) razorpayKey = keyData.key;
+                const orderRes = await fetch("/api/razorpay/create-order", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        amount: checkoutTotalAmount,
+                        currency: "INR",
+                        receipt: `po_${Date.now()}`
+                    })
+                });
+                const orderData = await orderRes.json();
+                if (orderData.key) razorpayKey = orderData.key;
+                if (orderData.order && orderData.order.id && !orderData.order.id.startsWith("order_sim_")) {
+                    razorpayOrderId = orderData.order.id;
+                }
             } catch (e) {
-                console.warn("Could not fetch remote Razorpay key, using configured default:", e);
+                console.warn("Could not fetch remote Razorpay order, using fallback:", e);
+                try {
+                    const keyRes = await fetch("/api/razorpay/key");
+                    const keyData = await keyRes.json();
+                    if (keyData.key) razorpayKey = keyData.key;
+                } catch (err) {}
             }
 
             const razorpayOptions = {
                 key: razorpayKey,
                 amount: Math.round(checkoutTotalAmount * 100),
                 currency: "INR",
+                ...(razorpayOrderId ? { order_id: razorpayOrderId } : {}),
                 name: "House of Aavasa",
                 description: `Batch 01 Pre-Order Reservation (${checkoutItems.length} item${checkoutItems.length > 1 ? 's' : ''})`,
                 image: "https://lh3.googleusercontent.com/a/default-user=s96-c",
