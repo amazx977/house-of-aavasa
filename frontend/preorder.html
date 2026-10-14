@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 
+    <!-- Razorpay Payment Gateway SDK -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
     <style>
         /* ═══════════════════════════════════════════════════════════════════════
            HOUSE OF AAVASA — MINIMALIST PRE-ORDER STYLING SYSTEM
@@ -1194,45 +1197,89 @@
             font-weight: 600;
         }
 
-        /* Payment Selector */
-        .po-payment-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 24px;
+        /* Online Payment Showcase Box (100% Prepaid via Razorpay) */
+        .po-payment-showcase {
+            background: #FFFDF9;
+            border: 1px solid var(--po-gold);
+            border-radius: var(--po-radius);
+            padding: 16px 18px;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 14px rgba(197, 160, 89, 0.12);
         }
 
-        .po-payment-tab {
-            border: 1px solid var(--po-border);
-            border-radius: var(--po-radius);
-            padding: 12px 14px;
-            cursor: pointer;
-            transition: all 0.2s ease;
+        .po-payment-header {
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed rgba(197, 160, 89, 0.4);
         }
 
-        .po-payment-tab.active {
-            border-color: var(--po-gold-dark);
-            background: #FFFDF9;
-            box-shadow: 0 2px 8px rgba(197, 160, 89, 0.15);
+        .po-payment-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #2E7D32;
+            background: rgba(46, 125, 50, 0.1);
+            border: 1px solid rgba(46, 125, 50, 0.25);
+            padding: 3px 8px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
 
-        .po-payment-tab i {
-            font-size: 1.1rem;
-            color: var(--po-gold-dark);
+        .po-payment-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--po-text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .po-payment-tab-text strong {
-            font-size: 0.78rem;
-            display: block;
+        .po-payment-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            margin: 10px 0 8px;
+        }
+
+        .po-payment-chip {
+            background: #FFFFFF;
+            border: 1px solid var(--po-border);
+            border-radius: 4px;
+            padding: 5px 9px;
+            font-size: 0.72rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
             color: var(--po-text);
         }
 
-        .po-payment-tab-text span {
-            font-size: 0.68rem;
+        .po-payment-chip i {
+            color: var(--po-gold-dark);
+        }
+
+        .po-payment-security-note {
+            font-size: 0.7rem;
             color: var(--po-text-muted);
+            line-height: 1.4;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .po-payment-notice {
+            font-size: 0.68rem;
+            color: #8D6E63;
+            margin-top: 4px;
+            font-style: italic;
         }
 
         .po-btn-submit-res {
@@ -1603,11 +1650,11 @@
             </div>
             <div class="po-faq-item">
                 <div class="po-faq-question" onclick="toggleFaq(this)">
-                    <span>Can I order with Cash on Delivery (Pay on Delivery)?</span>
+                    <span>What payment methods are accepted for Batch 01 Pre-Orders?</span>
                     <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div class="po-faq-answer">
-                    Yes. You may reserve your flacon today with zero advance payment. You simply pay upon courier delivery at your doorstep when the bottle arrives.
+                    Because Batch 01 represents a private, custom laser-monogrammed allocation, all pre-orders are 100% prepaid online. We securely accept Instant UPI (Google Pay, PhonePe, Paytm, BHIM), Debit & Credit Cards (Visa, MasterCard, RuPay), and NetBanking via Razorpay. Cash on Delivery is not available for custom pre-order allocations.
                 </div>
             </div>
             <div class="po-faq-item">
@@ -1728,27 +1775,33 @@
                             </div>
                         </div>
 
-                        <!-- Payment Method Selection -->
-                        <label class="po-form-label" style="margin-top:10px;">Payment Preference</label>
-                        <div class="po-payment-grid">
-                            <div class="po-payment-tab active" data-method="upi" onclick="selectPaymentTab(this, 'upi')">
-                                <i class="fa-solid fa-qrcode"></i>
-                                <div class="po-payment-tab-text">
-                                    <strong>Instant UPI / Cards</strong>
-                                    <span>GPay, PhonePe, Cards</span>
-                                </div>
+                        <!-- Online Payment Showcase Box (100% Prepaid via Razorpay) -->
+                        <div class="po-payment-showcase">
+                            <div class="po-payment-header">
+                                <span class="po-payment-title"><i class="fa-solid fa-shield-halved" style="color:var(--po-gold-dark);"></i> Secure Online Checkout</span>
+                                <span class="po-payment-badge"><i class="fa-solid fa-circle-check"></i> 100% Verified</span>
                             </div>
-                            <div class="po-payment-tab" data-method="cod" onclick="selectPaymentTab(this, 'cod')">
-                                <i class="fa-solid fa-truck-ramp-box"></i>
-                                <div class="po-payment-tab-text">
-                                    <strong>Pay on Delivery</strong>
-                                    <span>₹0 today · Pay upon arrival</span>
-                                </div>
+                            <p style="font-size:0.75rem; color:var(--po-text); margin:0 0 6px; line-height:1.4;">
+                                Instant allocation confirmed with Bank-Grade 256-bit encryption powered by <strong>Razorpay</strong>:
+                            </p>
+                            <div class="po-payment-chips">
+                                <span class="po-payment-chip"><i class="fa-brands fa-google-pay"></i> Google Pay</span>
+                                <span class="po-payment-chip"><i class="fa-solid fa-mobile-screen-button"></i> PhonePe / Paytm</span>
+                                <span class="po-payment-chip"><i class="fa-solid fa-qrcode"></i> Any UPI ID</span>
+                                <span class="po-payment-chip"><i class="fa-regular fa-credit-card"></i> Cards (Visa / MC / RuPay)</span>
+                                <span class="po-payment-chip"><i class="fa-solid fa-building-columns"></i> NetBanking</span>
+                            </div>
+                            <div class="po-payment-security-note">
+                                <i class="fa-solid fa-lock" style="color:#2E7D32;"></i>
+                                <span>Official Wax-Sealed Certificate generated immediately upon successful payment.</span>
+                            </div>
+                            <div class="po-payment-notice">
+                                * Cash on Delivery is disabled for bespoke Batch 01 personalized flacons.
                             </div>
                         </div>
 
                         <button type="submit" class="po-btn-submit-res" id="po-submit-btn">
-                            <i class="fa-solid fa-check"></i> Confirm Batch 01 Reservation
+                            <i class="fa-solid fa-lock"></i> Pay ₹<span id="po-submit-price-val">1,699</span> &amp; Confirm Reservation
                         </button>
                     </form>
                 </div>
@@ -1832,12 +1885,12 @@
                 <span id="po-drawer-subtotal" style="font-weight:700; color:var(--po-gold-dark);">₹0</span>
             </div>
             <div style="display:flex; gap:10px; flex-direction:column; margin-top:12px;">
+                <button class="btn btn-primary" id="po-drawer-checkout-btn" onclick="openBagReservationModal()">
+                    <i class="fa-solid fa-lock"></i> Proceed to Payment &rarr;
+                </button>
                 <a href="index.html" class="btn btn-outline" style="text-align:center; font-size:0.8rem; text-decoration:none;">
                     Continue Shopping Full Catalog
                 </a>
-                <button class="btn btn-primary" id="po-drawer-checkout-btn" onclick="goToStoreCheckout()">
-                    Proceed to Checkout &rarr;
-                </button>
             </div>
         </div>
     </div>
@@ -2071,7 +2124,10 @@
         let selectedSizes = {};
         let activeReservingProduct = null;
         let activeReservingSize = '50ml';
-        let selectedPayment = 'upi';
+        let isCartCheckout = false;
+        let checkoutTotalAmount = 1699;
+        let checkoutItems = [];
+        let selectedPayment = 'razorpay';
 
         // Cart State synced with localStorage
         let preorderCart = JSON.parse(localStorage.getItem("aavasa_cart") || "[]");
@@ -2568,32 +2624,104 @@
             const product = PREORDER_PRODUCTS.find(p => p.id === productId);
             if (!product) return;
 
+            isCartCheckout = false;
             activeReservingProduct = product;
             activeReservingSize = selectedSizes[productId] || '50ml';
 
             const sizeInfo = product.sizes.find(s => s.size === activeReservingSize) || product.sizes[0];
+            checkoutTotalAmount = sizeInfo.priceDiscounted;
+            checkoutItems = [{
+                id: product.id,
+                name: product.name,
+                edition: "Batch 01 Pre-Order",
+                price: sizeInfo.priceDiscounted,
+                quantity: 1,
+                size: activeReservingSize,
+                image: product.image
+            }];
 
             document.getElementById("res-summary-img").src = product.image;
             document.getElementById("res-summary-name").textContent = product.name;
             document.getElementById("res-summary-meta").textContent = `${activeReservingSize} · ${product.family} · ${product.gender === 'male' ? 'For Him' : (product.gender === 'female' ? 'For Her' : 'Universal')}`;
             document.getElementById("res-summary-price").textContent = `₹${sizeInfo.priceDiscounted.toLocaleString('en-IN')}`;
 
-            // Populate form with existing user info if logged in
-            const storedUser = JSON.parse(localStorage.getItem("aavasa_user") || "null");
-            if (storedUser) {
-                const p = storedUser.profile || {};
-                if (p.fullName) document.getElementById("po-res-name").value = p.fullName;
-                if (p.phone) document.getElementById("po-res-phone").value = p.phone;
-                if (storedUser.loginId && storedUser.loginId.includes('@')) document.getElementById("po-res-email").value = storedUser.loginId;
-                if (p.address) document.getElementById("po-res-address").value = p.address;
-                if (p.city) document.getElementById("po-res-city").value = p.city;
-                if (p.state) document.getElementById("po-res-state").value = p.state;
-                if (p.pincode) document.getElementById("po-res-pincode").value = p.pincode;
+            const submitPriceEl = document.getElementById("po-submit-price-val");
+            if (submitPriceEl) submitPriceEl.textContent = sizeInfo.priceDiscounted.toLocaleString('en-IN');
+
+            const submitBtn = document.getElementById("po-submit-btn");
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Pay ₹${sizeInfo.priceDiscounted.toLocaleString('en-IN')} &amp; Confirm Reservation`;
             }
 
+            populateUserForm();
             updateMonogramPreview(document.getElementById("po-input-monogram").value);
             document.getElementById("po-reservation-modal").classList.add("active");
         };
+
+        window.openBagReservationModal = function() {
+            if (!preorderCart.length) {
+                alert("Your shopping bag is empty. Please select a fragrance to pre-order.");
+                return;
+            }
+
+            closePreorderCart();
+            isCartCheckout = true;
+            activeReservingProduct = null;
+
+            const total = preorderCart.reduce((acc, item) => acc + (item.priceDiscounted * (item.quantity || 1)), 0);
+            checkoutTotalAmount = total;
+            checkoutItems = preorderCart.map(item => ({
+                id: item.id,
+                name: item.name,
+                edition: item.edition || "Batch 01 Pre-Order",
+                price: item.priceDiscounted,
+                quantity: item.quantity || 1,
+                size: item.size,
+                image: item.image
+            }));
+
+            const firstItem = preorderCart[0];
+            document.getElementById("res-summary-img").src = firstItem.image;
+            document.getElementById("res-summary-name").textContent = `Pre-Order Bag (${preorderCart.length} Item${preorderCart.length > 1 ? 's' : ''})`;
+            document.getElementById("res-summary-meta").textContent = preorderCart.map(i => `${i.name.replace(' (Batch 01 Pre-Order)', '')} (${i.size} × ${i.quantity || 1})`).join(', ');
+            document.getElementById("res-summary-price").textContent = `₹${total.toLocaleString('en-IN')}`;
+
+            const submitPriceEl = document.getElementById("po-submit-price-val");
+            if (submitPriceEl) submitPriceEl.textContent = total.toLocaleString('en-IN');
+
+            const submitBtn = document.getElementById("po-submit-btn");
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="fa-solid fa-lock"></i> Pay ₹${total.toLocaleString('en-IN')} &amp; Confirm Reservation`;
+            }
+
+            populateUserForm();
+            updateMonogramPreview(document.getElementById("po-input-monogram").value);
+            document.getElementById("po-reservation-modal").classList.add("active");
+        };
+
+        function populateUserForm() {
+            const storedUser = JSON.parse(localStorage.getItem("aavasa_user") || "null");
+            if (storedUser) {
+                const p = storedUser.profile || {};
+                const nameEl = document.getElementById("po-res-name");
+                const phoneEl = document.getElementById("po-res-phone");
+                const emailEl = document.getElementById("po-res-email");
+                const addrEl = document.getElementById("po-res-address");
+                const cityEl = document.getElementById("po-res-city");
+                const stateEl = document.getElementById("po-res-state");
+                const pinEl = document.getElementById("po-res-pincode");
+
+                if (p.fullName && nameEl && !nameEl.value) nameEl.value = p.fullName;
+                if (p.phone && phoneEl && !phoneEl.value) phoneEl.value = p.phone;
+                if (storedUser.loginId && storedUser.loginId.includes('@') && emailEl && !emailEl.value) emailEl.value = storedUser.loginId;
+                if (p.address && addrEl && !addrEl.value) addrEl.value = p.address;
+                if (p.city && cityEl && !cityEl.value) cityEl.value = p.city;
+                if (p.state && stateEl && !stateEl.value) stateEl.value = p.state;
+                if (p.pincode && pinEl && !pinEl.value) pinEl.value = p.pincode;
+            }
+        }
 
         window.closeReservationModal = function() {
             document.getElementById("po-reservation-modal").classList.remove("active");
@@ -2609,21 +2737,15 @@
 
         window.selectPaymentTab = function(el, method) {
             document.querySelectorAll(".po-payment-tab").forEach(tab => tab.classList.remove("active"));
-            el.classList.add("active");
+            if (el) el.classList.add("active");
             selectedPayment = method;
         };
 
-        // ─── SUBMIT RESERVATION ───
+        // ─── SUBMIT RESERVATION VIA RAZORPAY ───
         window.handleReservationSubmit = async function(e) {
             e.preventDefault();
             const btn = document.getElementById("po-submit-btn");
-            btn.disabled = true;
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Securing Reservation...`;
-
-            const product = activeReservingProduct;
-            const size = activeReservingSize;
-            const sizeInfo = product.sizes.find(s => s.size === size) || product.sizes[0];
-            const monogram = document.getElementById("po-input-monogram").value.trim().toUpperCase().slice(0, 3);
+            const originalBtnHtml = `<i class="fa-solid fa-lock"></i> Pay ₹${checkoutTotalAmount.toLocaleString('en-IN')} &amp; Confirm Reservation`;
 
             const patronName = document.getElementById("po-res-name").value.trim();
             const phone = document.getElementById("po-res-phone").value.trim();
@@ -2632,72 +2754,158 @@
             const city = document.getElementById("po-res-city").value.trim();
             const state = document.getElementById("po-res-state").value.trim();
             const pincode = document.getElementById("po-res-pincode").value.trim();
+            const monogram = document.getElementById("po-input-monogram").value.trim().toUpperCase().slice(0, 3);
+
+            if (!patronName || !phone || !email || !address || !city || !state || !pincode) {
+                alert("Please fill in all shipping details before proceeding to payment.");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Initializing Payment Gateway...`;
 
             const orderPayload = {
                 loginId: email || "guest",
                 customer: { fullName: patronName, email, phone, address, city, state, pincode },
-                items: [{
-                    id: product.id,
-                    name: product.name,
+                items: checkoutItems.length > 0 ? checkoutItems : [{
+                    id: activeReservingProduct ? activeReservingProduct.id : 1,
+                    name: activeReservingProduct ? activeReservingProduct.name : "Batch 01 Pre-Order",
                     edition: "Batch 01 Pre-Order",
-                    price: sizeInfo.priceDiscounted,
+                    price: checkoutTotalAmount,
                     quantity: 1,
-                    size: size
+                    size: activeReservingSize
                 }],
-                subtotal: sizeInfo.priceDiscounted,
+                subtotal: checkoutTotalAmount,
                 discountAmount: 0,
-                totalAmount: sizeInfo.priceDiscounted,
-                paymentMethod: selectedPayment,
-                paymentStatus: selectedPayment === 'cod' ? 'Reserved (Pay on Delivery)' : 'Paid (Pre-Order Deposit)',
+                totalAmount: checkoutTotalAmount,
+                paymentMethod: "razorpay",
+                paymentStatus: "Paid (Razorpay)",
                 isPreorder: true,
                 orderType: "Preorder Batch 01",
                 monogram: monogram || null
             };
 
-            let confirmedOrderId = `AAVASA-B1-${Math.floor(1000 + Math.random() * 9000)}`;
+            const finalizeSuccessfulPreorder = async (paymentId) => {
+                orderPayload.paymentId = paymentId;
+                orderPayload.paymentStatus = "Paid (Razorpay)";
 
-            // Attempt to post to backend
-            try {
-                const res = await fetch("/api/orders", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(orderPayload)
-                });
-                const data = await res.json();
-                if (data.success && data.order) {
-                    confirmedOrderId = data.order.id;
+                let confirmedOrderId = `AAVASA-B1-${Math.floor(1000 + Math.random() * 9000)}`;
+
+                try {
+                    const res = await fetch("/api/orders", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(orderPayload)
+                    });
+                    const data = await res.json();
+                    if (data.success && data.order) {
+                        confirmedOrderId = data.order.id;
+                    }
+                } catch (err) {
+                    console.warn("Backend sync offline, saving reservation locally:", err);
                 }
-            } catch (err) {
-                console.warn("Backend sync offline, saving reservation locally:", err);
+
+                if (isCartCheckout) {
+                    preorderCart = [];
+                    saveCart();
+                }
+
+                const existingPreorders = JSON.parse(localStorage.getItem("aavasa_preorders") || "[]");
+                existingPreorders.unshift({
+                    orderId: confirmedOrderId,
+                    paymentId: paymentId,
+                    products: orderPayload.items.map(i => `${i.name} (${i.size})`).join(', '),
+                    totalAmount: checkoutTotalAmount,
+                    monogram: monogram || "A·V·S",
+                    patronName: patronName,
+                    createdAt: new Date().toISOString()
+                });
+                localStorage.setItem("aavasa_preorders", JSON.stringify(existingPreorders));
+
+                closeReservationModal();
+
+                const blendTitle = isCartCheckout
+                    ? orderPayload.items.map(i => i.name.replace(' (Batch 01 Pre-Order)', '')).join(', ')
+                    : (activeReservingProduct ? activeReservingProduct.name : 'Batch 01 Allocation');
+                const blendSize = isCartCheckout
+                    ? `${orderPayload.items.reduce((acc, i) => acc + (i.quantity || 1), 0)} Flacons Allocation`
+                    : `${activeReservingSize} (${activeReservingSize === '50ml' ? 'Full Flacon + Free 5ml Gift' : 'Travel Edition'})`;
+
+                document.getElementById("cert-order-id").textContent = confirmedOrderId;
+                document.getElementById("cert-blend-name").textContent = blendTitle;
+                document.getElementById("cert-blend-size").textContent = blendSize;
+                document.getElementById("cert-monogram").textContent = monogram ? monogram.split('').join(' · ') : 'House of Aavasa Seal';
+                document.getElementById("cert-patron-name").textContent = patronName;
+                document.getElementById("cert-payment-status").innerHTML = `<span style="color:#2E7D32; font-weight:700;"><i class="fa-solid fa-circle-check"></i> Paid Online (Razorpay)</span>`;
+
+                document.getElementById("po-cert-modal").classList.add("active");
+
+                btn.disabled = false;
+                btn.innerHTML = originalBtnHtml;
+            };
+
+            // Fetch Razorpay public key
+            let razorpayKey = "rzp_test_1DP5mmOlF5G5ag";
+            try {
+                const keyRes = await fetch("/api/razorpay/key");
+                const keyData = await keyRes.json();
+                if (keyData.key) razorpayKey = keyData.key;
+            } catch (e) {
+                console.warn("Could not fetch remote Razorpay key, using configured default:", e);
             }
 
-            // Save to local preorders
-            const existingPreorders = JSON.parse(localStorage.getItem("aavasa_preorders") || "[]");
-            existingPreorders.unshift({
-                orderId: confirmedOrderId,
-                product: product.name,
-                size: size,
-                price: sizeInfo.priceDiscounted,
-                monogram: monogram || "A·V·S",
-                patronName: patronName,
-                createdAt: new Date().toISOString()
-            });
-            localStorage.setItem("aavasa_preorders", JSON.stringify(existingPreorders));
+            const razorpayOptions = {
+                key: razorpayKey,
+                amount: Math.round(checkoutTotalAmount * 100),
+                currency: "INR",
+                name: "House of Aavasa",
+                description: `Batch 01 Pre-Order Reservation (${checkoutItems.length} item${checkoutItems.length > 1 ? 's' : ''})`,
+                image: "https://lh3.googleusercontent.com/a/default-user=s96-c",
+                handler: async function (response) {
+                    const pid = response.razorpay_payment_id || `rzp_${Date.now()}`;
+                    await finalizeSuccessfulPreorder(pid);
+                },
+                prefill: {
+                    name: patronName,
+                    email: email,
+                    contact: phone
+                },
+                notes: {
+                    monogram: monogram || "A·V·S",
+                    orderType: "Batch 01 Pre-Order"
+                },
+                theme: {
+                    color: "#1c1917"
+                },
+                modal: {
+                    ondismiss: function() {
+                        btn.disabled = false;
+                        btn.innerHTML = originalBtnHtml;
+                    }
+                }
+            };
 
-            // Close reservation modal, show Certificate Modal
-            closeReservationModal();
-
-            document.getElementById("cert-order-id").textContent = confirmedOrderId;
-            document.getElementById("cert-blend-name").textContent = product.name;
-            document.getElementById("cert-blend-size").textContent = `${size} (${size === '50ml' ? 'Full Flacon + Free 5ml Gift' : 'Travel Edition'})`;
-            document.getElementById("cert-monogram").textContent = monogram ? monogram.split('').join(' · ') : 'House of Aavasa Seal';
-            document.getElementById("cert-patron-name").textContent = patronName;
-            document.getElementById("cert-payment-status").textContent = selectedPayment === 'cod' ? 'Pay on Delivery (₹0 Today)' : 'Confirmed & Secured';
-
-            document.getElementById("po-cert-modal").classList.add("active");
-
-            btn.disabled = false;
-            btn.innerHTML = `<i class="fa-solid fa-check"></i> Confirm Batch 01 Reservation`;
+            if (window.Razorpay) {
+                try {
+                    const rzp = new window.Razorpay(razorpayOptions);
+                    rzp.on('payment.failed', function (resp) {
+                        alert("Payment was not completed: " + (resp.error?.description || "Transaction failed or cancelled. Please try again."));
+                        btn.disabled = false;
+                        btn.innerHTML = originalBtnHtml;
+                    });
+                    rzp.open();
+                } catch (err) {
+                    console.error("Razorpay instance error:", err);
+                    alert("Could not open payment gateway. Please ensure your internet connection is active or try again.");
+                    btn.disabled = false;
+                    btn.innerHTML = originalBtnHtml;
+                }
+            } else {
+                console.warn("Razorpay SDK not loaded on window");
+                alert("Payment gateway is loading. Please click pay again in a moment.");
+                btn.disabled = false;
+                btn.innerHTML = originalBtnHtml;
+            }
         };
 
         window.closeCertModal = function() {
@@ -2807,7 +3015,7 @@
         };
 
         window.goToStoreCheckout = function() {
-            window.location.href = "index.html#catalog";
+            openBagReservationModal();
         };
 
         // ─── FAQ ACCORDION TOGGLE ───
